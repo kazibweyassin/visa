@@ -9,6 +9,7 @@ import { WhyUs } from "@/components/modules/why-us";
 import { Pricing } from "@/components/modules/pricing";
 import { FAQ } from "@/components/modules/faq";
 import { FloatingWhatsApp } from "@/components/modules/floating-whatsapp";
+import TravelAdvisoryNews from "@/components/modules/travel-advisory-news";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <LandingHero />
       <TrustBar />
       <VisaChecker />
+      <TravelAdvisoryNews />
       <PopularEvisas />
       <WhyUs />
       <HowItWorks />
