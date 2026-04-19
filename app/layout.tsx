@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+<link
+  href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300&display=swap"
+  rel="stylesheet"
+/>
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,6 +20,10 @@ export const metadata: Metadata = {
   title: "Ailes Global | Visa automation for global travelers",
   description:
     "Ailes Global helps travelers apply for Schengen visas with guided intake, secure document handling, and localized payments.",
+  icons: {
+    icon: "/globe.svg",
+    shortcut: "/globe.svg",
+  },
   metadataBase: new URL("https://ailesglobal.com"),
   alternates: {
     canonical: "/",

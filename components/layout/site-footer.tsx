@@ -32,7 +32,7 @@ export function SiteFooter() {
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Contact</p>
           <div className="mt-3 space-y-2 text-sm text-slate-300">
-            <p>WhatsApp: +000 000 000 000</p>
+            <p>WhatsApp: +256704833021</p>
             <p>Email: hello@ailesglobal.com</p>
           </div>
         </div>
