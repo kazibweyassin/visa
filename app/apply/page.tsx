@@ -1,5 +1,7 @@
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
+
 import { ApplyForm } from "./apply-form";
 
 export default function ApplyPage() {
