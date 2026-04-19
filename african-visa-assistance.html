@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ailes Global | African Visa Assistance</title>
+    <meta
+      name="description"
+      content="Ailes Global is a premium African visa assistance platform for Schengen travel. Fast, trusted support with Mobile Money payments and WhatsApp-first guidance."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      referrerpolicy="no-referrer"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brandGreen: '#1B5E20',
+              brandGold: '#F9A825',
+              brandNavy: '#0D1B2A',
+            },
+            boxShadow: {
+              soft: '0 10px 30px rgba(13, 27, 42, 0.15)',
+              deep: '0 20px 45px rgba(13, 27, 42, 0.25)',
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background: #ffffff;
+        color: #0d1b2a;
+      }
+
+      .glass {
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.85);
+      }
+
+      .sticky-active {
+        box-shadow: 0 8px 24px rgba(13, 27, 42, 0.12);
+        border-bottom: 1px solid rgba(13, 27, 42, 0.08);
+      }
+
+      .fade-in-up {
+        animation: fadeInUp 0.45s ease forwards;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .step-hidden {
+        display: none;
+      }
+
+      .faq-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .testimonial-track {
+        transition: transform 0.45s ease;
+      }
+    </style>
+  </head>
+
+  <body class="antialiased">
+    <nav id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="mt-3 rounded-2xl glass px-4 sm:px-6 py-3 flex items-center justify-between">
+          <a href="#home" class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-xl bg-brandGreen text-white flex items-center justify-center">
+              <i class="fa-solid fa-passport text-sm"></i>
+            </div>
+            <div>
+              <p class="font-extrabold text-brandNavy leading-none">Ailes Global</p>
+              <p class="text-xs text-slate-600">Travel Without Barriers</p>
+            </div>
+          </a>
+
+          <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-700">
+            <a href="#how-it-works" class="hover:text-brandGreen transition">How It Works</a>
+            <a href="#visa-types" class="hover:text-brandGreen transition">Visa Types</a>
+            <a href="#pricing" class="hover:text-brandGreen transition">Pricing</a>
+            <a href="#testimonials" class="hover:text-brandGreen transition">Testimonials</a>
+          </div>
+
+          <div class="hidden md:block">
+            <a
+              href="#apply"
+              class="inline-flex items-center rounded-xl bg-brandGold px-5 py-2.5 font-semibold text-brandNavy hover:brightness-95 transition"
+              >Apply Now</a
+            >
+          </div>
+
+          <button id="menuBtn" class="md:hidden text-brandNavy text-xl" aria-label="Open menu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden mt-2 rounded-2xl bg-white shadow-soft p-4">
+          <div class="flex flex-col gap-3 text-sm font-medium text-slate-700">
+            <a href="#how-it-works" class="mobile-link">How It Works</a>
+            <a href="#visa-types" class="mobile-link">Visa Types</a>
+            <a href="#pricing" class="mobile-link">Pricing</a>
+            <a href="#testimonials" class="mobile-link">Testimonials</a>
+            <a href="#apply" class="mt-2 inline-flex justify-center rounded-xl bg-brandGold px-4 py-2.5 text-brandNavy font-semibold">Apply Now</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <header
+      id="home"
+      class="pt-28 sm:pt-32 pb-14 relative overflow-hidden"
+      style="background: linear-gradient(130deg, rgba(13,27,42,0.93), rgba(27,94,32,0.88)), url('https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;"
+    >
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <div class="text-white">
+            <span class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-4 py-1.5 text-xs font-semibold tracking-wide">
+              <i class="fa-solid fa-shield-halved text-brandGold"></i> Built for African travelers
+            </span>
+            <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+              Your European Visa, Handled by Africans Who Understand You
+            </h1>
+            <p class="mt-5 text-base sm:text-lg text-slate-100 max-w-xl leading-relaxed">
+              Fast, affordable Schengen visa assistance built for African passport holders.
+              Pay with Mobile Money.
+            </p>
+
+            <div class="mt-8 grid grid-cols-2 gap-4 max-w-md text-sm">
+              <div class="rounded-xl bg-white/10 border border-white/15 p-3">
+                <p class="font-bold text-brandGold">10,000+</p>
+                <p>Visa journeys supported</p>
+              </div>
+              <div class="rounded-xl bg-white/10 border border-white/15 p-3">
+                <p class="font-bold text-brandGold">54 countries</p>
+                <p>Across Africa served</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-3xl shadow-deep p-5 sm:p-7">
+            <h2 class="text-xl sm:text-2xl font-bold text-brandNavy">Check your visa need in seconds</h2>
+            <p class="text-sm text-slate-600 mt-1">Instant Schengen requirement summary for African passport holders.</p>
+
+            <div class="mt-5 space-y-4">
+              <div>
+                <label class="text-sm font-semibold text-slate-700">I am from...</label>
+                <select id="checkerFrom" class="mt-1 w-full rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brandGreen">
+                  <option value="">Select your African country</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-sm font-semibold text-slate-700">I want to visit...</label>
+                <select id="checkerTo" class="mt-1 w-full rounded-xl border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brandGreen">
+                  <option value="">Select Schengen destination</option>
+                </select>
+              </div>
+              <button
+                id="checkVisaBtn"
+                class="w-full inline-flex justify-center items-center rounded-xl bg-brandGold px-5 py-3.5 font-bold text-brandNavy hover:brightness-95 transition"
+              >
+                Check My Visa <i class="fa-solid fa-arrow-right ml-2"></i>
+              </button>
+            </div>
+
+            <div id="visaResult" class="hidden mt-5 rounded-2xl border border-brandGreen/30 bg-brandGreen/5 p-4">
+              <p class="text-brandNavy font-semibold">
+                You need a Schengen Visa. Processing time: 15 days. Our service fee starts at $79.
+              </p>
+              <a href="#apply" class="mt-3 inline-flex rounded-lg bg-brandGreen px-4 py-2 text-white font-semibold">Start Application</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="py-6 bg-brandNavy text-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div class="rounded-xl bg-white/5 p-4"><p class="font-bold text-brandGold">10,000+ Visas Processed</p></div>
+          <div class="rounded-xl bg-white/5 p-4"><p class="font-bold text-brandGold">98% Approval Rate</p></div>
+          <div class="rounded-xl bg-white/5 p-4"><p class="font-bold text-brandGold">54 African Countries Served</p></div>
+          <div class="rounded-xl bg-white/5 p-4"><p class="font-bold text-brandGold">24/7 WhatsApp Support</p></div>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <section id="how-it-works" class="py-16 sm:py-20 bg-slate-50">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-brandNavy">How It Works</h2>
+            <p class="mt-3 text-slate-600">A guided process designed around African travel realities and embassy expectations.</p>
+          </div>
+
+          <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <article class="rounded-2xl bg-white p-6 shadow-soft">
+              <div class="h-11 w-11 rounded-lg bg-brandGreen text-white flex items-center justify-center"><i class="fa-solid fa-file-pen"></i></div>
+              <h3 class="mt-4 font-bold text-brandNavy">Fill our simple online form</h3>
+              <p class="mt-2 text-sm text-slate-600">Complete your application in about 5 minutes with clear prompts.</p>
+            </article>
+            <article class="rounded-2xl bg-white p-6 shadow-soft">
+              <div class="h-11 w-11 rounded-lg bg-brandGold text-brandNavy flex items-center justify-center"><i class="fa-solid fa-money-bill-wave"></i></div>
+              <h3 class="mt-4 font-bold text-brandNavy">Pay securely</h3>
+              <p class="mt-2 text-sm text-slate-600">Pay via Mobile Money, card, bank transfer, or Flutterwave channels.</p>
+            </article>
+            <article class="rounded-2xl bg-white p-6 shadow-soft">
+              <div class="h-11 w-11 rounded-lg bg-brandNavy text-white flex items-center justify-center"><i class="fa-solid fa-user-check"></i></div>
+              <h3 class="mt-4 font-bold text-brandNavy">Experts review documents</h3>
+              <p class="mt-2 text-sm text-slate-600">Our visa specialists prepare and quality-check your submission.</p>
+            </article>
+            <article class="rounded-2xl bg-white p-6 shadow-soft">
+              <div class="h-11 w-11 rounded-lg bg-brandGreen text-white flex items-center justify-center"><i class="fa-solid fa-plane-departure"></i></div>
+              <h3 class="mt-4 font-bold text-brandNavy">Attend and receive</h3>
+              <p class="mt-2 text-sm text-slate-600">Attend your consulate appointment with confidence and track next steps.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="visa-types" class="py-16 sm:py-20 bg-white">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex items-end justify-between flex-wrap gap-4">
+            <div>
+              <h2 class="text-3xl sm:text-4xl font-extrabold text-brandNavy">Visa Types</h2>
+              <p class="mt-2 text-slate-600">Choose the support package matching your trip purpose.</p>
+            </div>
+          </div>
+
+          <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <article class="rounded-2xl border border-slate-200 p-6 hover:shadow-soft transition">
+              <i class="fa-solid fa-umbrella-beach text-brandGreen text-2xl"></i>
+              <h3 class="mt-4 font-bold text-brandNavy">Tourist Visa</h3>
+              <p class="mt-2 text-sm text-slate-600">For holidays, family visits, and short leisure stays.</p>
+              <button class="mt-4 text-brandGreen font-semibold">Learn More</button>
+            </article>
+            <article class="rounded-2xl border border-slate-200 p-6 hover:shadow-soft transition">
+              <i class="fa-solid fa-briefcase text-brandGreen text-2xl"></i>
+              <h3 class="mt-4 font-bold text-brandNavy">Business Visa</h3>
+              <p class="mt-2 text-sm text-slate-600">For meetings, conferences, partnerships, and trade travel.</p>
+              <button class="mt-4 text-brandGreen font-semibold">Learn More</button>
+            </article>
+            <article class="rounded-2xl border border-slate-200 p-6 hover:shadow-soft transition">
+              <i class="fa-solid fa-graduation-cap text-brandGreen text-2xl"></i>
+              <h3 class="mt-4 font-bold text-brandNavy">Student Visa</h3>
+              <p class="mt-2 text-sm text-slate-600">For education pathways, admission, and study preparation.</p>
+              <button class="mt-4 text-brandGreen font-semibold">Learn More</button>
+            </article>
+            <article class="rounded-2xl border border-slate-200 p-6 hover:shadow-soft transition">
+              <i class="fa-solid fa-route text-brandGreen text-2xl"></i>
+              <h3 class="mt-4 font-bold text-brandNavy">Transit Visa</h3>
+              <p class="mt-2 text-sm text-slate-600">For stopovers and connecting journeys through Schengen zones.</p>
+              <button class="mt-4 text-brandGreen font-semibold">Learn More</button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-16 sm:py-20 bg-slate-50">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-brandNavy">Why travelers choose Ailes Global</h2>
+            <p class="mt-3 text-slate-600">Built by Africans, for Africans — with practical support Western platforms rarely provide.</p>
+            <div class="mt-7 space-y-4">
+              <div class="flex items-start gap-3"><i class="fa-solid fa-language text-brandGold mt-1"></i><p><strong>We speak your language</strong> — multilingual support across key African regions.</p></div>
+              <div class="flex items-start gap-3"><i class="fa-solid fa-passport text-brandGold mt-1"></i><p><strong>We know African passport challenges</strong> — stronger, better-prepared applications.</p></div>
+              <div class="flex items-start gap-3"><i class="fa-solid fa-mobile-screen-button text-brandGold mt-1"></i><p><strong>Pay with Mobile Money</strong> — MTN MoMo, Airtel, M-Pesa, Flutterwave enabled.</p></div>
+              <div class="flex items-start gap-3"><i class="fa-brands fa-whatsapp text-brandGold mt-1"></i><p><strong>WhatsApp-first support</strong> — direct help from a real human advisor.</p></div>
+              <div class="flex items-start gap-3"><i class="fa-solid fa-building-columns text-brandGold mt-1"></i><p><strong>African-country consulate guides</strong> — embassy requirements tailored to your country.</p></div>
+            </div>
+          </div>
+          <div class="rounded-3xl overflow-hidden shadow-deep h-[380px]">
+            <img
+              src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=1500&q=80"
+              alt="African city skyline"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" class="py-16 sm:py-20 bg-white">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-2xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-brandNavy">Simple, transparent pricing</h2>
+            <p class="mt-3 text-slate-600">Government/consulate fees are NOT included in our service fees.</p>
+          </div>
+
+          <div class="mt-10 grid lg:grid-cols-3 gap-6">
+            <article class="rounded-3xl p-7 bg-brandNavy text-white shadow-soft">
+              <p class="text-sm uppercase tracking-wider text-slate-300">Basic</p>
+              <p class="mt-3 text-4xl font-extrabold">$49</p>
+              <p class="mt-3 text-slate-200">Document checklist + form review</p>
+              <ul class="mt-5 space-y-2 text-sm text-slate-200">
+                <li><i class="fa-solid fa-check mr-2 text-brandGold"></i>Checklist guidance</li>
+                <li><i class="fa-solid fa-check mr-2 text-brandGold"></i>Form quality review</li>
+                <li><i class="fa-solid fa-check mr-2 text-brandGold"></i>Email support</li>
+              </ul>
+            </article>
+
+            <article class="rounded-3xl p-7 bg-brandGold text-brandNavy shadow-deep relative scale-[1.01]">
+              <span class="absolute -top-3 right-5 rounded-full bg-brandNavy text-white text-xs px-3 py-1 font-semibold">Best Value</span>
+              <p class="text-sm uppercase tracking-wider">Pro</p>
+              <p class="mt-3 text-4xl font-extrabold">$99</p>
+              <p class="mt-3">Full assistance + interview prep + resubmission guarantee</p>
+              <ul class="mt-5 space-y-2 text-sm">
+                <li><i class="fa-solid fa-check mr-2"></i>Everything in Basic</li>
+                <li><i class="fa-solid fa-check mr-2"></i>Interview preparation</li>
+                <li><i class="fa-solid fa-check mr-2"></i>Resubmission guarantee</li>
+              </ul>
+            </article>
+
+            <article class="rounded-3xl p-7 bg-brandGreen text-white shadow-soft">
+              <p class="text-sm uppercase tracking-wider text-green-100">Express</p>
+              <p class="mt-3 text-4xl font-extrabold">$149</p>
+              <p class="mt-3 text-green-50">Everything in Pro + priority processing + 48hr turnaround</p>
+              <ul class="mt-5 space-y-2 text-sm text-green-50">
+                <li><i class="fa-solid fa-check mr-2 text-brandGold"></i>Everything in Pro</li>
+                <li><i class="fa-solid fa-check mr-2 text-brandGold"></i>Priority queue</li>
+                <li><i class="fa-solid fa-check mr-2 text-brandGold"></i>48-hour turnaround</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials" class="py-16 sm:py-20 bg-slate-50">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h2 class="text-3xl sm:text-4xl font-extrabold text-brandNavy">Success stories from across Africa</h2>
+              <p class="mt-2 text-slate-600">Real journeys, clear guidance, confident outcomes.</p>
+            </div>
+            <div class="flex gap-2">
+              <button id="prevTestimonial" class="h-10 w-10 rounded-full bg-white border border-slate-200 hover:bg-slate-100"><i class="fa-solid fa-chevron-left"></i></button>
+              <button id="nextTestimonial" class="h-10 w-10 rounded-full bg-white border border-slate-200 hover:bg-slate-100"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+
+          <div class="mt-8 overflow-hidden">
+            <div id="testimonialTrack" class="testimonial-track flex">
+              <article class="min-w-full md:min-w-[50%] lg:min-w-[25%] p-3">
+                <div class="h-full rounded-2xl bg-white p-5 shadow-soft">
+                  <p class="text-brandGold">★★★★★</p>
+                  <p class="mt-3 text-slate-700">"I got clear guidance for my tourism visa and passed confidently. Everything felt local and human."</p>
+                  <p class="mt-4 font-bold text-brandNavy">Aisha N. 🇺🇬</p>
+                  <p class="text-sm text-slate-500">Uganda · Tourist Traveler</p>
+                </div>
+              </article>
+              <article class="min-w-full md:min-w-[50%] lg:min-w-[25%] p-3">
+                <div class="h-full rounded-2xl bg-white p-5 shadow-soft">
+                  <p class="text-brandGold">★★★★★</p>
+                  <p class="mt-3 text-slate-700">"As a founder from Lagos, I needed speed and accuracy. Their business visa support was excellent."</p>
+                  <p class="mt-4 font-bold text-brandNavy">Chinedu O. 🇳🇬</p>
+                  <p class="text-sm text-slate-500">Nigeria · Business Traveler</p>
+                </div>
+              </article>
+              <article class="min-w-full md:min-w-[50%] lg:min-w-[25%] p-3">
+                <div class="h-full rounded-2xl bg-white p-5 shadow-soft">
+                  <p class="text-brandGold">★★★★★</p>
+                  <p class="mt-3 text-slate-700">"They helped me prepare every student visa document and interview points. Truly lifesaving."</p>
+                  <p class="mt-4 font-bold text-brandNavy">Wanjiku M. 🇰🇪</p>
+                  <p class="text-sm text-slate-500">Kenya · Student Applicant</p>
+                </div>
+              </article>
+              <article class="min-w-full md:min-w-[50%] lg:min-w-[25%] p-3">
+                <div class="h-full rounded-2xl bg-white p-5 shadow-soft">
+                  <p class="text-brandGold">★★★★★</p>
+                  <p class="mt-3 text-slate-700">"From Accra, I was worried about rejection. Their Pro package gave me confidence and structure."</p>
+                  <p class="mt-4 font-bold text-brandNavy">Kwame A. 🇬🇭</p>
+                  <p class="text-sm text-slate-500">Ghana · Frequent Traveler</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="apply" class="py-16 sm:py-20 bg-white">
+        <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-brandNavy">Start your application</h2>
+            <p class="mt-2 text-slate-600">Complete this short form and we’ll guide every step.</p>
+          </div>
+
+          <div class="mt-8 rounded-3xl border border-slate-200 p-5 sm:p-7 shadow-soft">
+            <div class="h-2 rounded-full bg-slate-200 overflow-hidden">
+              <div id="progressBar" class="h-full bg-brandGreen" style="width: 33.33%"></div>
+            </div>
+            <p id="stepLabel" class="mt-2 text-xs text-slate-500">Step 1 of 3</p>
+
+            <form id="applicationForm" class="mt-6">
+              <div class="form-step" data-step="1">
+                <h3 class="font-bold text-lg text-brandNavy">Step 1 — Travel Info</h3>
+                <div class="mt-4 grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="text-sm font-semibold">Citizenship</label>
+                    <select id="appCitizenship" required class="mt-1 w-full rounded-xl border border-slate-300 px-4 py-3">
+                      <option value="">Select citizenship</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="text-sm font-semibold">Destination Country</label>
+                    <select id="appDestination" required class="mt-1 w-full rounded-xl border border-slate-300 px-4 py-3">
+                      <option value="">Select Schengen country</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="text-sm font-semibold">Travel Purpose</label>
+                    <select id="travelPurpose" required class="mt-1 w-full rounded-xl border border-slate-300 px-4 py-3">
+                      <option value="">Select purpose</option>
+                      <option>Tourism</option>
+                      <option>Business</option>
+                      <option>Study</option>
+                      <option>Transit</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="text-sm font-semibold">Travel Dates</label>
+                    <input id="travelDates" required type="text" placeholder="e.g., 12 Aug 2026 - 28 Aug 2026" class="mt-1 w-full rounded-xl border border-slate-300 px-4 py-3" />
+                  </div>
+                </div>
+                <div class="mt-6 flex justify-end">
+                  <button type="button" class="next-step rounded-xl bg-brandGreen px-5 py-3 text-white font-semibold">Next</button>
+                </div>
+              </div>
+
+              <div class="form-step step-hidden" data-step="2">
+                <h3 class="font-bold text-lg text-brandNavy">Step 2 — Personal Info</h3>
+                <div class="mt-4 grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="text-sm font-semibold">Full Name</label>
+                    <input id="fullName" required type="text" placeholder="Enter your full name" class="mt-1 w-full rounded-xl border border-slate-300 px-4 py-3" />
+                  </div>
+                  <div>
+                    <label class="text-sm font-semibold">Email</label>
+                    <input id="email" required type="email" placeholder="you@example.com" class="mt-1 w-full rounded-xl border border-slate-300 px-4 py-3" />
+                  </div>
+                  <div>
+                    <label class="text-sm font-semibold">Phone (with country code)</label>
+                    <input id="phone" required type="tel" placeholder="e.g., +256700000000" class="mt-1 w-full rounded-xl border border-slate-300 px-4 py-3" />
+                  </div>
+                  <div>
+                    <label class="text-sm font-semibold">Passport Number</label>
+                    <input id="passport" required type="text" placeholder="e.g., B1234567" class="mt-1 w-full rounded-xl border border-slate-300 px-4 py-3" />
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label class="text-sm font-semibold">Date of Birth</label>
+                    <input id="dob" required type="date" class="mt-1 w-full rounded-xl border border-slate-300 px-4 py-3" />
+                  </div>
+                </div>
+                <div class="mt-6 flex justify-between">
+                  <button type="button" class="prev-step rounded-xl border border-slate-300 px-5 py-3 font-semibold">Back</button>
+                  <button type="button" class="next-step rounded-xl bg-brandGreen px-5 py-3 text-white font-semibold">Next</button>
+                </div>
+              </div>
+
+              <div class="form-step step-hidden" data-step="3">
+                <h3 class="font-bold text-lg text-brandNavy">Step 3 — Choose Plan</h3>
+                <div class="mt-4 grid md:grid-cols-3 gap-4">
+                  <label class="cursor-pointer rounded-2xl border-2 border-transparent bg-brandNavy text-white p-4 plan-card">
+                    <input type="radio" name="plan" value="Basic" class="hidden" />
+                    <p class="font-bold">BASIC — $49</p>
+                    <p class="text-sm text-slate-200 mt-1">Checklist + form review</p>
+                  </label>
+                  <label class="cursor-pointer rounded-2xl border-2 border-transparent bg-brandGold text-brandNavy p-4 plan-card">
+                    <input type="radio" name="plan" value="Pro" class="hidden" />
+                    <p class="font-bold">PRO — $99</p>
+                    <p class="text-sm mt-1">Full assistance + interview prep</p>
+                  </label>
+                  <label class="cursor-pointer rounded-2xl border-2 border-transparent bg-brandGreen text-white p-4 plan-card">
+                    <input type="radio" name="plan" value="Express" class="hidden" />
+                    <p class="font-bold">EXPRESS — $149</p>
+                    <p class="text-sm text-green-100 mt-1">Priority + 48hr turnaround</p>
+                  </label>
+                </div>
+
+                <label class="mt-5 flex items-start gap-2 text-sm text-slate-700">
+                  <input id="termsCheck" type="checkbox" class="mt-0.5" required />
+                  <span>I agree to terms and understand government/consulate fees are NOT included.</span>
+                </label>
+
+                <div class="mt-6 flex justify-between">
+                  <button type="button" class="prev-step rounded-xl border border-slate-300 px-5 py-3 font-semibold">Back</button>
+                  <button type="submit" class="rounded-xl bg-brandGold px-5 py-3 font-bold text-brandNavy">Proceed to Payment</button>
+                </div>
+              </div>
+            </form>
+
+            <div id="successMessage" class="hidden mt-6 rounded-2xl border border-brandGreen/30 bg-brandGreen/10 p-4 text-brandNavy font-semibold"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="py-16 sm:py-20 bg-slate-50">
+        <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div class="text-center">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-brandNavy">Frequently Asked Questions</h2>
+          </div>
+
+          <div class="mt-8 space-y-3" id="faqContainer">
+            <article class="rounded-2xl bg-white border border-slate-200">
+              <button class="faq-toggle w-full flex items-center justify-between p-4 text-left font-semibold">Do you guarantee visa approval?<i class="fa-solid fa-plus"></i></button>
+              <div class="faq-content px-4"><p class="pb-4 text-slate-600">No. No private service can guarantee approval. Final decisions are made by consulates only.</p></div>
+            </article>
+            <article class="rounded-2xl bg-white border border-slate-200">
+              <button class="faq-toggle w-full flex items-center justify-between p-4 text-left font-semibold">How is this different from applying myself?<i class="fa-solid fa-plus"></i></button>
+              <div class="faq-content px-4"><p class="pb-4 text-slate-600">We reduce avoidable errors, align your documents, and prepare you for interviews based on your route.</p></div>
+            </article>
+            <article class="rounded-2xl bg-white border border-slate-200">
+              <button class="faq-toggle w-full flex items-center justify-between p-4 text-left font-semibold">Which payment methods do you accept?<i class="fa-solid fa-plus"></i></button>
+              <div class="faq-content px-4"><p class="pb-4 text-slate-600">Mobile Money (MTN MoMo, Airtel, M-Pesa), Flutterwave channels, cards, and bank transfer.</p></div>
+            </article>
+            <article class="rounded-2xl bg-white border border-slate-200">
+              <button class="faq-toggle w-full flex items-center justify-between p-4 text-left font-semibold">How long does the Schengen visa process take?<i class="fa-solid fa-plus"></i></button>
+              <div class="faq-content px-4"><p class="pb-4 text-slate-600">Typical processing is around 15 days after submission, though embassy timelines can vary.</p></div>
+            </article>
+            <article class="rounded-2xl bg-white border border-slate-200">
+              <button class="faq-toggle w-full flex items-center justify-between p-4 text-left font-semibold">What if my visa is rejected?<i class="fa-solid fa-plus"></i></button>
+              <div class="faq-content px-4"><p class="pb-4 text-slate-600">Our Pro and Express tiers include structured support for stronger resubmission planning.</p></div>
+            </article>
+            <article class="rounded-2xl bg-white border border-slate-200">
+              <button class="faq-toggle w-full flex items-center justify-between p-4 text-left font-semibold">Do you help with consulate appointments?<i class="fa-solid fa-plus"></i></button>
+              <div class="faq-content px-4"><p class="pb-4 text-slate-600">Yes. We guide booking steps, required documents, and appointment readiness checks.</p></div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-brandNavy text-white py-12">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-4 gap-8">
+          <div>
+            <div class="flex items-center gap-3">
+              <div class="h-10 w-10 rounded-xl bg-brandGreen flex items-center justify-center">
+                <i class="fa-solid fa-passport"></i>
+              </div>
+              <div>
+                <p class="font-bold">Ailes Global</p>
+                <p class="text-xs text-slate-300">Travel Without Barriers</p>
+              </div>
+            </div>
+            <p class="mt-4 text-sm text-slate-300">Trusted visa assistance designed for African travelers, families, and entrepreneurs.</p>
+          </div>
+
+          <div>
+            <p class="font-semibold">Quick Links</p>
+            <ul class="mt-3 space-y-2 text-sm text-slate-300">
+              <li><a href="#home" class="hover:text-brandGold">About</a></li>
+              <li><a href="#how-it-works" class="hover:text-brandGold">How It Works</a></li>
+              <li><a href="#pricing" class="hover:text-brandGold">Pricing</a></li>
+              <li><a href="#faq" class="hover:text-brandGold">FAQ</a></li>
+              <li><a href="#apply" class="hover:text-brandGold">Contact</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <p class="font-semibold">Contact</p>
+            <ul class="mt-3 space-y-2 text-sm text-slate-300">
+              <li><i class="fa-brands fa-whatsapp mr-2"></i>+000 000 000 000</li>
+              <li><i class="fa-solid fa-envelope mr-2"></i>hello@ailesglobal.com</li>
+            </ul>
+          </div>
+
+          <div>
+            <p class="font-semibold">Follow us</p>
+            <div class="mt-3 flex gap-3 text-lg">
+              <a href="#" class="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brandGold hover:text-brandNavy transition"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#" class="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brandGold hover:text-brandNavy transition"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="#" class="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brandGold hover:text-brandNavy transition"><i class="fa-brands fa-x-twitter"></i></a>
+              <a href="#" class="h-9 w-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-brandGold hover:text-brandNavy transition"><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-white/10 text-xs text-slate-300 leading-relaxed">
+          Ailes Global is a private visa assistance service. We are not affiliated with any government or embassy.
+          Visa decisions are made solely by the relevant consular authority. You may apply directly at your nearest embassy for free.
+        </div>
+        <p class="mt-4 text-xs text-slate-400">© <span id="year"></span> Ailes Global. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <a
+      href="https://wa.me/000000000000"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-white font-bold shadow-deep hover:brightness-95"
+    >
+      <i class="fa-brands fa-whatsapp text-lg"></i> WhatsApp Us
+    </a>
+
+    <script>
+      const africanCountries = [
+        'Algeria','Angola','Benin','Botswana','Burkina Faso','Burundi','Cabo Verde','Cameroon','Central African Republic','Chad','Comoros','Congo (Republic)','Congo (DRC)','Côte d\'Ivoire','Djibouti','Egypt','Equatorial Guinea','Eritrea','Eswatini','Ethiopia','Gabon','Gambia','Ghana','Guinea','Guinea-Bissau','Kenya','Lesotho','Liberia','Libya','Madagascar','Malawi','Mali','Mauritania','Mauritius','Morocco','Mozambique','Namibia','Niger','Nigeria','Rwanda','São Tomé and Príncipe','Senegal','Seychelles','Sierra Leone','Somalia','South Africa','South Sudan','Sudan','Tanzania','Togo','Tunisia','Uganda','Zambia','Zimbabwe'
+      ];
+
+      const schengenCountries = [
+        'Austria','Belgium','Bulgaria','Croatia','Czech Republic','Denmark','Estonia','Finland','France','Germany','Greece','Hungary','Iceland','Italy','Latvia','Liechtenstein','Lithuania','Luxembourg','Malta','Netherlands','Norway','Poland','Portugal','Romania','Slovakia','Slovenia','Spain','Sweden','Switzerland'
+      ];
+
+      function fillSelect(selectId, items) {
+        const select = document.getElementById(selectId);
+        items.forEach((item) => {
+          const option = document.createElement('option');
+          option.value = item;
+          option.textContent = item;
+          select.appendChild(option);
+        });
+      }
+
+      fillSelect('checkerFrom', africanCountries);
+      fillSelect('appCitizenship', africanCountries);
+      fillSelect('checkerTo', schengenCountries);
+      fillSelect('appDestination', schengenCountries);
+
+      const menuBtn = document.getElementById('menuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+      document.querySelectorAll('.mobile-link').forEach((link) => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          const href = this.getAttribute('href');
+          if (!href || href === '#') return;
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      const nav = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        nav.classList.toggle('sticky-active', window.scrollY > 10);
+      });
+
+      const visaResult = document.getElementById('visaResult');
+      document.getElementById('checkVisaBtn').addEventListener('click', () => {
+        const from = document.getElementById('checkerFrom').value;
+        const to = document.getElementById('checkerTo').value;
+        if (!from || !to) {
+          alert('Please select both your origin and destination countries.');
+          return;
+        }
+        visaResult.classList.remove('hidden');
+        visaResult.classList.add('fade-in-up');
+      });
+
+      const steps = Array.from(document.querySelectorAll('.form-step'));
+      const progressBar = document.getElementById('progressBar');
+      const stepLabel = document.getElementById('stepLabel');
+      let currentStep = 0;
+
+      function updateStepUI() {
+        steps.forEach((step, idx) => {
+          step.classList.toggle('step-hidden', idx !== currentStep);
+        });
+        progressBar.style.width = `${((currentStep + 1) / steps.length) * 100}%`;
+        stepLabel.textContent = `Step ${currentStep + 1} of ${steps.length}`;
+      }
+
+      function validateCurrentStep() {
+        const requiredFields = steps[currentStep].querySelectorAll('[required]');
+        for (const field of requiredFields) {
+          if ((field.type === 'checkbox' && !field.checked) || (field.type !== 'checkbox' && !field.value.trim())) {
+            field.focus();
+            alert('Please complete all required fields before continuing.');
+            return false;
+          }
+        }
+
+        if (currentStep === 2) {
+          const selectedPlan = document.querySelector('input[name="plan"]:checked');
+          if (!selectedPlan) {
+            alert('Please select a plan to continue.');
+            return false;
+          }
+        }
+
+        return true;
+      }
+
+      document.querySelectorAll('.next-step').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (!validateCurrentStep()) return;
+          if (currentStep < steps.length - 1) {
+            currentStep += 1;
+            updateStepUI();
+          }
+        });
+      });
+
+      document.querySelectorAll('.prev-step').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          if (currentStep > 0) {
+            currentStep -= 1;
+            updateStepUI();
+          }
+        });
+      });
+
+      document.querySelectorAll('.plan-card').forEach((card) => {
+        const input = card.querySelector('input[type="radio"]');
+        card.addEventListener('click', () => {
+          input.checked = true;
+          document.querySelectorAll('.plan-card').forEach((c) => c.classList.remove('ring-4', 'ring-brandGold/50'));
+          card.classList.add('ring-4', 'ring-brandGold/50');
+        });
+      });
+
+      const appForm = document.getElementById('applicationForm');
+      const successMessage = document.getElementById('successMessage');
+      appForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!validateCurrentStep()) return;
+
+        const ref = Math.floor(100000 + Math.random() * 900000);
+        successMessage.textContent = `Application received! Our team will contact you on WhatsApp within 2 hours. Reference: #${ref}`;
+        successMessage.classList.remove('hidden');
+        successMessage.classList.add('fade-in-up');
+        appForm.reset();
+        currentStep = 0;
+        document.querySelectorAll('.plan-card').forEach((c) => c.classList.remove('ring-4', 'ring-brandGold/50'));
+        updateStepUI();
+      });
+
+      document.querySelectorAll('.faq-toggle').forEach((button) => {
+        button.addEventListener('click', () => {
+          const content = button.nextElementSibling;
+          const icon = button.querySelector('i');
+          const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+          document.querySelectorAll('.faq-content').forEach((c) => (c.style.maxHeight = null));
+          document.querySelectorAll('.faq-toggle i').forEach((i) => (i.className = 'fa-solid fa-plus'));
+
+          if (!isOpen) {
+            content.style.maxHeight = content.scrollHeight + 'px';
+            icon.className = 'fa-solid fa-minus';
+          }
+        });
+      });
+
+      const testimonialTrack = document.getElementById('testimonialTrack');
+      const prevBtn = document.getElementById('prevTestimonial');
+      const nextBtn = document.getElementById('nextTestimonial');
+      const totalTestimonials = 4;
+      let testimonialIndex = 0;
+
+      function getVisibleCount() {
+        if (window.innerWidth >= 1024) return 4;
+        if (window.innerWidth >= 768) return 2;
+        return 1;
+      }
+
+      function updateCarousel() {
+        const visible = getVisibleCount();
+        const maxIndex = Math.max(0, totalTestimonials - visible);
+        testimonialIndex = Math.max(0, Math.min(testimonialIndex, maxIndex));
+        const slidePercent = 100 / visible;
+        testimonialTrack.style.transform = `translateX(-${testimonialIndex * slidePercent}%)`;
+      }
+
+      prevBtn.addEventListener('click', () => {
+        testimonialIndex -= 1;
+        updateCarousel();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        testimonialIndex += 1;
+        updateCarousel();
+      });
+
+      window.addEventListener('resize', updateCarousel);
+      updateCarousel();
+      updateStepUI();
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
