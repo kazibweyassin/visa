@@ -20,7 +20,7 @@ const news = [
     category: "Travel Advisory",
     country: "Germany",
     flag: "🇩🇪",
-    live: false,
+    live: true,
     summary:
       "Germany's embassy in Kampala has extended appointment wait times to 3–4 weeks due to high volume. Applicants are advised to submit at least 8 weeks before intended travel.",
   },
