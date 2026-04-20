@@ -1,16 +1,6 @@
 "use client";
 import { useState } from "react";
 
-/**
- * TravelAdvisoryNews
- *
- * SEO NOTES:
- * - Each news item should link to a real slug page: /blog/[slug]
- * - Replace `news` array with a fetch from your CMS / API / MDX files
- * - The category filter helps internal linking and crawlability
- * - Add structured data (JSON-LD NewsArticle) on the individual slug pages
- */
-
 const news = [
   {
     slug: "france-schengen-visa-requirements-2026",
@@ -19,6 +9,7 @@ const news = [
     category: "Policy Update",
     country: "France",
     flag: "🇫🇷",
+    live: true,
     summary:
       "France has revised its proof-of-funds threshold and now requires a minimum of €65 per day for Ugandan and Kenyan applicants. Travel insurance must explicitly cover repatriation.",
   },
@@ -29,6 +20,7 @@ const news = [
     category: "Travel Advisory",
     country: "Germany",
     flag: "🇩🇪",
+    live: false,
     summary:
       "Germany's embassy in Kampala has extended appointment wait times to 3–4 weeks due to high volume. Applicants are advised to submit at least 8 weeks before intended travel.",
   },
@@ -39,6 +31,7 @@ const news = [
     category: "Policy Update",
     country: "Schengen",
     flag: "🇪🇺",
+    live: false,
     summary:
       "Effective February 2026, the standard Schengen visa fee has increased from €80 to €90. The change applies to all 27 Schengen member states including France, Germany, and Netherlands.",
   },
@@ -49,6 +42,7 @@ const news = [
     category: "Operational",
     country: "Netherlands",
     flag: "🇳🇱",
+    live: false,
     summary:
       "VFS Global Kampala now accepts Netherlands Schengen visa applications on Saturdays from 9am to 1pm, reducing wait times for working applicants.",
   },
@@ -59,6 +53,7 @@ const news = [
     category: "Policy Update",
     country: "Italy",
     flag: "🇮🇹",
+    live: false,
     summary:
       "Italy's consulate now mandates biometric enrollment for all first-time applicants from Uganda regardless of prior Schengen history. Book biometrics before submitting documents.",
   },
@@ -66,10 +61,10 @@ const news = [
 
 const CATEGORIES = ["All", "Policy Update", "Travel Advisory", "Operational"];
 
-const CATEGORY_STYLES = {
-  "Policy Update": { background: "rgba(201,168,76,.12)", color: "#8B6914" },
-  "Travel Advisory": { background: "rgba(220,38,38,.08)", color: "#991B1B" },
-  "Operational": { background: "rgba(59,130,246,.08)", color: "#1D4ED8" },
+const CATEGORY_STYLES: Record<string, string> = {
+  "Policy Update":   "bg-amber-100 text-amber-800",
+  "Travel Advisory": "bg-red-50 text-red-700",
+  "Operational":     "bg-blue-50 text-blue-700",
 };
 
 function formatDate(dateStr: string) {
@@ -78,114 +73,102 @@ function formatDate(dateStr: string) {
   });
 }
 
-const styles = `
-  .advisory-wrap { font-family: 'DM Sans', system-ui, sans-serif; }
-  .advisory-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
-  .filter-btn {
-    font-size: 12px; font-weight: 500; padding: 6px 14px;
-    border-radius: 3px; border: 1px solid #E5E7EB;
-    background: transparent; color: #6B7280;
-    cursor: pointer; transition: all .18s; letter-spacing: .03em;
-  }
-  .filter-btn:hover { border-color: #C9A84C; color: #1A1A14; }
-  .filter-btn.active { background: #C9A84C; border-color: #C9A84C; color: #0B1C2D; }
-  .advisory-list { display: flex; flex-direction: column; gap: 1px; }
-  .advisory-item {
-    display: grid; grid-template-columns: auto 1fr auto;
-    gap: 20px; align-items: start;
-    padding: 20px 0;
-    border-bottom: 1px solid #F3F0E8;
-    text-decoration: none; color: inherit;
-    transition: background .15s;
-  }
-  .advisory-item:last-child { border-bottom: none; }
-  .advisory-item:hover .advisory-title { color: #C9A84C; }
-  .advisory-flag { font-size: 24px; margin-top: 2px; }
-  .advisory-body { }
-  .advisory-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
-  .advisory-category {
-    font-size: 10px; font-weight: 600; padding: 3px 8px;
-    border-radius: 2px; letter-spacing: .08em; text-transform: uppercase;
-  }
-  .advisory-date { font-size: 12px; color: #9CA3AF; }
-  .advisory-title {
-    font-size: 15px; font-weight: 500; color: #0B1C2D;
-    margin-bottom: 6px; line-height: 1.4;
-    transition: color .18s;
-  }
-  .advisory-summary { font-size: 13px; color: #6B7280; line-height: 1.65; font-weight: 300; }
-  .advisory-arrow { font-size: 16px; color: #D6C9A8; margin-top: 4px; transition: color .18s; }
-  .advisory-item:hover .advisory-arrow { color: #C9A84C; }
-  .advisory-empty { font-size: 14px; color: #9CA3AF; padding: 32px 0; text-align: center; }
-  .advisory-footer { margin-top: 24px; padding-top: 20px; border-top: 1px solid #F3F0E8; display: flex; justify-content: space-between; align-items: center; }
-  .advisory-count { font-size: 12px; color: #9CA3AF; }
-  .advisory-cta {
-    font-size: 13px; font-weight: 500; color: #C9A84C;
-    text-decoration: none; display: flex; align-items: center; gap: 6px;
-    transition: gap .2s;
-  }
-  .advisory-cta:hover { gap: 10px; }
-`;
-
 export default function TravelAdvisoryNews() {
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const filtered = activeCategory === "All"
-    ? news
-    : news.filter((n) => n.category === activeCategory);
+  const filtered =
+    activeCategory === "All"
+      ? news
+      : news.filter((n) => n.category === activeCategory);
 
   return (
-    <aside className="advisory-wrap">
-      <style>{styles}</style>
+    <aside className="w-full">
 
-      {/* Filters */}
-      <div className="advisory-filters">
+      {/* ── Category filters ── */}
+      <div className="flex flex-wrap gap-2 mb-6">
         {CATEGORIES.map((cat) => (
           <button
             key={cat}
-            className={`filter-btn${activeCategory === cat ? " active" : ""}`}
             onClick={() => setActiveCategory(cat)}
+            className={`text-xs font-medium px-4 py-2 rounded border transition-colors
+              ${activeCategory === cat
+                ? "bg-amber-500 border-amber-500 text-white"
+                : "bg-white border-gray-200 text-gray-500 hover:border-amber-400 hover:text-gray-800"
+              }`}
           >
             {cat}
           </button>
         ))}
       </div>
 
-      {/* List */}
-      <div className="advisory-list">
+      {/* ── List ── */}
+      <div className="divide-y divide-gray-100">
         {filtered.length === 0 ? (
-          <div className="advisory-empty">No advisories in this category yet.</div>
+          <p className="text-sm text-gray-400 text-center py-10">
+            No advisories in this category yet.
+          </p>
         ) : (
-          filtered.map((item) => (
-            <a
-              key={item.slug}
-              href={`/blog/${item.slug}`}
-              className="advisory-item"
-            >
-              <div className="advisory-flag">{item.flag}</div>
-              <div className="advisory-body">
-                <div className="advisory-meta">
-                  <span
-                    className="advisory-category"
-                    style={CATEGORY_STYLES[item.category as keyof typeof CATEGORY_STYLES] ?? {}}
-                  >
-                    {item.category}
-                  </span>
-                  <span className="advisory-date">{formatDate(item.date)}</span>
+          filtered.map((item) => {
+            const Wrapper = item.live ? "a" : "div";
+            const wrapperProps = item.live
+              ? { href: `/blog/${item.slug}` }
+              : {};
+
+            return (
+              <Wrapper
+                key={item.slug}
+                {...wrapperProps}
+                className={`flex items-start gap-4 py-5 group
+                  ${item.live ? "cursor-pointer" : "cursor-default opacity-80"}`}
+              >
+                {/* Flag */}
+                <span className="text-2xl mt-0.5 shrink-0">{item.flag}</span>
+
+                {/* Body */}
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                    <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded ${CATEGORY_STYLES[item.category] ?? "bg-gray-100 text-gray-600"}`}>
+                      {item.category}
+                    </span>
+                    <span className="text-xs text-gray-400">{formatDate(item.date)}</span>
+                    {!item.live && (
+                      <span className="text-[10px] font-medium text-gray-400 border border-gray-200 px-2 py-0.5 rounded">
+                        Coming soon
+                      </span>
+                    )}
+                  </div>
+
+                  <p className={`text-sm font-medium text-gray-900 mb-1 leading-snug
+                    ${item.live ? "group-hover:text-amber-600 transition-colors" : ""}`}>
+                    {item.title}
+                  </p>
+
+                  <p className="text-sm text-gray-500 leading-relaxed font-light line-clamp-2">
+                    {item.summary}
+                  </p>
                 </div>
-                <div className="advisory-title">{item.title}</div>
-                <div className="advisory-summary">{item.summary}</div>
-              </div>
-              <div className="advisory-arrow">→</div>
-            </a>
-          ))
+
+                {/* Arrow — only shown for live items */}
+                {item.live && (
+                  <span className="text-gray-300 group-hover:text-amber-500 transition-colors text-lg shrink-0 mt-1">
+                    →
+                  </span>
+                )}
+              </Wrapper>
+            );
+          })
         )}
       </div>
 
-      {/* Footer */}
-      <div className="advisory-footer">
-        <span className="advisory-count">{filtered.length} update{filtered.length !== 1 ? "s" : ""}</span>
-        <a href="/blog" className="advisory-cta">
+      {/* ── Footer ── */}
+      <div className="flex justify-between items-center mt-6 pt-5 border-t border-gray-100">
+        <span className="text-xs text-gray-400">
+          {filtered.length} update{filtered.length !== 1 ? "s" : ""}
+        </span>
+        <a
+          href="/blog"
+          className="text-sm font-medium text-amber-600 hover:text-amber-700 transition-colors"
+        >
           All advisories →
         </a>
       </div>
