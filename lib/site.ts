@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "Ailes Global",
-  tagline: "Visa guidance for global journeys",
+  tagline: "Schengen visa preparation made simple and reliable",
   description:
-    "Personalized visa and study abroad guidance for travelers and students.",
-  ctaLabel: "Start application",
-  secondaryCtaLabel: "See how it works",
+    "We help travelers and students prepare complete, consulate-ready visa applications through expert document review and step-by-step guidance.",
+  ctaLabel: "Start on here",
+  secondaryCtaLabel: "Check requirements",
 };
