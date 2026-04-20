@@ -72,7 +72,7 @@ const CATEGORY_STYLES = {
   "Operational": { background: "rgba(59,130,246,.08)", color: "#1D4ED8" },
 };
 
-function formatDate(dateStr) {
+function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-UG", {
     day: "numeric", month: "long", year: "numeric",
   });
@@ -167,7 +167,7 @@ export default function TravelAdvisoryNews() {
                 <div className="advisory-meta">
                   <span
                     className="advisory-category"
-                    style={CATEGORY_STYLES[item.category]}
+                    style={CATEGORY_STYLES[item.category as keyof typeof CATEGORY_STYLES] ?? {}}
                   >
                     {item.category}
                   </span>
