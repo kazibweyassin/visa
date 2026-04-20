@@ -74,7 +74,7 @@ export function LandingHero() {
 
             <p className="mt-6 max-w-xl text-base leading-7 text-slate-300 sm:text-lg">
               {siteConfig.description} Upload your documents, let AI flag gaps before submission, and
-              generate a consulate-ready PDF packet—paying in UGX, NGN, or KES.
+              generate a consulate documents.
             </p>
 
             <div className="mt-8" id="start">
