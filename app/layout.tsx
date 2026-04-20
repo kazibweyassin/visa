@@ -21,8 +21,8 @@ export const metadata: Metadata = {
   description:
     "Ailes Global helps travelers apply for Schengen visas with guided intake, secure document handling, and localized payments.",
   icons: {
-    icon: "/globe.svg",
-    shortcut: "/globe.svg",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
   },
   metadataBase: new URL("https://ailesglobal.com"),
   alternates: {
@@ -41,12 +41,24 @@ export const metadata: Metadata = {
     description:
       "Ailes Global helps travelers apply for Schengen visas with guided intake, secure document handling, and localized payments.",
     type: "website",
+    url: "https://ailesglobal.com",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "Ailes Global | Visa automation for global travelers",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Ailes Global | Visa automation for global travelers",
     description:
       "Ailes Global helps travelers apply for Schengen visas with guided intake, secure document handling, and localized payments.",
+    images: [
+      "/og-image.svg"
+    ]
   },
 };
 
@@ -62,6 +74,12 @@ export default function RootLayout({
     >
       <head>
         <meta name="google-site-verification" content="B5F8J-8NQ3r0YF3x2dErJQgFx10EfTtdDgmXQ5yPhRI" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta property="og:title" content="Ailes Global | Visa automation for global travelers" />
+        <meta property="og:description" content="Ailes Global helps travelers apply for Schengen visas with guided intake, secure document handling, and localized payments." />
+        <meta property="og:image" content="/og-image.svg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ailesglobal.com" />
       </head>
       <body className="min-h-full flex flex-col bg-[#0B1324] text-white">
         {children}
