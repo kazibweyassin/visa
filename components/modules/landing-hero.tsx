@@ -47,10 +47,10 @@ export function LandingHero() {
   };
 
   return (
-    <main className="relative overflow-hidden bg-[#0B1324] text-white">
+    <main className="relative overflow-hidden bg-[var(--background)] text-[var(--foreground)]">
       {/* Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(30,42,68,0.32),_transparent_32%),radial-gradient(circle_at_top_right,_rgba(244,193,93,0.14),_transparent_26%),linear-gradient(180deg,#0b1324_0%,#0b1324_55%,#0a1020_100%)]" />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(69,123,157,0.10),_transparent_32%),radial-gradient(circle_at_top_right,_rgba(255,209,102,0.10),_transparent_26%),linear-gradient(180deg,var(--background)_0%,var(--surface)_100%)]" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--primary)]/10 to-transparent" />
 
       <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-4 pb-10 sm:px-6 lg:px-8">
         <section className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:py-16">

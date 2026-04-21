@@ -14,16 +14,16 @@ const planFeatures: Record<string, string[]> = {
 
 export function Pricing() {
   return (
-    <section id="pricing" className="relative overflow-hidden bg-[#0B1324] py-20 sm:py-24">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(247,213,111,0.16),_transparent_45%)]" />
+    <section id="pricing" className="relative overflow-hidden bg-[var(--surface)] py-20 sm:py-24">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,209,102,0.10),_transparent_45%)]" />
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-slate-200">
-            <ShieldCheck className="h-4 w-4 text-[#F4C15D]" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--muted)] bg-[var(--muted)] px-4 py-2 text-xs text-[var(--primary)]">
+            <ShieldCheck className="h-4 w-4 text-[var(--gold)]" />
             Transparent pricing
           </div>
-          <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Choose the right support tier.</h2>
-          <p className="mt-3 text-base text-slate-300">
+          <h2 className="mt-4 text-3xl font-semibold text-[var(--foreground)] sm:text-4xl">Choose the right support tier.</h2>
+          <p className="mt-3 text-base text-[var(--primary)]/80">
             Government or consulate fees are paid separately and are not included below.
           </p>
         </div>
@@ -38,19 +38,19 @@ export function Pricing() {
               transition={{ duration: 0.55, delay: index * 0.08 }}
               className={
                 plan.key === "pro"
-                  ? "relative rounded-[2rem] border border-[#F4C15D]/35 bg-[linear-gradient(135deg,rgba(244,193,93,0.2),rgba(232,169,73,0.1))] p-7 shadow-2xl shadow-[#F4C15D]/20"
-                  : "rounded-[2rem] border border-white/10 bg-white/[0.06] p-7 shadow-2xl shadow-black/20"
+                  ? "relative rounded-[2rem] border border-[var(--gold)]/35 bg-[linear-gradient(135deg,var(--gold),var(--secondary),var(--surface))] p-7 shadow-2xl shadow-[var(--gold)]/20"
+                  : "rounded-[2rem] border border-[var(--muted)] bg-[var(--muted)] p-7 shadow-2xl shadow-black/10"
               }
             >
               {plan.key === "pro" && (
-                <span className="absolute -top-3 right-6 rounded-full bg-[#F4C15D] px-3 py-1 text-xs font-semibold text-slate-950">
+                <span className="absolute -top-3 right-6 rounded-full bg-[var(--gold)] px-3 py-1 text-xs font-semibold text-[var(--foreground)]">
                   Best Value
                 </span>
               )}
-              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{plan.name}</p>
-              <p className="mt-4 text-4xl font-semibold text-white">{plan.price}</p>
-              <p className="mt-3 text-sm text-slate-300">{plan.description}</p>
-              <ul className="mt-6 space-y-2 text-sm text-slate-200">
+              <p className="text-xs uppercase tracking-[0.3em] text-[var(--secondary)]/80">{plan.name}</p>
+              <p className="mt-4 text-4xl font-semibold text-[var(--foreground)]">{plan.price}</p>
+              <p className="mt-3 text-sm text-[var(--primary)]/80">{plan.description}</p>
+              <ul className="mt-6 space-y-2 text-sm text-[var(--primary)]/90">
                 {planFeatures[plan.key].map((feature) => (
                   <li key={feature} className="flex items-center gap-2">
                     <CheckCircle2 className="h-4 w-4 text-emerald-300" />

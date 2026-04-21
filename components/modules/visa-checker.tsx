@@ -35,24 +35,24 @@ export function VisaChecker() {
     : "/apply";
 
   return (
-    <section id="visa-checker" className="relative overflow-hidden bg-[#0B1324] py-20 sm:py-24">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(247,213,111,0.14),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(56,189,248,0.14),_transparent_35%)]" />
+    <section id="visa-checker" className="relative overflow-hidden bg-[var(--surface)] py-20 sm:py-24">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,209,102,0.10),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(69,123,157,0.10),_transparent_35%)]" />
       <div className="relative mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
         <div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-slate-200">
-            <ShieldCheck className="h-4 w-4 text-[#F4C15D]" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--muted)] bg-[var(--muted)] px-4 py-2 text-xs text-[var(--primary)]">
+            <ShieldCheck className="h-4 w-4 text-[var(--gold)]" />
             Visa checker
           </div>
-          <h2 className="mt-5 text-3xl font-semibold text-white sm:text-4xl">
+          <h2 className="mt-5 text-3xl font-semibold text-[var(--foreground)] sm:text-4xl">
             Confirm your Schengen visa requirements in seconds.
           </h2>
-          <p className="mt-4 max-w-xl text-base leading-7 text-slate-300">
+          <p className="mt-4 max-w-xl text-base leading-7 text-[var(--primary)]/80">
             Pick your citizenship and destination to get an instant requirement summary, timeline,
             and estimated service fee.
           </p>
-          <div className="mt-8 grid gap-4 rounded-[2rem] border border-white/10 bg-white/[0.06] p-5 shadow-2xl shadow-black/30 backdrop-blur-xl">
+          <div className="mt-8 grid gap-4 rounded-[2rem] border border-[var(--muted)] bg-[var(--muted)] p-5 shadow-2xl shadow-black/10 backdrop-blur-xl">
             <div>
-              <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+              <label className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--secondary)]/80">
                 I am from
               </label>
               <select

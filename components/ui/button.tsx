@@ -12,8 +12,8 @@ type ButtonProps = ComponentPropsWithoutRef<typeof Link> & {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "bg-[linear-gradient(135deg,#F4C15D,#E8A949)] text-slate-950 shadow-lg shadow-[#F4C15D]/25 hover:-translate-y-0.5",
-  secondary: "border border-white/10 bg-white/5 text-white hover:bg-white/10",
+    "bg-[linear-gradient(135deg,var(--gold),var(--secondary))] text-[var(--foreground)] shadow-lg shadow-[var(--gold)]/15 hover:-translate-y-0.5",
+  secondary: "border border-[var(--muted)] bg-[var(--muted)] text-[var(--primary)] hover:bg-[var(--secondary)]/10",
 };
 
 export function Button({ variant = "primary", className, ...props }: ButtonProps) {

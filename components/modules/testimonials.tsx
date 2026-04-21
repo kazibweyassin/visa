@@ -32,16 +32,16 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="relative overflow-hidden bg-[#0B1324] py-20 sm:py-24">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(247,213,111,0.14),_transparent_40%)]" />
+    <section id="testimonials" className="relative overflow-hidden bg-[var(--surface)] py-20 sm:py-24">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,209,102,0.10),_transparent_40%)]" />
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-4 text-center sm:text-left">
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-[#F4C15D]">Testimonials</p>
-            <h2 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">
+            <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Testimonials</p>
+            <h2 className="mt-3 text-3xl font-semibold text-[var(--foreground)] sm:text-4xl">
               Global travelers sharing real outcomes.
             </h2>
-            <p className="mt-3 text-base text-slate-300">
+            <p className="mt-3 text-base text-[var(--primary)]/80">
               Authentic stories from people who needed a reliable, fast visa experience.
             </p>
           </div>
@@ -55,9 +55,9 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: index * 0.08 }}
-              className="rounded-[2rem] border border-white/10 bg-white/[0.06] p-6 shadow-2xl shadow-black/20 backdrop-blur-xl"
+              className="rounded-[2rem] border border-[var(--muted)] bg-[var(--muted)] p-6 shadow-2xl shadow-black/10 backdrop-blur-xl"
             >
-              <div className="flex items-center gap-1 text-[#F4C15D]">
+              <div className="flex items-center gap-1 text-[var(--gold)]">
                 {Array.from({ length: 5 }).map((_, starIndex) => (
                   <Star key={starIndex} className="h-4 w-4 fill-[#F4C15D]" />
                 ))}

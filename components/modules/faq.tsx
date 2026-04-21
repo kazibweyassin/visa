@@ -37,13 +37,13 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative overflow-hidden bg-[#0B1324] py-20 sm:py-24">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(247,213,111,0.12),_transparent_40%)]" />
+    <section id="faq" className="relative overflow-hidden bg-[var(--surface)] py-20 sm:py-24">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,209,102,0.10),_transparent_40%)]" />
       <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-[#F4C15D]">FAQ</p>
-          <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">Answers to common questions.</h2>
-          <p className="mt-3 text-base text-slate-300">
+          <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">FAQ</p>
+          <h2 className="mt-4 text-3xl font-semibold text-[var(--foreground)] sm:text-4xl">Answers to common questions.</h2>
+          <p className="mt-3 text-base text-[var(--primary)]/80">
             Get clarity on timelines, approvals, and support expectations.
           </p>
         </div>
@@ -52,12 +52,12 @@ export function FAQ() {
           {faqItems.map((item, index) => (
             <div
               key={item.question}
-              className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.06] backdrop-blur-xl"
+              className="overflow-hidden rounded-[1.5rem] border border-[var(--muted)] bg-[var(--muted)] backdrop-blur-xl"
             >
               <button
                 type="button"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="flex w-full items-center justify-between px-5 py-4 text-left text-sm font-semibold text-white"
+                className="flex w-full items-center justify-between px-5 py-4 text-left text-sm font-semibold text-[var(--foreground)]"
               >
                 {item.question}
                 <ChevronDown
