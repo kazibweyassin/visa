@@ -13,7 +13,7 @@ export function SiteHeader() {
     { label: "Business journeys", href: "/study-abroad" },
     { label: "Visa support", href: "#visa-checker" },
     { label: "How it works", href: "#how-it-works" },
-    { label: "Pricing", href: "#pricing" },
+    { label: "Pricing", href: "/pricing" },
     { label: "FAQ", href: "#faq" },
   ];
 

@@ -58,9 +58,9 @@ export function LandingHero() {
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--primary)]/30 to-transparent" />
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent" />
 
-      <div className="relative mx-auto flex max-w-7xl flex-col px-4 pb-10 pt-10 sm:px-6 lg:px-8">
+      <div className="relative mx-auto flex max-w-7xl flex-col px-4 pb-8 pt-8 sm:px-6 lg:px-8">
 
-        <section className="grid items-center gap-8 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:py-12">
+        <section className="grid items-center gap-8 py-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10 lg:py-10">
 
           {/* LEFT */}
           <motion.div
@@ -71,24 +71,22 @@ export function LandingHero() {
           >
 
             {/* Badge */}
-            <div className="inline-flex flex-wrap items-center gap-3 rounded-full border border-[var(--gold)]/25 bg-[rgba(248,180,62,0.1)] px-4 py-2 text-xs backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/25 bg-[rgba(248,180,62,0.1)] px-3 py-2 text-xs text-slate-800 backdrop-blur-sm">
               <ShieldCheck className="h-4 w-4 text-[var(--gold)]" />
-              <span>Expert-reviewed applications</span>
-              <span>Business travel planning</span>
-              <span>Trusted across Africa</span>
+              Expert-reviewed visa preparation
             </div>
 
             {/* Title */}
-            <h1 className="mt-6 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
               Visa-ready business travel for African professionals.
             </h1>
 
-            <p className="mt-6 max-w-xl text-base leading-8 text-slate-700 sm:text-lg">
-              We prepare, review, and position your visa application for approval — while you focus on international opportunities, deals, and growth.
+            <p className="mt-4 max-w-xl text-base leading-7 text-slate-700 sm:text-lg">
+              We prepare your visa application for approval while you focus on deals and growth.
             </p>
 
             {/* CTA */}
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
 
               {/* PRIMARY CTA */}
               <Link
@@ -130,7 +128,7 @@ export function LandingHero() {
 
             </div>
 
-            <p className="mt-6 max-w-xl text-sm font-medium uppercase tracking-[0.24em] text-slate-500">
+            <p className="mt-4 max-w-xl text-sm font-medium uppercase tracking-[0.24em] text-slate-500 sm:block hidden">
               High approval focus • Professional documentation • End-to-end guidance
             </p>
           </motion.div>
@@ -146,7 +144,7 @@ export function LandingHero() {
             {/* Glow */}
             <div className="absolute -inset-2 rounded-[2rem] bg-gradient-to-r from-blue-200/40 to-yellow-100/40 blur-2xl opacity-60" />
 
-            <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-5 shadow-2xl sm:p-6">
+            <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-4 shadow-2xl sm:p-5">
 
               <div>
                 <p className="text-xs uppercase tracking-[0.28em] text-slate-500">
@@ -155,13 +153,13 @@ export function LandingHero() {
                 <h2 className="mt-2 text-2xl font-semibold text-slate-950">
                   Start your visa assessment
                 </h2>
-                <p className="mt-2 text-sm text-slate-600">
-                  Get a personalized checklist and expert guidance.
-                </p>
               </div>
+              <p className="mt-3 text-sm text-slate-600 sm:mt-0">
+                Personalized checklist, expert guidance, and clear next steps.
+              </p>
 
               {/* FORM */}
-              <form onSubmit={handleSubmit} className="mt-6 grid gap-4">
+              <form onSubmit={handleSubmit} className="mt-4 grid gap-3">
 
                 {/* Your existing inputs stay unchanged */}
 

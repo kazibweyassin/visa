@@ -6,7 +6,6 @@ import { VisaChecker } from "@/components/modules/visa-checker";
 import { PopularEvisas } from "@/components/modules/popular-evisas";
 import { HowItWorks } from "@/components/modules/how-it-works";
 import { WhyUs } from "@/components/modules/why-us";
-import { Pricing } from "@/components/modules/pricing";
 import { FAQ } from "@/components/modules/faq";
 import { FloatingWhatsApp } from "@/components/modules/floating-whatsapp";
 import TravelAdvisoryNews from "@/components/modules/travel-advisory-news";
@@ -22,7 +21,6 @@ export default function Home() {
       <PopularEvisas />
       <WhyUs />
       <HowItWorks />
-      <Pricing />
       <FAQ />
       <FloatingWhatsApp />
       <SiteFooter />
