@@ -58,9 +58,9 @@ export function LandingHero() {
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--primary)]/30 to-transparent" />
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent" />
 
-      <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-4 pb-10 sm:px-6 lg:px-8">
+      <div className="relative mx-auto flex max-w-7xl flex-col px-4 pb-10 pt-10 sm:px-6 lg:px-8">
 
-        <section className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:py-16">
+        <section className="grid items-center gap-8 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:py-12">
 
           {/* LEFT */}
           <motion.div
