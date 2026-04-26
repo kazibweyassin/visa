@@ -89,13 +89,30 @@ export function LandingHero() {
             </p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <Link
-                href="/apply"
-                className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-sm font-semibold text-white shadow-lg shadow-blue-200 transition hover:-translate-y-0.5 hover:from-blue-700 hover:to-blue-800"
-              >
-                Start your visa preparation
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+                <Link
+                  href="/apply"
+                  className="
+      group relative inline-flex h-12 items-center justify-center gap-2
+      overflow-hidden rounded-xl
+      bg-gradient-to-r from-blue-600 via-blue-600 to-blue-700
+      px-6 text-sm font-semibold text-white
+      shadow-md shadow-blue-500/20
+      transition-all duration-300
+      hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/30
+      active:translate-y-0 active:scale-[0.98]
+    "
+                >
+                  {/* Shine effect */}
+                  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                  {/* Content */}
+                  <span className="relative flex items-center gap-2">
+                    Start your visa preparation
+                    <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              </div>
+
 
               <Link
                 href="#visa-checker"
