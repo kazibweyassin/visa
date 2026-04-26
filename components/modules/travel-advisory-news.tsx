@@ -1,5 +1,7 @@
 "use client";
+
 import { useState } from "react";
+import { ArrowRight, Clock, Radio } from "lucide-react";
 
 const news = [
   {
@@ -33,7 +35,7 @@ const news = [
     flag: "🇪🇺",
     live: false,
     summary:
-      "Effective February 2026, the standard Schengen visa fee has increased from €80 to €90. The change applies to all 27 Schengen member states including France, Germany, and Netherlands.",
+      "Effective February 2026, the standard Schengen visa fee increased from €80 to €90, applying to all 27 member states.",
   },
   {
     slug: "netherlands-vfs-kampala-extended-hours",
@@ -55,21 +57,23 @@ const news = [
     flag: "🇮🇹",
     live: false,
     summary:
-      "Italy's consulate now mandates biometric enrollment for all first-time applicants from Uganda regardless of prior Schengen history. Book biometrics before submitting documents.",
+      "Italy's consulate now mandates biometric enrollment for all first-time applicants from Uganda regardless of prior Schengen history.",
   },
 ];
 
 const CATEGORIES = ["All", "Policy Update", "Travel Advisory", "Operational"];
 
 const CATEGORY_STYLES: Record<string, string> = {
-  "Policy Update":   "bg-amber-100 text-amber-800",
-  "Travel Advisory": "bg-red-50 text-red-700",
-  "Operational":     "bg-blue-50 text-blue-700",
+  "Policy Update":   "bg-amber-100 text-amber-800 border-amber-200",
+  "Travel Advisory": "bg-rose-50 text-rose-700 border-rose-200",
+  "Operational":     "bg-blue-50 text-blue-700 border-blue-200",
 };
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-UG", {
-    day: "numeric", month: "long", year: "numeric",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
   });
 }
 
@@ -77,23 +81,21 @@ export default function TravelAdvisoryNews() {
   const [activeCategory, setActiveCategory] = useState("All");
 
   const filtered =
-    activeCategory === "All"
-      ? news
-      : news.filter((n) => n.category === activeCategory);
+    activeCategory === "All" ? news : news.filter((n) => n.category === activeCategory);
 
   return (
     <aside className="w-full">
-
-      {/* ── Category filters ── */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      {/* Category filters */}
+      <div className="flex flex-wrap gap-2">
         {CATEGORIES.map((cat) => (
           <button
             key={cat}
+            type="button"
             onClick={() => setActiveCategory(cat)}
-            className={`text-xs font-medium px-4 py-2 rounded border transition-colors
+            className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all duration-150
               ${activeCategory === cat
-                ? "bg-amber-500 border-amber-500 text-white"
-                : "bg-white border-gray-200 text-gray-500 hover:border-amber-400 hover:text-gray-800"
+                ? "border-amber-500 bg-amber-500 text-white"
+                : "border-slate-200 bg-white text-slate-500 hover:border-amber-400 hover:text-slate-800"
               }`}
           >
             {cat}
@@ -101,75 +103,81 @@ export default function TravelAdvisoryNews() {
         ))}
       </div>
 
-      {/* ── List ── */}
-      <div className="divide-y divide-gray-100">
+      {/* Advisory list */}
+      <div className="mt-5 divide-y divide-slate-100">
         {filtered.length === 0 ? (
-          <p className="text-sm text-gray-400 text-center py-10">
-            No advisories in this category yet.
-          </p>
+          <p className="py-10 text-center text-sm text-slate-400">No advisories in this category yet.</p>
         ) : (
           filtered.map((item) => {
-            const Wrapper = item.live ? "a" : "div";
-            const wrapperProps = item.live
-              ? { href: `/blog/${item.slug}` }
-              : {};
+            const Tag = item.live ? "a" : "div";
+            const tagProps = item.live ? { href: `/blog/${item.slug}` } : {};
 
             return (
-              <Wrapper
+              <Tag
                 key={item.slug}
-                {...wrapperProps}
-                className={`flex items-start gap-4 py-5 group
-                  ${item.live ? "cursor-pointer" : "cursor-default opacity-80"}`}
+                {...(tagProps as Record<string, string>)}
+                className={`flex items-start gap-4 py-5 transition-colors
+                  ${item.live ? "group cursor-pointer hover:bg-slate-50/60 -mx-3 px-3 rounded-xl" : "cursor-default opacity-75"}`}
               >
                 {/* Flag */}
-                <span className="text-2xl mt-0.5 shrink-0">{item.flag}</span>
+                <span className="mt-0.5 shrink-0 text-xl">{item.flag}</span>
 
                 {/* Body */}
-                <div className="flex-1 min-w-0">
-                  <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                    <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded ${CATEGORY_STYLES[item.category] ?? "bg-gray-100 text-gray-600"}`}>
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span
+                      className={`inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider
+                        ${CATEGORY_STYLES[item.category] ?? "border-slate-200 bg-slate-100 text-slate-600"}`}
+                    >
                       {item.category}
                     </span>
-                    <span className="text-xs text-gray-400">{formatDate(item.date)}</span>
-                    {!item.live && (
-                      <span className="text-[10px] font-medium text-gray-400 border border-gray-200 px-2 py-0.5 rounded">
+
+                    {item.live ? (
+                      <span className="inline-flex items-center gap-1 text-[10px] font-medium text-emerald-600">
+                        <Radio className="h-3 w-3" />
+                        Live
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 text-[10px] text-slate-400">
+                        <Clock className="h-3 w-3" />
                         Coming soon
                       </span>
                     )}
+
+                    <span className="text-[11px] text-slate-400">{formatDate(item.date)}</span>
                   </div>
 
-                  <p className={`text-sm font-medium text-gray-900 mb-1 leading-snug
-                    ${item.live ? "group-hover:text-amber-600 transition-colors" : ""}`}>
+                  <p
+                    className={`mt-1.5 text-sm font-medium leading-snug text-slate-900
+                      ${item.live ? "group-hover:text-amber-600 transition-colors" : ""}`}
+                  >
                     {item.title}
                   </p>
 
-                  <p className="text-sm text-gray-500 leading-relaxed font-light line-clamp-2">
+                  <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-slate-500">
                     {item.summary}
                   </p>
                 </div>
 
-                {/* Arrow — only shown for live items */}
                 {item.live && (
-                  <span className="text-gray-300 group-hover:text-amber-500 transition-colors text-lg shrink-0 mt-1">
-                    →
-                  </span>
+                  <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-slate-300 transition-colors group-hover:text-amber-500" />
                 )}
-              </Wrapper>
+              </Tag>
             );
           })
         )}
       </div>
 
-      {/* ── Footer ── */}
-      <div className="flex justify-between items-center mt-6 pt-5 border-t border-gray-100">
-        <span className="text-xs text-gray-400">
+      {/* Footer */}
+      <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
+        <span className="text-xs text-slate-400">
           {filtered.length} update{filtered.length !== 1 ? "s" : ""}
         </span>
         <a
           href="/blog"
-          className="text-sm font-medium text-amber-600 hover:text-amber-700 transition-colors"
+          className="inline-flex items-center gap-1 text-sm font-medium text-amber-600 transition-colors hover:text-amber-700"
         >
-          All advisories →
+          All advisories <ArrowRight className="h-3.5 w-3.5" />
         </a>
       </div>
     </aside>

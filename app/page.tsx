@@ -18,7 +18,7 @@ export default function Home() {
       <LandingHero />
       <TrustBar />
       <VisaChecker />
-      <TravelAdvisoryNews />
+      {/* <TravelAdvisoryNews /> */}
       <PopularEvisas />
       <WhyUs />
       <HowItWorks />

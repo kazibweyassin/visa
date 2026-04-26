@@ -1,7 +1,8 @@
 import Link from "next/link";
 
 const quickLinks = [
-  { label: "Visa checker", href: "#visa-checker" },
+  { label: "Business journeys", href: "/study-abroad" },
+  { label: "Visa support", href: "#visa-checker" },
   { label: "How it works", href: "#how-it-works" },
   { label: "Pricing", href: "#pricing" },
   { label: "FAQ", href: "#faq" },
@@ -10,12 +11,12 @@ const quickLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-[var(--muted)] bg-[var(--surface)] py-12 text-[var(--foreground)]">
+    <footer className="border-t border-white/10 bg-[var(--surface)] py-12 text-[var(--foreground)]">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
         <div>
           <p className="text-sm font-semibold">Ailes Global</p>
-          <p className="mt-2 text-sm text-[var(--primary)]/80">
-            Premium visa assistance for global travelers seeking Schengen destinations.
+          <p className="mt-2 text-sm text-[var(--foreground)]/70">
+            Business travel, visa support, and curated journeys for ambitious travelers.
           </p>
         </div>
 
@@ -32,9 +33,13 @@ export function SiteFooter() {
 
         <div>
           <p className="text-xs uppercase tracking-[0.3em] text-[var(--secondary)]/80">Contact</p>
-          <div className="mt-3 space-y-2 text-sm text-[var(--primary)]/80">
-            <p>WhatsApp: +256704833021</p>
-            <p>Email: hello@ailesglobal.com</p>
+          <div className="mt-3 space-y-2 text-sm text-[var(--foreground)]/80">
+            <p>
+              WhatsApp: <Link href="https://wa.me/256704833021" className="text-[var(--primary)]">+256 704 833021</Link>
+            </p>
+            <p>
+              Email: <Link href="mailto:hello@ailesglobal.com" className="text-[var(--primary)]">hello@ailesglobal.com</Link>
+            </p>
           </div>
         </div>
 

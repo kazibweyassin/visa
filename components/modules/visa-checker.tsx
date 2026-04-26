@@ -2,16 +2,18 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Globe, ShieldCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, Globe, Info, ShieldCheck } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { africanCountries, schengenCountries } from "@/lib/visa-data";
 
+// Static result — replace with real API when available
 const visaResult = {
   visaType: "Schengen short-stay (Type C)",
-  processingTime: "10-15 business days",
+  processingTime: "10–15 business days",
   serviceFee: "$79",
   approvalRate: "98% when document-ready",
+  bookingNote: "Apply at the embassy of the country you'll stay longest in.",
 };
 
 export function VisaChecker() {
@@ -22,7 +24,7 @@ export function VisaChecker() {
 
   const handleCheck = () => {
     if (!fromCountry || !toCountry) {
-      setError("Select both origin and destination countries to continue.");
+      setError("Select both your country and destination to continue.");
       setShowResult(false);
       return;
     }
@@ -35,132 +37,154 @@ export function VisaChecker() {
     : "/apply";
 
   return (
-    <section id="visa-checker" className="relative overflow-hidden bg-[var(--surface)] py-20 sm:py-24">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,209,102,0.10),_transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(69,123,157,0.10),_transparent_35%)]" />
-      <div className="relative mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
+    <section id="visa-checker" className="relative overflow-hidden bg-[var(--surface)] py-20 sm:py-28">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(255,209,102,0.08),_transparent_35%),radial-gradient(ellipse_at_bottom_right,_rgba(69,123,157,0.08),_transparent_35%)]" />
+
+      <div className="relative mx-auto grid max-w-5xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:px-8">
+        {/* ── Left: heading + form ── */}
         <div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--muted)] bg-[var(--muted)] px-4 py-2 text-xs text-[var(--primary)]">
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs text-[var(--primary)] shadow-sm">
             <ShieldCheck className="h-4 w-4 text-[var(--gold)]" />
             Visa checker
           </div>
           <h2 className="mt-5 text-3xl font-semibold text-[var(--foreground)] sm:text-4xl">
             Confirm your Schengen visa requirements in seconds.
           </h2>
-          <p className="mt-4 max-w-xl text-base leading-7 text-[var(--primary)]/80">
-            Pick your citizenship and destination to get an instant requirement summary, timeline,
-            and estimated service fee.
+          <p className="mt-4 text-base leading-7 text-slate-500">
+            Pick your citizenship and destination to get an instant requirement summary, timeline, and service fee.
           </p>
-          <div className="mt-8 grid gap-4 rounded-[2rem] border border-[var(--muted)] bg-[var(--muted)] p-5 shadow-2xl shadow-black/10 backdrop-blur-xl">
-            <div>
-              <label className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--secondary)]/80">
-                I am from
-              </label>
-              <select
-                value={fromCountry}
-                onChange={(event) => setFromCountry(event.target.value)}
-                className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-white outline-none transition focus:border-[#F4C15D]/60"
-              >
-                <option value="">Select country</option>
-                {africanCountries.map((country) => (
-                  <option key={country} value={country} className="text-slate-950">
-                    {country}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-                I want to visit
-              </label>
-              <select
-                value={toCountry}
-                onChange={(event) => setToCountry(event.target.value)}
-                className="mt-2 w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-white outline-none transition focus:border-[#F4C15D]/60"
-              >
-                <option value="">Select destination</option>
-                {schengenCountries.map((country) => (
-                  <option key={country} value={country} className="text-slate-950">
-                    {country}
-                  </option>
-                ))}
-              </select>
-            </div>
+
+          <div className="mt-8 grid gap-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            {[
+              {
+                id: "from",
+                label: "I am from",
+                value: fromCountry,
+                set: setFromCountry,
+                options: africanCountries,
+                placeholder: "Select country",
+              },
+              {
+                id: "to",
+                label: "I want to visit",
+                value: toCountry,
+                set: setToCountry,
+                options: schengenCountries,
+                placeholder: "Select destination",
+              },
+            ].map(({ id, label, value, set, options, placeholder }) => (
+              <div key={id}>
+                <label className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
+                  {label}
+                </label>
+                <select
+                  value={value}
+                  onChange={(e) => set(e.target.value)}
+                  className="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/10"
+                >
+                  <option value="">{placeholder}</option>
+                  {options.map((opt) => (
+                    <option key={opt} value={opt}>{opt}</option>
+                  ))}
+                </select>
+              </div>
+            ))}
+
             <button
               type="button"
               onClick={handleCheck}
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,#F4C15D,#E8A949)] text-sm font-semibold text-slate-950 transition hover:-translate-y-0.5"
+              className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[var(--primary)] text-sm font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-[var(--secondary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/30"
             >
-              Check my visa
-              <ArrowRight className="h-4 w-4" />
+              <span className="flex items-center gap-2">
+                Check my visa
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+              </span>
             </button>
-            {error && <p className="text-xs font-semibold text-rose-200">{error}</p>}
+
+            {error && (
+              <p className="rounded-lg bg-rose-50 px-3 py-2 text-xs font-medium text-rose-600">{error}</p>
+            )}
           </div>
         </div>
 
+        {/* ── Right: result panel ── */}
         <div className="relative">
-          <div className="absolute -inset-6 rounded-[2rem] bg-gradient-to-br from-[#F4C15D]/20 via-transparent to-[#3CC7A6]/12 blur-3xl" />
-          <div className="relative rounded-[2rem] border border-white/10 bg-white/[0.06] p-6 shadow-2xl shadow-black/30 backdrop-blur-xl">
+          <div className="pointer-events-none absolute -inset-5 rounded-[2rem] bg-gradient-to-br from-[#F4C15D]/15 via-transparent to-[var(--primary)]/10 blur-2xl" />
+          <div className="relative h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <div className="flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#F4C15D]/10 text-[#F4C15D]">
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--primary)]/10 text-[var(--primary)]">
                 <Globe className="h-5 w-5" />
               </span>
               <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Instant summary</p>
-                <p className="text-lg font-semibold text-white">Results preview</p>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-slate-400">Instant summary</p>
+                <p className="text-lg font-semibold text-slate-900">Results preview</p>
               </div>
             </div>
 
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
               {showResult ? (
                 <motion.div
                   key="result"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.35 }}
-                  className="mt-6 space-y-4"
+                  transition={{ duration: 0.3 }}
+                  className="mt-6 space-y-3"
                 >
-                  <div className="rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-4">
-                    <p className="text-sm font-semibold text-emerald-100">Visa required</p>
-                    <p className="mt-2 text-sm text-slate-200">
-                      {visaResult.visaType} for {toCountry} departures.
-                    </p>
+                  {/* Visa type banner */}
+                  <div className="rounded-xl border border-blue-200 bg-blue-50 p-4">
+                    <p className="text-sm font-semibold text-blue-800">Visa required — {toCountry}</p>
+                    <p className="mt-1 text-xs text-blue-600">{visaResult.visaType}</p>
                   </div>
-                  <div className="grid gap-3">
+
+                  {/* Stats grid */}
+                  <div className="grid grid-cols-2 gap-2.5">
                     {[
                       { label: "Processing time", value: visaResult.processingTime },
                       { label: "Service fee", value: visaResult.serviceFee },
                       { label: "Approval rate", value: visaResult.approvalRate },
+                      { label: "Origin", value: fromCountry },
                     ].map((item) => (
                       <div
                         key={item.label}
-                        className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-sm"
+                        className="rounded-xl border border-slate-100 bg-slate-50 px-3 py-2.5"
                       >
-                        <span className="text-slate-300">{item.label}</span>
-                        <span className="font-semibold text-white">{item.value}</span>
+                        <p className="text-[10px] uppercase tracking-wider text-slate-400">{item.label}</p>
+                        <p className="mt-0.5 text-sm font-semibold text-slate-900 truncate">{item.value}</p>
                       </div>
                     ))}
                   </div>
-                  <div className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-xs text-slate-300">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-300" />
-                    Document audit included for Pro and Express plans.
+
+                  {/* Info note */}
+                  <div className="flex items-start gap-2 rounded-xl bg-amber-50 px-3 py-2.5 text-xs text-amber-800">
+                    <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                    {visaResult.bookingNote}
                   </div>
+
+                  <div className="flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2.5 text-xs text-slate-600">
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[var(--primary)]" />
+                    Document audit included in Pro and Express plans.
+                  </div>
+
                   <Link
                     href={applyLink}
-                    className="inline-flex h-12 w-full items-center justify-center rounded-full bg-white text-sm font-semibold text-slate-950 transition hover:bg-[#F7E2A2]"
+                    className="group inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[var(--primary)] text-sm font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-[var(--secondary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/30"
                   >
-                    Start application
+                    <span className="flex items-center gap-2">
+                      Start application
+                      <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+                    </span>
                   </Link>
                 </motion.div>
               ) : (
                 <motion.div
                   key="empty"
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                  className="mt-6 rounded-2xl border border-dashed border-white/15 bg-white/[0.03] px-5 py-6 text-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="mt-6 flex flex-col items-center justify-center rounded-xl border border-dashed border-slate-200 px-6 py-12 text-center"
                 >
-                  <p className="text-sm text-slate-300">
+                  <Globe className="h-8 w-8 text-slate-300" />
+                  <p className="mt-3 text-sm text-slate-400">
                     Select your countries to see processing timelines, fees, and next steps.
                   </p>
                 </motion.div>

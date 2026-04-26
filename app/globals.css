@@ -2,14 +2,14 @@
 
 
 :root {
-  --background: #FAFAFA;         /* Light, clean background */
-  --foreground: #22223B;         /* Deep blue-gray for text */
-  --navy: #3A5A98;              /* Softer navy for accents */
-  --gold: #FFD166;              /* Brighter gold accent */
-  --primary: #457B9D;           /* Fresh blue for buttons/links */
-  --secondary: #F4A261;         /* Warm secondary accent */
-  --surface: #FFFFFF;           /* Card/section backgrounds */
-  --muted: #E9ECEF;             /* Muted backgrounds */
+  --background: #F8FAFF;
+  --foreground: #0F172A;
+  --navy: #1D4ED8;
+  --gold: #2563EB;
+  --primary: #1D4ED8;
+  --secondary: #38BDF8;
+  --surface: #FFFFFF;
+  --muted: #E0E7FF;
 }
 
 @theme inline {
@@ -23,27 +23,35 @@ html {
   scroll-behavior: smooth;
 }
 
-
 body {
-  background: var(--background);
+  min-height: 100vh;
+  margin: 0;
+  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.12), transparent 28%),
+    linear-gradient(180deg, #F8FAFF 0%, #E2E8F0 100%);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
+  line-height: 1.6;
 }
 
-/* Example: style links and buttons for better contrast */
+* {
+  box-sizing: border-box;
+}
+
 a, button {
-  color: var(--primary);
-  transition: color 0.2s;
+  transition: all 0.2s ease;
 }
-a:hover, button:hover {
-  color: var(--secondary);
+a {
+  color: var(--primary);
+}
+a:hover,
+button:hover {
+  color: var(--foreground);
 }
 
-/* Example: card/section backgrounds */
 .card, .section {
   background: var(--surface);
-  border-radius: 0.75rem;
-  box-shadow: 0 2px 8px rgba(60, 60, 60, 0.06);
+  border-radius: 1.5rem;
+  box-shadow: 0 18px 50px rgba(59, 130, 246, 0.12);
   padding: 1.5rem;
 }
 
@@ -53,6 +61,6 @@ a:hover, button:hover {
 }
 
 ::selection {
-  background: rgba(255, 209, 102, 0.35); /* gold accent */
-  color: #22223B;
+  background: rgba(59, 130, 246, 0.24);
+  color: var(--foreground);
 }
