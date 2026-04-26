@@ -9,6 +9,7 @@ export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
+    { label: "Home", href: "/" },
     { label: "Business journeys", href: "/study-abroad" },
     { label: "Visa support", href: "#visa-checker" },
     { label: "How it works", href: "#how-it-works" },
