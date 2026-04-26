@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, ShieldCheck, X } from "lucide-react";
-
 import { siteConfig } from "@/lib/site";
 
 export function SiteHeader() {
@@ -19,79 +18,101 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-slate-200 bg-white/95 px-4 py-3 backdrop-blur-xl shadow-sm shadow-slate-300/30">
-        <Link href="/" className="flex items-center gap-3 text-[var(--foreground)]">
-          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,var(--gold),var(--secondary))] text-[var(--foreground)] shadow-lg shadow-[var(--gold)]/15">
-            <ShieldCheck className="h-5 w-5" />
-          </span>
-          <span className="flex flex-col leading-tight">
-            <span className="text-sm font-semibold tracking-wide">{siteConfig.name}</span>
-            <span className="text-xs text-[var(--primary)]/70">{siteConfig.tagline}</span>
-          </span>
+      <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-slate-200/70 bg-white/80 px-5 py-3 backdrop-blur-2xl shadow-sm transition">
+        
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--gold)] to-[var(--secondary)] shadow-md">
+            <ShieldCheck className="h-5 w-5 text-white" />
+          </div>
+
+          <div className="leading-tight">
+            <p className="text-sm font-semibold text-slate-900">
+              {siteConfig.name}
+            </p>
+            <p className="text-xs text-slate-500">
+              {siteConfig.tagline}
+            </p>
+          </div>
         </Link>
 
-        <nav className="hidden items-center gap-6 text-sm text-slate-700 md:flex">
+        {/* Desktop Nav */}
+        <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="transition hover:text-[var(--gold)]">
+            <Link
+              key={link.href}
+              href={link.href}
+              className="relative transition hover:text-slate-900 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-[var(--gold)] after:transition-all hover:after:w-full"
+            >
               {link.label}
             </Link>
           ))}
         </nav>
 
+        {/* Desktop CTAs */}
         <div className="hidden items-center gap-3 md:flex">
           <Link
             href="https://wa.me/256704833021"
-            className="inline-flex h-11 items-center justify-center rounded-full border border-white/10 bg-[rgba(255,255,255,0.08)] px-4 text-xs font-semibold text-[var(--foreground)] transition hover:opacity-90"
             target="_blank"
-            rel="noreferrer"
+            className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
           >
             Speak to advisor
           </Link>
+
           <Link
             href="/apply"
-            className="inline-flex h-11 items-center justify-center rounded-full bg-[var(--secondary)] px-5 text-sm font-semibold text-white transition hover:opacity-95"
+            className="rounded-full bg-[var(--secondary)] px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
           >
             {siteConfig.ctaLabel}
           </Link>
         </div>
 
+        {/* Mobile button */}
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--muted)] bg-[var(--muted)] text-[var(--foreground)] transition hover:opacity-90 md:hidden"
-          onClick={() => setMenuOpen((open) => !open)}
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white md:hidden"
+          onClick={() => setMenuOpen((v) => !v)}
           aria-label="Toggle navigation"
         >
-          {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {menuOpen ? (
+            <X className="h-5 w-5 text-slate-700" />
+          ) : (
+            <Menu className="h-5 w-5 text-slate-700" />
+          )}
         </button>
       </div>
 
+      {/* Mobile menu */}
       {menuOpen && (
-        <div className="mx-auto mt-3 max-w-7xl rounded-[1.5rem] border border-white/10 bg-[rgba(15,23,42,0.95)] px-4 py-4 backdrop-blur-xl md:hidden">
-          <div className="flex flex-col gap-3 text-sm text-[var(--foreground)]/90">
+        <div className="mx-auto mt-3 max-w-7xl rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-lg backdrop-blur-xl md:hidden">
+          <div className="flex flex-col gap-2 text-sm">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="rounded-xl px-3 py-2 transition hover:opacity-90"
+                className="rounded-xl px-3 py-2 text-slate-700 transition hover:bg-slate-50"
               >
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="https://wa.me/256704833021"
-              className="mt-2 inline-flex h-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-xs font-semibold text-[var(--foreground)]"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Speak to advisor
-            </Link>
-            <Link
-              href="/apply"
-              className="inline-flex h-11 items-center justify-center rounded-full bg-[var(--secondary)] text-sm font-semibold text-white transition hover:opacity-95"
-            >
-              {siteConfig.ctaLabel}
-            </Link>
+
+            <div className="mt-3 flex flex-col gap-2">
+              <Link
+                href="https://wa.me/256704833021"
+                target="_blank"
+                className="rounded-full border border-slate-200 bg-white px-4 py-2 text-center text-xs font-semibold text-slate-700"
+              >
+                Speak to advisor
+              </Link>
+
+              <Link
+                href="/apply"
+                className="rounded-full bg-[var(--secondary)] px-4 py-2 text-center text-sm font-semibold text-white"
+              >
+                {siteConfig.ctaLabel}
+              </Link>
+            </div>
           </div>
         </div>
       )}
