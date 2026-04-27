@@ -47,7 +47,7 @@ const planColors = {
 export function Pricing() {
   return (
     <section id="pricing" className="relative overflow-hidden bg-[var(--surface)] py-20 sm:py-28">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,209,102,0.10),_transparent_45%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[rgba(255,209,102,0.10)]" />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header */}

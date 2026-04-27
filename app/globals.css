@@ -26,8 +26,7 @@ html {
 body {
   min-height: 100vh;
   margin: 0;
-  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.12), transparent 28%),
-    linear-gradient(180deg, #F8FAFF 0%, #E2E8F0 100%);
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
   line-height: 1.6;

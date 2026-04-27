@@ -14,7 +14,7 @@ export function SiteHeader() {
     { label: "Visa support", href: "#visa-checker" },
     { label: "How it works", href: "#how-it-works" },
     { label: "Pricing", href: "/pricing" },
-    { label: "FAQ", href: "#faq" },
+    { label: "FAQ", href: "/faq" },
   ];
 
   return (
@@ -23,7 +23,7 @@ export function SiteHeader() {
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-3xl bg-gradient-to-br from-[var(--gold)] to-[var(--secondary)] shadow-lg shadow-[var(--gold)]/20">
+          <div className="flex h-11 w-11 items-center justify-center rounded-3xl bg-[var(--gold)] shadow-lg shadow-[var(--gold)]/20">
             <ShieldCheck className="h-5 w-5 text-white" />
           </div>
 
@@ -61,7 +61,7 @@ export function SiteHeader() {
 
           <Link
             href="/apply"
-            className="rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:opacity-95"
+            className="rounded-full bg-[var(--primary)] px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:opacity-95"
           >
             {siteConfig.ctaLabel}
           </Link>
@@ -104,7 +104,7 @@ export function SiteHeader() {
 
               <Link
                 href="/apply"
-                className="rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-4 py-2 text-center text-sm font-semibold text-white"
+                className="rounded-full bg-[var(--primary)] px-4 py-2 text-center text-sm font-semibold text-white"
               >
                 {siteConfig.ctaLabel}
               </Link>

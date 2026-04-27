@@ -88,7 +88,7 @@ function Cell({ value }: { value: CellValue }) {
 export function WhyUs() {
   return (
     <section id="why-us" className="relative overflow-hidden bg-[var(--surface)] py-20 sm:py-28">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(120,119,198,0.10),_transparent_40%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[rgba(120,119,198,0.08)]" />
 
       <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         {/* Header */}

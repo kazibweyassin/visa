@@ -51,16 +51,16 @@ export function LandingHero() {
 
       {/* BACKGROUND */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(59,130,246,0.15),transparent_40%),radial-gradient(circle_at_80%_70%,rgba(251,191,36,0.12),transparent_40%)]" />
-        <div className="absolute inset-0 opacity-[0.04] bg-[url('/world-map.svg')] bg-no-repeat bg-center bg-contain" />
+        <div className="absolute inset-0 bg-[rgba(59,130,246,0.06)]" />
+        <div className="absolute inset-0 opacity-[0.08] bg-[url('/bg_premium.png')] bg-no-repeat bg-center bg-cover" />
       </div>
 
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--primary)]/30 to-transparent" />
-      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-px bg-[var(--primary)]/30" />
+      <div className="absolute bottom-0 left-0 w-full h-24 bg-white" />
 
-      <div className="relative mx-auto flex max-w-7xl flex-col px-4 pb-8 pt-8 sm:px-6 lg:px-8">
+      <div className="relative mx-auto flex max-w-7xl flex-col px-4 pb-6 pt-6 sm:px-6 lg:px-8">
 
-        <section className="grid items-center gap-8 py-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10 lg:py-10">
+        <section className="grid items-center gap-6 py-6 lg:gap-8 lg:py-8">
 
           {/* LEFT */}
           <motion.div
@@ -91,20 +91,8 @@ export function LandingHero() {
               {/* PRIMARY CTA */}
               <Link
                 href="/apply"
-                className="
-                  group relative inline-flex h-12 items-center justify-center gap-2
-                  overflow-hidden rounded-xl
-                  bg-gradient-to-r from-blue-600 via-blue-600 to-blue-700
-                  px-6 text-sm font-semibold text-white
-                  shadow-md shadow-blue-500/20
-                  transition-all duration-300
-                  hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/30
-                  active:scale-[0.98]
-                "
+                className="group relative inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[var(--primary)] px-6 text-sm font-semibold text-white shadow-md shadow-blue-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
               >
-                {/* Shine */}
-                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-
                 <span className="relative flex items-center gap-2">
                   Start your visa preparation
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -133,150 +121,6 @@ export function LandingHero() {
             </p>
           </motion.div>
 
-          {/* RIGHT */}
-          <motion.aside
-            className="relative"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-          >
-
-            {/* Glow */}
-            <div className="absolute -inset-2 rounded-[2rem] bg-gradient-to-r from-blue-200/40 to-yellow-100/40 blur-2xl opacity-60" />
-
-            <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-5 shadow-2xl sm:p-6">
-
-              <div className="flex flex-col gap-3">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.28em] text-slate-500">
-                    Visa assessment
-                  </p>
-                  <h2 className="mt-2 text-2xl font-semibold text-slate-950">
-                    Start your visa assessment
-                  </h2>
-                </div>
-                <p className="text-sm text-slate-600">
-                  Get a personalized checklist and expert guidance based on your travel purpose.
-                </p>
-                <div className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600">
-                  Reviewed using professional visa standards
-                </div>
-              </div>
-
-              <form onSubmit={handleSubmit} className="mt-6 grid gap-4">
-                <div>
-                  <label className="text-xs uppercase tracking-[0.22em] text-slate-500">
-                    Purpose of travel
-                  </label>
-                  <select
-                    value={purpose}
-                    onChange={(e) => setPurpose(e.target.value)}
-                    className="mt-2 w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/10"
-                  >
-                    <option value="">Select purpose</option>
-                    {travelPurposes.map((item) => (
-                      <option key={item} value={item} className="text-slate-950">
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="text-xs uppercase tracking-[0.22em] text-slate-500">
-                      Departure country
-                    </label>
-                    <select
-                      value={fromCountry}
-                      onChange={(e) => setFromCountry(e.target.value)}
-                      className="mt-2 w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/10"
-                    >
-                      <option value="">Select country</option>
-                      {africanCountries.map((c) => (
-                        <option key={c} value={c} className="text-slate-950">
-                          {c}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="text-xs uppercase tracking-[0.22em] text-slate-500">
-                      Destination
-                    </label>
-                    <select
-                      value={toCountry}
-                      onChange={(e) => setToCountry(e.target.value)}
-                      className="mt-2 w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/10"
-                    >
-                      <option value="">Select destination</option>
-                      {schengenCountries.map((c) => (
-                        <option key={c} value={c} className="text-slate-950">
-                          {c}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label className="text-xs uppercase tracking-[0.22em] text-slate-500">
-                      Departure date
-                    </label>
-                    <input
-                      type="date"
-                      value={travelStart}
-                      onChange={(e) => setTravelStart(e.target.value)}
-                      className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/10"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-xs uppercase tracking-[0.22em] text-slate-500">
-                      Return date
-                    </label>
-                    <input
-                      type="date"
-                      value={travelEnd}
-                      onChange={(e) => setTravelEnd(e.target.value)}
-                      className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/10"
-                    />
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-6 text-sm font-semibold text-slate-950 shadow-md shadow-amber-200/40 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
-                >
-                  Get my visa requirements
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-
-                {error && (
-                  <p className="text-xs font-semibold text-rose-600">
-                    {error}
-                  </p>
-                )}
-              </form>
-
-              {showResult && (
-                <div className="mt-4 rounded-2xl border border-amber-200/30 bg-slate-50 p-4">
-                  <p className="text-sm font-semibold text-slate-950">
-                    You will need a Schengen visa for {toCountry}.
-                  </p>
-
-                  <Link
-                    href={applyLink}
-                    className="mt-4 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[var(--primary)] px-5 text-xs font-semibold text-white"
-                  >
-                    Start application
-                    <ArrowRight className="h-3 w-3" />
-                  </Link>
-                </div>
-              )}
-
-            </div>
-          </motion.aside>
 
         </section>
       </div>

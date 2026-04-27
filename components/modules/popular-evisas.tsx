@@ -82,8 +82,8 @@ export function PopularEvisas() {
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/40" />
                 {/* Flag badge on image */}
                 <div className="absolute bottom-3 left-4 flex items-center gap-2">
                   <img
@@ -122,7 +122,7 @@ export function PopularEvisas() {
                 {/* CTA — visible always (not hover-only) for mobile accessibility */}
                 <Link
                   href={item.href}
-                  className="mt-4 flex h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-[#F4C15D]/40 bg-[#F4C15D]/10 text-xs font-semibold text-[#9A6D10] transition-all duration-200 hover:bg-[#F4C15D]/20 hover:border-[#F4C15D]/70 sm:opacity-0 sm:translate-y-1 sm:group-hover:opacity-100 sm:group-hover:translate-y-0"
+                  className="mt-4 flex h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-[#F4C15D]/40 bg-[#F4C15D]/10 px-4 text-xs font-semibold text-[#9A6D10] transition-all duration-200 hover:bg-[#F4C15D]/20 hover:border-[#F4C15D]/70"
                 >
                   Apply now <ArrowRight className="h-3 w-3" />
                 </Link>

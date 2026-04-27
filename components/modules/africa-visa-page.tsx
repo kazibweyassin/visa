@@ -184,7 +184,7 @@ export function AfricaVisaPage() {
         </AnimatePresence>
       </nav>
 
-      <header id="home" className="relative overflow-hidden pt-28 text-white sm:pt-32" style={{ background: "linear-gradient(120deg, rgba(13,27,42,0.92), rgba(27,94,32,0.88)), url('https://images.unsplash.com/photo-1544735716-392fe2489e15?auto=format&fit=crop&w=1700&q=80') center/cover no-repeat" }}>
+      <header id="home" className="relative overflow-hidden pt-28 text-white sm:pt-32" style={{ background: "url('/banner.jpg') center/cover no-repeat" }}>
         <div className="mx-auto grid max-w-7xl gap-10 px-4 pb-16 sm:px-6 lg:grid-cols-2 lg:px-8">
           <div>
             <p className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-semibold"><BadgeCheck className="h-4 w-4 text-[var(--primary)]" /> Built for African travelers by Africans</p>
@@ -264,7 +264,7 @@ export function AfricaVisaPage() {
               ))}
             </div>
           </div>
-          <div className="overflow-hidden rounded-3xl shadow-lg"><img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=1400&q=80" alt="African city skyline" className="h-full min-h-[320px] w-full object-cover" /></div>
+          <div className="overflow-hidden rounded-3xl shadow-lg"><img src="/traveler-on-suitcase-sm.webp" alt="African city skyline" className="h-full min-h-[320px] w-full object-cover" /></div>
         </div>
       </section>
 

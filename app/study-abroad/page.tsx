@@ -60,7 +60,7 @@ const styles = `
   .sa-hero::after {
     content: ''; position: absolute; top: 0; right: 0;
     width: 40%; height: 100%;
-    background: radial-gradient(ellipse at 80% 50%, rgba(201,168,76,.08) 0%, transparent 65%);
+    background: rgba(201,168,76,.08);
     pointer-events: none;
   }
   .sa-hero-inner { max-width: 1100px; margin: 0 auto; }

@@ -38,7 +38,7 @@ export function VisaChecker() {
 
   return (
     <section id="visa-checker" className="relative overflow-hidden bg-[var(--surface)] py-20 sm:py-28">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(255,209,102,0.08),_transparent_35%),radial-gradient(ellipse_at_bottom_right,_rgba(69,123,157,0.08),_transparent_35%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[rgba(255,209,102,0.06)]" />
 
       <div className="relative mx-auto grid max-w-5xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:px-8">
         {/* ── Left: heading + form ── */}
@@ -109,7 +109,7 @@ export function VisaChecker() {
 
         {/* ── Right: result panel ── */}
         <div className="relative">
-          <div className="pointer-events-none absolute -inset-5 rounded-[2rem] bg-gradient-to-br from-[#F4C15D]/15 via-transparent to-[var(--primary)]/10 blur-2xl" />
+          <div className="pointer-events-none absolute -inset-5 rounded-[2rem] bg-[var(--primary)]/10 blur-2xl" />
           <div className="relative h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
             <div className="flex items-center gap-3">
               <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--primary)]/10 text-[var(--primary)]">

@@ -57,8 +57,8 @@ export function HowItWorks() {
       id="how-it-works"
       className="relative overflow-hidden bg-white py-20 sm:py-28"
     >
-      {/* Background radial */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.06),_transparent_55%)]" />
+      {/* Background overlay */}
+      <div className="pointer-events-none absolute inset-0 bg-[rgba(59,130,246,0.06)]" />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -79,7 +79,7 @@ export function HowItWorks() {
         <div className="relative mt-16 hidden lg:block">
           {/* Connector line */}
           <motion.div
-            className="absolute left-[calc(12.5%+1.5rem)] right-[calc(12.5%+1.5rem)] top-[2.75rem] h-px bg-gradient-to-r from-blue-200 via-amber-200 to-purple-200"
+            className="absolute left-[calc(12.5%+1.5rem)] right-[calc(12.5%+1.5rem)] top-[2.75rem] h-px bg-slate-200"
             style={{ originX: 0 }} // ✅ critical for correct animation
             variants={connectorVariant}
             initial="hidden"

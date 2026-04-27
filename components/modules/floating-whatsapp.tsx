@@ -24,7 +24,7 @@ export function FloatingWhatsApp() {
       <MessageCircle className="h-5 w-5 shrink-0 text-white" />
 
       {/* Text */}
-      <span className="max-w-0 whitespace-nowrap text-sm font-semibold text-white opacity-0 transition-all duration-300 group-hover:max-w-[160px] group-hover:opacity-100">
+      <span className="whitespace-nowrap text-sm font-semibold text-white transition-all duration-300">
         Chat with us
       </span>
     </Link>

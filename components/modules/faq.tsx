@@ -57,7 +57,7 @@ export function FAQ() {
 
   return (
     <section id="faq" className="relative overflow-hidden bg-[var(--surface)] py-20 sm:py-28">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,209,102,0.08),_transparent_40%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[rgba(255,209,102,0.08)]" />
 
       <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
