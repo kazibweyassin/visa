@@ -18,18 +18,21 @@ export function SiteHeader() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 px-4 pt-4 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-slate-200/70 bg-white/80 px-5 py-3 backdrop-blur-2xl shadow-sm transition">
-        
+    <header className="sticky top-0 z-50 border-b border-slate-200/50 bg-white/90 shadow-sm shadow-slate-900/5 backdrop-blur-xl backdrop-saturate-150">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 sm:px-6 lg:px-8">
+
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--gold)] to-[var(--secondary)] shadow-md">
+          <div className="flex h-11 w-11 items-center justify-center rounded-3xl bg-gradient-to-br from-[var(--gold)] to-[var(--secondary)] shadow-lg shadow-[var(--gold)]/20">
             <ShieldCheck className="h-5 w-5 text-white" />
           </div>
 
-          <div className="leading-tight">
-            <p className="text-sm font-semibold text-slate-900">
+          <div className="space-y-0.5">
+            <p className="text-sm font-semibold tracking-tight text-slate-950">
               {siteConfig.name}
+            </p>
+            <p className="text-xs text-slate-500">
+              {siteConfig.tagline}
             </p>
           </div>
         </Link>
@@ -40,14 +43,13 @@ export function SiteHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className="relative transition hover:text-slate-900 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-[var(--gold)] after:transition-all hover:after:w-full"
+              className="relative transition-colors duration-200 hover:text-slate-950 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-[var(--gold)] after:transition-all hover:after:w-full"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        {/* Desktop CTAs */}
         <div className="hidden items-center gap-3 md:flex">
           <Link
             href="https://wa.me/256704833021"
@@ -59,7 +61,7 @@ export function SiteHeader() {
 
           <Link
             href="/apply"
-            className="rounded-full bg-[var(--secondary)] px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+            className="rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:opacity-95"
           >
             {siteConfig.ctaLabel}
           </Link>
@@ -68,15 +70,11 @@ export function SiteHeader() {
         {/* Mobile button */}
         <button
           type="button"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm md:hidden"
           onClick={() => setMenuOpen((v) => !v)}
           aria-label="Toggle navigation"
         >
-          {menuOpen ? (
-            <X className="h-5 w-5 text-slate-700" />
-          ) : (
-            <Menu className="h-5 w-5 text-slate-700" />
-          )}
+          {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
@@ -106,7 +104,7 @@ export function SiteHeader() {
 
               <Link
                 href="/apply"
-                className="rounded-full bg-[var(--secondary)] px-4 py-2 text-center text-sm font-semibold text-white"
+                className="rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-4 py-2 text-center text-sm font-semibold text-white"
               >
                 {siteConfig.ctaLabel}
               </Link>

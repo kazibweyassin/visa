@@ -71,9 +71,9 @@ export function LandingHero() {
           >
 
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--gold)]/25 bg-[rgba(248,180,62,0.1)] px-3 py-2 text-xs text-slate-800 backdrop-blur-sm">
+            <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-[var(--gold)]/25 bg-[rgba(248,180,62,0.1)] px-3 py-2 text-xs text-slate-800 backdrop-blur-sm">
               <ShieldCheck className="h-4 w-4 text-[var(--gold)]" />
-              Expert-reviewed visa preparation
+              Trusted visa advisory for business travel
             </div>
 
             {/* Title */}
@@ -82,7 +82,7 @@ export function LandingHero() {
             </h1>
 
             <p className="mt-4 max-w-xl text-base leading-7 text-slate-700 sm:text-lg">
-              We prepare your visa application for approval while you focus on deals and growth.
+              We prepare, review, and position your visa application for approval so you can travel with confidence.
             </p>
 
             {/* CTA */}
@@ -144,36 +144,109 @@ export function LandingHero() {
             {/* Glow */}
             <div className="absolute -inset-2 rounded-[2rem] bg-gradient-to-r from-blue-200/40 to-yellow-100/40 blur-2xl opacity-60" />
 
-            <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-4 shadow-2xl sm:p-5">
+            <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-5 shadow-2xl sm:p-6">
 
-              <div>
-                <p className="text-xs uppercase tracking-[0.28em] text-slate-500">
-                  Visa assessment
+              <div className="flex flex-col gap-3">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.28em] text-slate-500">
+                    Visa assessment
+                  </p>
+                  <h2 className="mt-2 text-2xl font-semibold text-slate-950">
+                    Start your visa assessment
+                  </h2>
+                </div>
+                <p className="text-sm text-slate-600">
+                  Get a personalized checklist and expert guidance based on your travel purpose.
                 </p>
-                <h2 className="mt-2 text-2xl font-semibold text-slate-950">
-                  Start your visa assessment
-                </h2>
+                <div className="inline-flex rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-600">
+                  Reviewed using professional visa standards
+                </div>
               </div>
-              <p className="mt-3 text-sm text-slate-600 sm:mt-0">
-                Personalized checklist, expert guidance, and clear next steps.
-              </p>
 
-              {/* FORM */}
-              <form onSubmit={handleSubmit} className="mt-4 grid gap-3">
+              <form onSubmit={handleSubmit} className="mt-6 grid gap-4">
+                <div>
+                  <label className="text-xs uppercase tracking-[0.22em] text-slate-500">
+                    Purpose of travel
+                  </label>
+                  <select
+                    value={purpose}
+                    onChange={(e) => setPurpose(e.target.value)}
+                    className="mt-2 w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/10"
+                  >
+                    <option value="">Select purpose</option>
+                    {travelPurposes.map((item) => (
+                      <option key={item} value={item} className="text-slate-950">
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-                {/* Your existing inputs stay unchanged */}
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label className="text-xs uppercase tracking-[0.22em] text-slate-500">
+                      Departure country
+                    </label>
+                    <select
+                      value={fromCountry}
+                      onChange={(e) => setFromCountry(e.target.value)}
+                      className="mt-2 w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/10"
+                    >
+                      <option value="">Select country</option>
+                      {africanCountries.map((c) => (
+                        <option key={c} value={c} className="text-slate-950">
+                          {c}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-xs uppercase tracking-[0.22em] text-slate-500">
+                      Destination
+                    </label>
+                    <select
+                      value={toCountry}
+                      onChange={(e) => setToCountry(e.target.value)}
+                      className="mt-2 w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/10"
+                    >
+                      <option value="">Select destination</option>
+                      {schengenCountries.map((c) => (
+                        <option key={c} value={c} className="text-slate-950">
+                          {c}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label className="text-xs uppercase tracking-[0.22em] text-slate-500">
+                      Departure date
+                    </label>
+                    <input
+                      type="date"
+                      value={travelStart}
+                      onChange={(e) => setTravelStart(e.target.value)}
+                      className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/10"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs uppercase tracking-[0.22em] text-slate-500">
+                      Return date
+                    </label>
+                    <input
+                      type="date"
+                      value={travelEnd}
+                      onChange={(e) => setTravelEnd(e.target.value)}
+                      className="mt-2 w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/10"
+                    />
+                  </div>
+                </div>
 
                 <button
                   type="submit"
-                  className="
-                    inline-flex h-12 items-center justify-center gap-2
-                    rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600
-                    px-6 text-sm font-semibold text-slate-950
-                    shadow-md shadow-amber-200/40
-                    transition-all duration-300
-                    hover:-translate-y-0.5 hover:shadow-lg
-                    active:scale-[0.98]
-                  "
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-6 text-sm font-semibold text-slate-950 shadow-md shadow-amber-200/40 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
                 >
                   Get my visa requirements
                   <ArrowRight className="h-4 w-4" />
@@ -186,20 +259,15 @@ export function LandingHero() {
                 )}
               </form>
 
-              {/* RESULT */}
               {showResult && (
-                <div className="mt-4 rounded-2xl border border-amber-200/30 bg-white p-4">
-                  <p className="text-sm font-semibold text-slate-900">
+                <div className="mt-4 rounded-2xl border border-amber-200/30 bg-slate-50 p-4">
+                  <p className="text-sm font-semibold text-slate-950">
                     You will need a Schengen visa for {toCountry}.
                   </p>
 
                   <Link
                     href={applyLink}
-                    className="
-                      mt-4 inline-flex h-11 items-center justify-center gap-2
-                      rounded-full bg-[var(--primary)] px-5
-                      text-xs font-semibold text-white
-                    "
+                    className="mt-4 inline-flex h-11 items-center justify-center gap-2 rounded-full bg-[var(--primary)] px-5 text-xs font-semibold text-white"
                   >
                     Start application
                     <ArrowRight className="h-3 w-3" />
