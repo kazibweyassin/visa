@@ -335,14 +335,14 @@ GOOD (proof-first structure):
 
 ## Troubleshooting
 
-**"Claude keeps generating purple gradients"**
+**"The agent keeps generating purple gradients"**
 Your brand palette was not established in Phase 2. Go back and explicitly define colors via CSS custom properties or Tailwind config before starting the redesign. If the brand genuinely uses purple, that is fine — the rule is against defaulting to purple, not against intentional brand choice.
 
 **"The redesigned site still looks generic"**
 Phase 2 (Brand Discovery) was likely skipped or incomplete. The most common cause: the user could not articulate their differentiator. Go back to question 5 and work through it together before touching any design.
 
 **"I wanted small fixes, not a full redesign"**
-Tell Claude the specific scope: "audit only", "fix only the hero section", or "just update the color palette". This skill defaults to a full 4-phase workflow, but each phase can be run independently.
+Tell the agent the specific scope: "audit only", "fix only the hero section", or "just update the color palette". This skill defaults to a full 4-phase workflow, but each phase can be run independently.
 
 **"The 5-second test keeps failing"**
 This almost always means: (1) the headline is too generic — make it more specific to the company, or (2) trust signals are missing above the fold — add real proof before the first scroll.
