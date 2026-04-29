@@ -1,112 +1,163 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { Menu, ShieldCheck, X } from "lucide-react";
-import { siteConfig } from "@/lib/site";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { Menu, X, ShieldCheck } from "lucide-react";
+
+const navLinks: Array<{ label: string; href: string; target?: string }> = [
+  { label: "Home", href: "/" },
+  {
+    label: "Study Abroad",
+    href: "http://scholarships.ailesglobal.com/",
+    target: "_blank",
+  },
+  { label: "Visa Support", href: "#visa-checker" },
+  { label: "How it Works", href: "#how-it-works" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "FAQ", href: "/faq" },
+];
 
 export function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
-  const navLinks = [
-    { label: "Home", href: "/" },
-    { label: "Business journeys", href: "/study-abroad" },
-    { label: "Visa support", href: "#visa-checker" },
-    { label: "How it works", href: "#how-it-works" },
-    { label: "Pricing", href: "/pricing" },
-    { label: "FAQ", href: "/faq" },
-  ];
+  // Scroll effect
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Prevent background scroll when mobile menu is open (nice UX win)
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [menuOpen]);
+
+  const isActive = (href: string) => {
+    if (href.startsWith("http") || href.startsWith("#")) return false;
+    return pathname === href;
+  };
+
+  const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200/50 bg-white/90 shadow-sm shadow-slate-900/5 backdrop-blur-xl backdrop-saturate-150">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 sm:px-6 lg:px-8">
-
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/80 backdrop-blur-xl border-b shadow-sm"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-3xl bg-[var(--gold)] shadow-lg shadow-[var(--gold)]/20">
-            <ShieldCheck className="h-5 w-5 text-white" />
+        <Link
+          href="/"
+          className="flex items-center gap-3 group"
+          aria-label="AILES Global homepage"
+        >
+          <div className="h-10 w-10 flex items-center justify-center rounded-2xl bg-black text-white shadow-md transition-transform group-hover:scale-105">
+            <ShieldCheck className="h-5 w-5" />
           </div>
-
-          <div className="space-y-0.5">
-            <p className="text-sm font-semibold tracking-tight text-slate-950">
-              {siteConfig.name}
-            </p>
-            <p className="text-xs text-slate-500">
-              {siteConfig.tagline}
-            </p>
-          </div>
+          <span className="font-semibold text-lg text-gray-900 tracking-tight">
+            AILES Global
+          </span>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
           {navLinks.map((link) => (
             <Link
-              key={link.href}
+              key={link.label}
               href={link.href}
-              className="relative transition-colors duration-200 hover:text-slate-950 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-[var(--gold)] after:transition-all hover:after:w-full"
+              target={link.target}
+              rel={link.target ? "noopener noreferrer" : undefined}
+              className={`transition-colors ${
+                isActive(link.href)
+                  ? "text-black font-semibold"
+                  : "hover:text-black"
+              }`}
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        {/* Desktop CTA */}
+        <div className="hidden md:flex items-center gap-3">
           <Link
             href="https://wa.me/256704833021"
             target="_blank"
-            className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm transition hover:bg-slate-50"
+            rel="noopener noreferrer"
+            className="text-sm font-medium text-gray-600 hover:text-black transition-colors"
           >
             Speak to advisor
           </Link>
 
           <Link
             href="/apply"
-            className="rounded-full bg-[var(--primary)] px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:opacity-95"
+            className="bg-black text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:opacity-90 transition-all active:scale-95"
           >
-            {siteConfig.ctaLabel}
+            Start Application
           </Link>
         </div>
 
-        {/* Mobile button */}
+        {/* Mobile menu button */}
         <button
-          type="button"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm md:hidden"
-          onClick={() => setMenuOpen((v) => !v)}
-          aria-label="Toggle navigation"
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden p-2 -mr-2 text-gray-700 hover:text-black transition-colors"
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
         >
-          {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile Menu */}
       {menuOpen && (
-        <div className="mx-auto mt-3 max-w-7xl rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-lg backdrop-blur-xl md:hidden">
-          <div className="flex flex-col gap-2 text-sm">
+        <div className="md:hidden px-6 pb-6 bg-white border-t">
+          <div className="max-w-7xl mx-auto flex flex-col gap-2 pt-2">
             {navLinks.map((link) => (
               <Link
-                key={link.href}
+                key={link.label}
                 href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className="rounded-xl px-3 py-2 text-slate-700 transition hover:bg-slate-50"
+                target={link.target}
+                rel={link.target ? "noopener noreferrer" : undefined}
+                onClick={closeMenu}
+                className={`py-3 px-4 text-gray-700 font-medium rounded-xl hover:bg-gray-100 transition-colors ${
+                  isActive(link.href) ? "bg-gray-100 text-black" : ""
+                }`}
               >
                 {link.label}
               </Link>
             ))}
 
-            <div className="mt-3 flex flex-col gap-2">
+            {/* Mobile CTAs */}
+            <div className="pt-4 mt-4 border-t flex flex-col gap-3">
               <Link
                 href="https://wa.me/256704833021"
                 target="_blank"
-                className="rounded-full border border-slate-200 bg-white px-4 py-2 text-center text-xs font-semibold text-slate-700"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                className="py-3 px-4 text-center text-gray-700 font-medium hover:bg-gray-100 rounded-xl transition-colors"
               >
                 Speak to advisor
               </Link>
 
               <Link
                 href="/apply"
-                className="rounded-full bg-[var(--primary)] px-4 py-2 text-center text-sm font-semibold text-white"
+                onClick={closeMenu}
+                className="py-3 px-4 bg-black text-white text-center font-semibold rounded-2xl hover:opacity-90 transition-all active:scale-[0.97]"
               >
-                {siteConfig.ctaLabel}
+                Start Application
               </Link>
             </div>
           </div>
