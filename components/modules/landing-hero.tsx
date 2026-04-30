@@ -1,326 +1,505 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Globe, Plane, Flag, ArrowRight, CheckCircle } from "lucide-react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { Globe, Plane, Flag, ArrowUpRight, MoveRight } from "lucide-react";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.3 },
-  },
-};
+/* ─────────────────────────────────────────
+   DATA
+───────────────────────────────────────── */
+const DESTINATIONS = [
+  { code: "GB", flag: "🇬🇧", label: "United Kingdom" },
+  { code: "CA", flag: "🇨🇦", label: "Canada" },
+  { code: "DE", flag: "🇩🇪", label: "Germany" },
+  { code: "FR", flag: "🇫🇷", label: "France" },
+  { code: "NL", flag: "🇳🇱", label: "Netherlands" },
+  { code: "IE", flag: "🇮🇪", label: "Ireland" },
+];
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
-  },
-};
+const PURPOSES = [
+  { icon: "📚", label: "Study" },
+  { icon: "💼", label: "Work" },
+  { icon: "✈️", label: "Tourism" },
+  { icon: "🤝", label: "Business" },
+  { icon: "👨‍👩‍👧", label: "Family Visit" },
+];
 
+const NATIONALITIES = [
+  { flag: "🇺🇬", label: "Uganda" },
+  { flag: "🇰🇪", label: "Kenya" },
+  { flag: "🇳🇬", label: "Nigeria" },
+  { flag: "🇬🇭", label: "Ghana" },
+  { flag: "🇷🇼", label: "Rwanda" },
+  { flag: "🇹🇿", label: "Tanzania" },
+];
+
+const TICKER_ITEMS = [
+  "UK Student Visa", "Canada PR", "German Work Permit",
+  "Schengen Visa", "Ireland Study", "Netherlands Visa",
+  "France Student", "Family Reunification",
+];
+
+/* ─────────────────────────────────────────
+   TICKER
+───────────────────────────────────────── */
+function Ticker() {
+  return (
+    <div className="overflow-hidden w-full py-3 border-y border-white/10 relative">
+      <div className="flex gap-12 animate-ticker whitespace-nowrap w-max">
+        {[...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
+          <span key={i} className="text-xs tracking-[0.2em] uppercase text-white/40 flex items-center gap-4">
+            <span className="w-1 h-1 rounded-full bg-[#C8F04A] inline-block" />
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────
+   CUSTOM SELECT
+───────────────────────────────────────── */
+function CustomSelect({
+  icon: Icon,
+  placeholder,
+  options,
+  value,
+  onChange,
+}: {
+  icon: React.ElementType;
+  placeholder: string;
+  options: { label: string; flag?: string; icon?: string }[];
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const selected = options.find((o) => o.label === value);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="w-full h-14 flex items-center gap-3 px-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/25 transition-colors text-left group"
+      >
+        <Icon className="w-4 h-4 text-white/30 shrink-0" />
+        <span className={`flex-1 text-sm truncate ${selected ? "text-white" : "text-white/35"}`}>
+          {selected ? (
+            <span className="flex items-center gap-2">
+              <span>{selected.flag ?? selected.icon}</span>
+              {selected.label}
+            </span>
+          ) : placeholder}
+        </span>
+        <motion.span
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="text-white/30 text-xs"
+        >
+          ▾
+        </motion.span>
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            initial={{ opacity: 0, y: -6, scaleY: 0.95 }}
+            animate={{ opacity: 1, y: 0, scaleY: 1 }}
+            exit={{ opacity: 0, y: -6, scaleY: 0.95 }}
+            transition={{ duration: 0.15 }}
+            className="absolute z-50 mt-1.5 w-full rounded-xl bg-[#111] border border-white/10 shadow-2xl overflow-hidden origin-top"
+          >
+            {options.map((opt) => (
+              <li key={opt.label}>
+                <button
+                  type="button"
+                  onClick={() => { onChange(opt.label); setOpen(false); }}
+                  className="w-full flex items-center gap-3 px-4 py-3 text-sm text-white/70 hover:bg-white/8 hover:text-white transition-colors text-left"
+                >
+                  <span className="w-5">{opt.flag ?? opt.icon}</span>
+                  {opt.label}
+                  {value === opt.label && <span className="ml-auto text-[#C8F04A]">✓</span>}
+                </button>
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────
+   PASSPORT CARD (decorative)
+───────────────────────────────────────── */
+function PassportCard({ delay = 0, label, sub, rotate }: { delay?: number; label: string; sub: string; rotate: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30, rotate: 0 }}
+      animate={{ opacity: 1, y: 0, rotate }}
+      transition={{ delay, duration: 0.8, ease: "easeOut" }}
+      className="absolute bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] border border-white/10 rounded-2xl p-5 shadow-2xl backdrop-blur-xl w-52"
+    >
+      <div className="flex items-start justify-between mb-6">
+        <Globe className="w-5 h-5 text-[#C8F04A]" />
+        <span className="text-[10px] text-white/30 tracking-widest uppercase">Approved</span>
+      </div>
+      <div className="space-y-1">
+        <div className="h-1.5 w-20 rounded-full bg-white/10" />
+        <div className="h-1.5 w-16 rounded-full bg-white/6" />
+      </div>
+      <div className="mt-6 pt-4 border-t border-white/8 flex items-end justify-between">
+        <div>
+          <p className="text-white/90 font-semibold text-sm">{label}</p>
+          <p className="text-white/35 text-xs mt-0.5">{sub}</p>
+        </div>
+        <div className="w-7 h-7 rounded-full bg-[#C8F04A]/15 flex items-center justify-center">
+          <span className="text-[#C8F04A] text-xs">↗</span>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─────────────────────────────────────────
+   MAIN HERO
+───────────────────────────────────────── */
 export default function LandingHero() {
   const [destination, setDestination] = useState("");
   const [purpose, setPurpose] = useState("");
   const [nationality, setNationality] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  const containerRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
+  const headingY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!destination || !purpose || !nationality) return;
-
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 800));
-
-    console.log("🚀 Application started:", { destination, purpose, nationality });
+    await new Promise((r) => setTimeout(r, 900));
     router.push("/apply");
   };
 
+  const canSubmit = destination && purpose && nationality;
+
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden px-4 py-12 sm:px-6 sm:py-14 lg:py-16">
-      {/* === BACKGROUND PATTERN LAYERS === */}
-      {/* 1. Base gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-50" />
+    <section
+      ref={containerRef}
+      className="relative min-h-screen bg-[#080808] text-white overflow-hidden flex flex-col"
+    >
+      {/* ── animated grain overlay ── */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.035] z-10"
+        style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")", backgroundSize: "200px" }} />
 
-      {/* 2. Subtle global dot pattern (feels like a world map / network) */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: `
-            radial-gradient(circle at 25% 25%, rgba(16, 185, 129, 0.12) 0.8px, transparent 0),
-            radial-gradient(circle at 75% 35%, rgba(16, 185, 129, 0.1) 0.8px, transparent 0),
-            radial-gradient(circle at 40% 70%, rgba(16, 185, 129, 0.08) 0.8px, transparent 0),
-            radial-gradient(circle at 85% 85%, rgba(16, 185, 129, 0.1) 0.8px, transparent 0)
-          `,
-          backgroundSize: "80px 80px",
-          opacity: 0.75,
-        }}
-      />
+      {/* ── glow blobs ── */}
+      <motion.div style={{ scale: bgScale }} className="pointer-events-none absolute inset-0 z-0">
+        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-[#C8F04A]/5 blur-[140px]" />
+        <div className="absolute bottom-[-10%] right-[5%] w-[500px] h-[500px] rounded-full bg-[#3b82f6]/6 blur-[120px]" />
+      </motion.div>
 
-      {/* 3. Very faint connecting lines (modern "global connections" feel) */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-20"
-        style={{
-          backgroundImage: `
-            linear-gradient(90deg, transparent 49%, rgba(16, 185, 129, 0.15) 50%, transparent 51%),
-            linear-gradient(0deg, transparent 49%, rgba(16, 185, 129, 0.15) 50%, transparent 51%)
-          `,
-          backgroundSize: "120px 120px",
-        }}
-      />
+      {/* ── NAV ── */}
+      <motion.nav
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="relative z-20 flex items-center justify-between px-6 sm:px-10 pt-8"
+      >
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-[#C8F04A] flex items-center justify-center">
+            <Globe className="w-4 h-4 text-black" />
+          </div>
+          <span className="font-bold text-lg tracking-tight">VisaPath</span>
+        </div>
+        <div className="hidden md:flex items-center gap-8 text-sm text-white/50">
+          <a href="#" className="hover:text-white transition-colors">Services</a>
+          <a href="#" className="hover:text-white transition-colors">Countries</a>
+          <a href="#" className="hover:text-white transition-colors">Reviews</a>
+        </div>
+        <Link href="/apply">
+          <span className="text-sm px-5 py-2.5 rounded-full border border-white/15 hover:border-white/40 text-white/70 hover:text-white transition-all cursor-pointer">
+            Apply now ↗
+          </span>
+        </Link>
+      </motion.nav>
 
-      {/* 4. Soft radial spotlight for depth */}
-      <div className="absolute inset-0 bg-[radial-gradient(at_top_right,#10b98115_0%,transparent_60%)] pointer-events-none" />
+      {/* ── TICKER ── */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.4 }}
+        className="relative z-20 mt-8"
+      >
+        <Ticker />
+      </motion.div>
 
-      {/* Content container */}
-      <div className="max-w-7xl w-full grid gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-16 items-center relative z-10">
-        {/* LEFT COLUMN - STORY + TRUST */}
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="lg:col-span-7 max-w-2xl mx-auto lg:mx-0 text-center lg:text-left"
-        >
-          {/* ... (same left content as previous version - unchanged) */}
+      {/* ── MAIN CONTENT ── */}
+      <div className="relative z-20 flex-1 grid lg:grid-cols-2 gap-0 items-center px-6 sm:px-10 py-16 max-w-[1400px] mx-auto w-full">
+
+        {/* LEFT — BIG TYPE */}
+        <motion.div style={{ y: headingY }} className="lg:pr-16 xl:pr-24">
+          {/* eyebrow */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
-            className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm shadow-sm border border-gray-100 px-4 h-9 rounded-3xl text-sm font-medium text-emerald-700 mb-6"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="flex items-center gap-3 mb-8"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8F04A] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C8F04A]" />
             </span>
-            98% first-time approval rate
+            <span className="text-xs tracking-[0.2em] uppercase text-white/45">98% first-time approval</span>
           </motion.div>
 
-          <motion.h1
-            variants={itemVariants}
-            initial="hidden"
-            animate="visible"
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight tracking-tighter"
-          >
-            Global Visas.
-            <br />
-            Done Right.
-          </motion.h1>
+          {/* Headline */}
+          <div className="overflow-hidden">
+            <motion.h1
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              transition={{ delay: 0.6, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="font-black leading-[0.9] tracking-[-0.04em] text-[clamp(3.5rem,8vw,7rem)] text-white"
+              style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
+            >
+              The world<br />
+              <span className="italic text-white/40">is your</span><br />
+              <span className="text-[#C8F04A]">destination.</span>
+            </motion.h1>
+          </div>
 
           <motion.p
-            variants={itemVariants}
-            initial="hidden"
-            animate="visible"
-            className="mt-8 text-base sm:text-lg md:text-xl text-gray-600 max-w-lg mx-auto lg:mx-0"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.7 }}
+            className="mt-10 text-white/45 text-lg leading-relaxed max-w-md"
+            style={{ fontFamily: "'Georgia', serif" }}
           >
-            Professional visa &amp; study abroad support. Zero stress. Real results.
+            End-to-end visa &amp; study abroad support. Built for Africa.
+            Trusted by 1,200+ applicants across 15 countries.
           </motion.p>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left mx-auto lg:mx-0 max-w-xl sm:max-w-none"
-          >
-            <motion.div variants={itemVariants} className="flex items-start gap-3">
-              <CheckCircle className="h-6 w-6 text-emerald-500 mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="font-semibold">End-to-end guidance</p>
-                <p className="text-sm text-gray-500">From documents to approval</p>
-              </div>
-            </motion.div>
-            <motion.div variants={itemVariants} className="flex items-start gap-3">
-              <CheckCircle className="h-6 w-6 text-emerald-500 mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="font-semibold">Consulate-ready packets</p>
-                <p className="text-sm text-gray-500">We package everything</p>
-              </div>
-            </motion.div>
-            <motion.div variants={itemVariants} className="flex items-start gap-3">
-              <CheckCircle className="h-6 w-6 text-emerald-500 mt-0.5 flex-shrink-0" />
-              <div>
-                <p className="font-semibold">Local payment + support</p>
-                <p className="text-sm text-gray-500">Africa-first experience</p>
-              </div>
-            </motion.div>
-          </motion.div>
-
+          {/* Stats row */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-            className="mt-12 flex flex-wrap justify-center lg:justify-start gap-x-8 gap-y-4 text-sm"
+            transition={{ delay: 1.2 }}
+            className="mt-14 flex items-center gap-10 flex-wrap"
           >
-            <div className="flex items-center gap-2">
-              <span className="text-3xl font-semibold text-gray-900">1,247</span>
-              <span className="text-gray-500">applicants helped</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-3xl font-semibold text-gray-900">15</span>
-              <span className="text-gray-500">countries covered</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-3xl font-semibold text-emerald-600">4.98</span>
-              <span className="text-gray-500">average rating</span>
-            </div>
+            {[
+              { n: "1,247", label: "Applicants" },
+              { n: "15", label: "Countries" },
+              { n: "4.98", label: "Rating", accent: true },
+            ].map(({ n, label, accent }) => (
+              <div key={label} className="flex flex-col">
+                <span
+                  className={`text-4xl font-black tracking-tight leading-none ${accent ? "text-[#C8F04A]" : "text-white"}`}
+                  style={{ fontFamily: "'Georgia', serif" }}
+                >
+                  {n}
+                </span>
+                <span className="text-xs text-white/35 mt-1.5 tracking-widest uppercase">{label}</span>
+              </div>
+            ))}
           </motion.div>
 
-          <Link href="/apply" className="hidden lg:inline-block mt-10">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-black text-white rounded-3xl text-lg font-semibold flex items-center gap-3 shadow-xl hover:shadow-2xl transition-all"
-            >
-              Start Your Application
-              <ArrowRight className="h-5 w-5" />
-            </motion.button>
-          </Link>
+          {/* CTA — desktop */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.4 }}
+            className="mt-12 hidden lg:flex items-center gap-4"
+          >
+            <Link href="/apply">
+              <motion.button
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="group flex items-center gap-3 px-8 py-4 bg-[#C8F04A] text-black font-bold rounded-full text-sm tracking-wide hover:bg-white transition-colors"
+              >
+                Start application
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </motion.button>
+            </Link>
+            <a href="#reviews" className="text-sm text-white/40 hover:text-white/70 transition-colors flex items-center gap-1.5">
+              Read reviews <MoveRight className="w-3 h-3" />
+            </a>
+          </motion.div>
         </motion.div>
 
-        {/* RIGHT COLUMN - FORM (unchanged from last version) */}
+        {/* RIGHT — FORM + FLOATING CARDS */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="lg:col-span-5 w-full max-w-xl mx-auto lg:mx-0"
+          initial={{ opacity: 0, x: 60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.5, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="relative flex justify-center lg:justify-end"
         >
-          <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl shadow-black/10 border border-white/60 p-6 sm:p-8 md:p-10">
-            {/* ... rest of the form exactly as before ... */}
-            <motion.div variants={containerVariants} initial="hidden" animate="visible">
-              <motion.h2
-                variants={itemVariants}
-                className="text-3xl font-semibold text-gray-900 mb-2"
-              >
-                Get matched in 60 seconds
-              </motion.h2>
-              <motion.p
-                variants={itemVariants}
-                className="text-gray-500 mb-8"
-              >
-                Tell us a bit about your journey — we’ll show you the fastest path forward.
-              </motion.p>
+          {/* Floating passport cards — desktop only */}
+          <div className="hidden xl:block absolute pointer-events-none">
+            <div className="relative w-full h-full">
+              <div className="absolute -top-16 -left-28">
+                <PassportCard delay={1.2} label="UK Tier 4 Student" sub="Approved · 2024" rotate="-6deg" />
+              </div>
+              <div className="absolute -bottom-14 -left-20">
+                <PassportCard delay={1.5} label="Canada Study Permit" sub="Approved · 2025" rotate="4deg" />
+              </div>
+            </div>
+          </div>
 
-              <form onSubmit={handleSubmit} className="space-y-7">
-                {/* Destination, Purpose, Nationality fields (identical to previous) */}
-                <motion.div variants={itemVariants} className="relative">
-                  <label className="block text-sm font-medium text-gray-600 mb-2">
-                    Where are you going?
-                  </label>
-                  <div className="relative">
-                    <Globe className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
-                    <select
+          {/* FORM CARD */}
+          <div className="w-full max-w-md">
+            <div className="rounded-3xl overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-2xl shadow-[0_32px_80px_rgba(0,0,0,0.7)]">
+              {/* Top accent bar */}
+              <div className="h-1 w-full bg-gradient-to-r from-[#C8F04A] via-[#a8d43a] to-[#6ee7b7]" />
+
+              <div className="p-8 sm:p-10">
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold tracking-tight text-white">
+                    Get matched in 60s
+                  </h2>
+                  <p className="text-white/40 text-sm mt-2 leading-relaxed">
+                    Tell us your journey — we'll find the fastest path forward.
+                  </p>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-[11px] tracking-widest uppercase text-white/30 mb-2">
+                      Destination
+                    </label>
+                    <CustomSelect
+                      icon={Globe}
+                      placeholder="Where are you going?"
+                      options={DESTINATIONS}
                       value={destination}
-                      onChange={(e) => setDestination(e.target.value)}
-                      required
-                      className="w-full h-14 pl-12 pr-5 bg-white border border-gray-200 rounded-2xl text-base focus:border-black focus:ring-0 transition-all"
-                    >
-                      <option value="">Select destination</option>
-                      <option value="United Kingdom">🇬🇧 United Kingdom</option>
-                      <option value="Canada">🇨🇦 Canada</option>
-                      <option value="Germany">🇩🇪 Germany</option>
-                      <option value="France">🇫🇷 France</option>
-                      <option value="Netherlands">🇳🇱 Netherlands</option>
-                      <option value="Ireland">🇮🇪 Ireland</option>
-                    </select>
+                      onChange={setDestination}
+                    />
                   </div>
-                </motion.div>
 
-                <motion.div variants={itemVariants} className="relative">
-                  <label className="block text-sm font-medium text-gray-600 mb-2">
-                    Purpose of travel
-                  </label>
-                  <div className="relative">
-                    <Plane className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
-                    <select
+                  <div>
+                    <label className="block text-[11px] tracking-widest uppercase text-white/30 mb-2">
+                      Purpose
+                    </label>
+                    <CustomSelect
+                      icon={Plane}
+                      placeholder="Why are you travelling?"
+                      options={PURPOSES}
                       value={purpose}
-                      onChange={(e) => setPurpose(e.target.value)}
-                      required
-                      className="w-full h-14 pl-12 pr-5 bg-white border border-gray-200 rounded-2xl text-base focus:border-black focus:ring-0 transition-all"
-                    >
-                      <option value="">Select purpose</option>
-                      <option value="Study">📚 Study</option>
-                      <option value="Work">💼 Work</option>
-                      <option value="Tourism">✈️ Tourism</option>
-                      <option value="Business">🤝 Business</option>
-                      <option value="Family Visit">👨‍👩‍👧 Family Visit</option>
-                    </select>
+                      onChange={setPurpose}
+                    />
                   </div>
-                </motion.div>
 
-                <motion.div variants={itemVariants} className="relative">
-                  <label className="block text-sm font-medium text-gray-600 mb-2">
-                    Your nationality
-                  </label>
-                  <div className="relative">
-                    <Flag className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
-                    <select
+                  <div>
+                    <label className="block text-[11px] tracking-widest uppercase text-white/30 mb-2">
+                      Nationality
+                    </label>
+                    <CustomSelect
+                      icon={Flag}
+                      placeholder="Your passport country"
+                      options={NATIONALITIES}
                       value={nationality}
-                      onChange={(e) => setNationality(e.target.value)}
-                      required
-                      className="w-full h-14 pl-12 pr-5 bg-white border border-gray-200 rounded-2xl text-base focus:border-black focus:ring-0 transition-all"
-                    >
-                      <option value="">Select nationality</option>
-                      <option value="Uganda">🇺🇬 Uganda</option>
-                      <option value="Kenya">🇰🇪 Kenya</option>
-                      <option value="Nigeria">🇳🇬 Nigeria</option>
-                      <option value="Ghana">🇬🇭 Ghana</option>
-                      <option value="Rwanda">🇷🇼 Rwanda</option>
-                      <option value="Tanzania">🇹🇿 Tanzania</option>
-                    </select>
+                      onChange={setNationality}
+                    />
                   </div>
-                </motion.div>
 
-                <motion.button
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full h-14 mt-2 bg-black text-white rounded-3xl text-lg font-semibold flex items-center justify-center gap-3 disabled:opacity-70 transition-all hover:shadow-xl"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full" />
-                      Matching you…
-                    </>
-                  ) : (
-                    <>
-                      Continue
-                      <ArrowRight className="h-5 w-5" />
-                    </>
-                  )}
-                </motion.button>
-              </form>
+                  {/* Progress dots */}
+                  <div className="flex gap-1.5 pt-1">
+                    {[destination, purpose, nationality].map((v, i) => (
+                      <motion.div
+                        key={i}
+                        animate={{ backgroundColor: v ? "#C8F04A" : "rgba(255,255,255,0.1)" }}
+                        className="h-1 flex-1 rounded-full"
+                      />
+                    ))}
+                  </div>
 
-              <motion.p
-                variants={itemVariants}
-                className="text-center text-xs text-gray-400 mt-8"
-              >
-                Takes 47 seconds • No credit card • Confidential
-              </motion.p>
+                  <motion.button
+                    type="submit"
+                    disabled={!canSubmit || isSubmitting}
+                    whileHover={canSubmit ? { scale: 1.02 } : {}}
+                    whileTap={canSubmit ? { scale: 0.98 } : {}}
+                    className={`w-full h-14 mt-2 rounded-2xl text-sm font-bold tracking-wide flex items-center justify-center gap-3 transition-all
+                      ${canSubmit
+                        ? "bg-[#C8F04A] text-black hover:bg-white cursor-pointer shadow-[0_0_40px_rgba(200,240,74,0.25)]"
+                        : "bg-white/5 text-white/20 cursor-not-allowed"
+                      }`}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <span className="w-4 h-4 rounded-full border-2 border-black border-t-transparent animate-spin" />
+                        Finding your path…
+                      </>
+                    ) : (
+                      <>
+                        Continue
+                        <ArrowUpRight className="w-4 h-4" />
+                      </>
+                    )}
+                  </motion.button>
+                </form>
+
+                <p className="text-center text-[11px] text-white/20 mt-6 tracking-wide">
+                  47 seconds · No card required · 100% confidential
+                </p>
+              </div>
+            </div>
+
+            {/* Trust badges */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.6 }}
+              className="mt-5 flex items-center justify-center gap-6 text-[11px] text-white/25 tracking-wide"
+            >
+              <span>🔒 Encrypted</span>
+              <span className="w-px h-3 bg-white/10" />
+              <span>📋 Expert reviewed</span>
+              <span className="w-px h-3 bg-white/10" />
+              <span>✅ Consulate-ready</span>
             </motion.div>
           </div>
         </motion.div>
       </div>
 
-      {/* Mobile CTA */}
+      {/* ── Mobile CTA ── */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2 }}
-        className="lg:hidden mt-10 relative z-10"
+        transition={{ delay: 1.4 }}
+        className="lg:hidden relative z-20 px-6 pb-10"
       >
         <Link href="/apply">
-          <button className="w-full max-w-xs mx-auto px-8 py-4 bg-black text-white rounded-3xl text-lg font-semibold flex items-center justify-center gap-3 shadow-xl">
+          <button className="w-full py-4 bg-[#C8F04A] text-black font-bold rounded-full text-sm tracking-wide flex items-center justify-center gap-2">
             Start Your Application
-            <ArrowRight className="h-5 w-5" />
+            <ArrowUpRight className="w-4 h-4" />
           </button>
         </Link>
       </motion.div>
+
+      {/* ── Ticker animation keyframes ── */}
+      <style jsx global>{`
+        @keyframes ticker {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-33.333%); }
+        }
+        .animate-ticker {
+          animation: ticker 30s linear infinite;
+        }
+      `}</style>
     </section>
   );
 }

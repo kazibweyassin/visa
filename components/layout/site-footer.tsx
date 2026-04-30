@@ -18,19 +18,19 @@ export function SiteFooter() {
   };
 
   return (
-    <footer className="bg-white border-t border-gray-100">
+    <footer className="bg-white border-t border-stone-100">
       <div className="max-w-7xl mx-auto px-6 py-12 lg:py-16">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-x-8 gap-y-10">
           {/* LOGO + DESCRIPTION */}
           <div className="lg:col-span-4 flex flex-col">
             <Link href="/" className="flex items-center gap-3 mb-4 group">
-              <div className="h-9 w-9 flex items-center justify-center rounded-2xl bg-black text-white shadow-inner transition-transform group-hover:scale-105">
+              <div className="h-9 w-9 flex items-center justify-center rounded-2xl bg-stone-900 text-white shadow-inner transition-transform group-hover:scale-105">
                 <ShieldCheck className="h-5 w-5" />
               </div>
-              <span className="font-semibold text-2xl tracking-tight text-gray-900">AILES Global</span>
+              <span className="font-semibold text-2xl tracking-tight text-stone-900">AILES Global</span>
             </Link>
             
-            <p className="text-gray-600 max-w-xs text-[15px] leading-relaxed">
+            <p className="text-stone-600 max-w-xs text-[15px] leading-relaxed">
               Professional visa &amp; study abroad support for ambitious African travelers. 
               From documents to approval — done right.
             </p>
@@ -44,7 +44,7 @@ export function SiteFooter() {
 
           {/* QUICK LINKS */}
           <div className="lg:col-span-2">
-            <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-4">Quick Links</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-stone-400 mb-4">Quick Links</p>
             <div className="flex flex-col gap-3 text-sm">
               {quickLinks.map((link) => (
                 <Link
@@ -52,11 +52,11 @@ export function SiteFooter() {
                   href={link.href}
                   target={link.external ? "_blank" : undefined}
                   rel={link.external ? "noopener noreferrer" : undefined}
-                  className="text-gray-600 hover:text-black transition-colors flex items-center gap-1 group"
+                  className="text-stone-600 hover:text-stone-900 transition-colors flex items-center gap-1 group"
                 >
                   {link.label}
                   {link.external && (
-                    <span className="text-[10px] text-gray-400 group-hover:text-black">↗</span>
+                    <span className="text-[10px] text-stone-400 group-hover:text-stone-900">↗</span>
                   )}
                 </Link>
               ))}
@@ -65,8 +65,8 @@ export function SiteFooter() {
 
           {/* SERVICES */}
           <div className="lg:col-span-2">
-            <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-4">Services</p>
-            <div className="flex flex-col gap-3 text-sm text-gray-600">
+            <p className="text-xs font-medium uppercase tracking-widest text-stone-400 mb-4">Services</p>
+            <div className="flex flex-col gap-3 text-sm text-stone-600">
               <Link href="#visa-checker" className="hover:text-black transition-colors">Schengen Visa</Link>
               <Link href="#visa-checker" className="hover:text-black transition-colors">UK Visa</Link>
               <Link href="#visa-checker" className="hover:text-black transition-colors">Canada Study Permit</Link>
@@ -77,7 +77,7 @@ export function SiteFooter() {
 
           {/* CONTACT */}
           <div className="lg:col-span-4">
-            <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-4">Get in touch</p>
+            <p className="text-xs font-medium uppercase tracking-widest text-stone-400 mb-4">Get in touch</p>
             
             <div className="space-y-4">
               <div className="flex items-start gap-3">
@@ -88,7 +88,7 @@ export function SiteFooter() {
                     href="https://wa.me/256704833021"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-black transition-colors"
+                    className="text-stone-600 hover:text-stone-900 transition-colors"
                   >
                     +256 704 833021
                   </Link>
@@ -101,7 +101,7 @@ export function SiteFooter() {
                   <p className="text-sm font-medium">Email</p>
                   <Link
                     href="mailto:hello@ailesglobal.com"
-                    className="text-gray-600 hover:text-black transition-colors"
+                    className="text-stone-600 hover:text-stone-900 transition-colors"
                   >
                     hello@ailesglobal.com
                   </Link>
@@ -111,13 +111,13 @@ export function SiteFooter() {
 
             {/* Socials */}
             <div className="mt-8">
-              <p className="text-xs font-medium uppercase tracking-widest text-gray-400 mb-3">Follow our journey</p>
+              <p className="text-xs font-medium uppercase tracking-widest text-stone-400 mb-3">Follow our journey</p>
               <div className="flex items-center gap-4">
                 <Link
                   href="https://x.com/ailesglobal"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-black transition-colors"
+                  className="text-stone-400 hover:text-stone-900 transition-colors"
                   aria-label="Follow us on X"
                 >
                   <LinkIcon className="h-5 w-5" />
@@ -126,7 +126,7 @@ export function SiteFooter() {
                   href="https://www.facebook.com/ailestravels/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-black transition-colors"
+                  className="text-stone-400 hover:text-stone-900 transition-colors"
                   aria-label="Follow us on Facebook"
                 >
                   <LinkIcon className="h-5 w-5" />
@@ -135,7 +135,7 @@ export function SiteFooter() {
                   href="https://www.instagram.com/ailesoverseaseducation/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-black transition-colors"
+                  className="text-stone-400 hover:text-stone-900 transition-colors"
                   aria-label="Follow us on Instagram"
                 >
                   <LinkIcon className="h-5 w-5" />
@@ -147,17 +147,17 @@ export function SiteFooter() {
       </div>
 
       {/* BOTTOM BAR */}
-      <div className="border-t border-gray-100 bg-gray-50 py-5">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+      <div className="border-t border-stone-100 bg-stone-50 py-5">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-stone-500">
           <div>
             © {new Date().getFullYear()} AILES Global. All rights reserved.
           </div>
           
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="hover:text-gray-900 transition-colors">
+            <Link href="/privacy" className="hover:text-stone-900 transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-gray-900 transition-colors">
+            <Link href="/terms" className="hover:text-stone-900 transition-colors">
               Terms of Service
             </Link>
             
@@ -173,7 +173,7 @@ export function SiteFooter() {
             </motion.button>
           </div>
 
-          <p className="text-[10px] text-gray-400">
+          <p className="text-[10px] text-stone-400">
             Independent visa assistance • Not affiliated with any government
           </p>
         </div>

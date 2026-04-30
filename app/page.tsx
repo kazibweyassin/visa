@@ -14,7 +14,7 @@ export default function Home() {
     <>
       <SiteHeader />
       <LandingHero />
-      <TrustBar />
+      {/* <TrustBar /> */}
       <VisaChecker />
       <PopularEvisas />
       <Testimonials />
