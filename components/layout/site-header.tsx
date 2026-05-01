@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { Globe, ArrowUpRight, X, Menu, MessageCircle } from "lucide-react";
+import { ArrowUpRight, X, Menu, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks: Array<{ label: string; href: string; target?: string }> = [
@@ -50,14 +50,19 @@ export function SiteHeader() {
           <div className="flex items-center h-16 gap-8">
 
             {/* Logo */}
-            <Link href="/" aria-label="AILES Global" className="flex items-center gap-2.5 shrink-0 group">
-              <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-md shadow-emerald-200 transition-all duration-300 group-hover:shadow-lg group-hover:shadow-emerald-200 group-hover:scale-105">
-                <Globe className="w-[18px] h-[18px] text-white" strokeWidth={2.5} />
-              </div>
-              <div className="flex flex-col leading-none">
-                <span className="text-[15px] font-extrabold text-stone-900 tracking-tight">AILES</span>
-                <span className="text-[10px] font-medium text-emerald-600 tracking-[0.12em] uppercase">Global</span>
-              </div>
+            <Link href="/" aria-label="Ailes Global" className="group shrink-0 flex items-baseline gap-2 select-none">
+              <span
+                className="text-[1.35rem] font-black tracking-[-0.03em] text-stone-900 leading-none transition-colors duration-200 group-hover:text-stone-700"
+                style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
+              >
+                Ailes<span className="text-emerald-500">.</span>
+              </span>
+              <span
+                className="text-[0.62rem] font-semibold tracking-[0.3em] uppercase text-stone-400 transition-colors duration-200 group-hover:text-stone-500"
+                style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
+              >
+                Global
+              </span>
             </Link>
 
             {/* Desktop Nav */}
@@ -70,8 +75,8 @@ export function SiteHeader() {
                   rel={link.target ? "noopener noreferrer" : undefined}
                   className={`relative px-3.5 py-2 text-[13.5px] font-medium rounded-lg transition-all duration-150 group flex items-center gap-1 ${
                     isActive(link.href)
-                      ? "text-stone-900 bg-stone-100"
-                      : "text-stone-500 hover:text-stone-900 hover:bg-stone-50"
+                      ? "text-gray-900 bg-gray-100"
+                      : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
                   }`}
                 >
                   {link.label}
@@ -94,7 +99,7 @@ export function SiteHeader() {
                 href="https://wa.me/256704833021"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-full border border-stone-200 text-[13px] font-medium text-stone-600 hover:border-stone-300 hover:text-stone-900 hover:bg-stone-50 transition-all duration-200"
+                className="flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 text-[13px] font-medium text-gray-600 hover:border-gray-300 hover:text-gray-900 hover:bg-gray-50 transition-all duration-200"
               >
                 <MessageCircle className="w-3.5 h-3.5 text-emerald-500" />
                 Talk to advisor
@@ -102,7 +107,7 @@ export function SiteHeader() {
 
               <Link
                 href="/apply"
-                className="group relative flex items-center gap-2 px-5 py-2.5 bg-emerald-500 text-white text-[13px] font-semibold rounded-full overflow-hidden transition-all duration-200 hover:bg-emerald-600 hover:shadow-lg hover:shadow-emerald-500/25"
+                className="group relative flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-[13px] font-semibold rounded-full overflow-hidden transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:shadow-gray-900/20"
               >
                 <span className="relative z-10">Start Application</span>
                 <ArrowUpRight className="w-3.5 h-3.5 relative z-10 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -115,7 +120,7 @@ export function SiteHeader() {
               onClick={() => setMenuOpen((o) => !o)}
               aria-label="Toggle menu"
               aria-expanded={menuOpen}
-              className="lg:hidden ml-auto flex items-center justify-center w-9 h-9 rounded-lg text-stone-600 hover:text-stone-900 hover:bg-stone-50 transition-colors"
+              className="lg:hidden ml-auto flex items-center justify-center w-9 h-9 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
@@ -140,7 +145,7 @@ export function SiteHeader() {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-              className="lg:hidden overflow-hidden border-t border-stone-100 bg-white"
+              className="lg:hidden overflow-hidden border-t border-gray-100 bg-white"
             >
               <div className="px-5 pt-3 pb-6 space-y-0.5">
                 {navLinks.map((link, i) => (
@@ -157,8 +162,8 @@ export function SiteHeader() {
                       onClick={() => setMenuOpen(false)}
                       className={`flex items-center justify-between w-full px-4 py-3 rounded-xl text-[14px] font-medium transition-colors ${
                         isActive(link.href)
-                          ? "bg-stone-100 text-stone-900"
-                          : "text-stone-500 hover:bg-stone-50 hover:text-stone-900"
+                          ? "bg-gray-100 text-gray-900"
+                          : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
                       }`}
                     >
                       {link.label}
@@ -175,14 +180,14 @@ export function SiteHeader() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="pt-4 mt-3 border-t border-stone-100 grid grid-cols-2 gap-2.5"
+                  className="pt-4 mt-3 border-t border-gray-100 grid grid-cols-2 gap-2.5"
                 >
                   <Link
                     href="https://wa.me/256704833021"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl border border-stone-200 text-sm font-medium text-stone-600 hover:bg-stone-50 transition-colors"
+                    className="flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
                   >
                     <MessageCircle className="w-4 h-4 text-emerald-500" />
                     Advisor
@@ -190,7 +195,7 @@ export function SiteHeader() {
                   <Link
                     href="/apply"
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl bg-emerald-500 text-white text-sm font-semibold hover:bg-emerald-600 shadow-md shadow-emerald-500/25 transition-colors"
+                    className="flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors"
                   >
                     Apply now
                     <ArrowUpRight className="w-3.5 h-3.5" />

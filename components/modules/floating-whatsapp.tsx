@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 
-const WHATSAPP_NUMBER = "256XXXXXXXXX";
+const WHATSAPP_NUMBER = "256704833021";
 const WHATSAPP_MESSAGE =
   "Hi, I'd like help with my Schengen visa application.";
 

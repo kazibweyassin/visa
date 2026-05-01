@@ -50,7 +50,7 @@ function Ticker() {
       <div className="flex gap-12 animate-ticker whitespace-nowrap w-max">
         {[...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
           <span key={i} className="text-xs tracking-[0.2em] uppercase text-white/40 flex items-center gap-4">
-            <span className="w-1 h-1 rounded-full bg-[#C8F04A] inline-block" />
+            <span className="w-1 h-1 rounded-full bg-emerald-400 inline-block" />
             {item}
           </span>
         ))}
@@ -131,7 +131,7 @@ function CustomSelect({
                 >
                   <span className="w-5">{opt.flag ?? opt.icon}</span>
                   {opt.label}
-                  {value === opt.label && <span className="ml-auto text-[#C8F04A]">✓</span>}
+                  {value === opt.label && <span className="ml-auto text-emerald-400">✓</span>}
                 </button>
               </li>
             ))}
@@ -154,7 +154,7 @@ function PassportCard({ delay = 0, label, sub, rotate }: { delay?: number; label
       className="absolute bg-gradient-to-br from-[#1a1a1a] to-[#0d0d0d] border border-white/10 rounded-2xl p-5 shadow-2xl backdrop-blur-xl w-52"
     >
       <div className="flex items-start justify-between mb-6">
-        <Globe className="w-5 h-5 text-[#C8F04A]" />
+        <Globe className="w-5 h-5 text-emerald-400" />
         <span className="text-[10px] text-white/30 tracking-widest uppercase">Approved</span>
       </div>
       <div className="space-y-1">
@@ -166,8 +166,8 @@ function PassportCard({ delay = 0, label, sub, rotate }: { delay?: number; label
           <p className="text-white/90 font-semibold text-sm">{label}</p>
           <p className="text-white/35 text-xs mt-0.5">{sub}</p>
         </div>
-        <div className="w-7 h-7 rounded-full bg-[#C8F04A]/15 flex items-center justify-center">
-          <span className="text-[#C8F04A] text-xs">↗</span>
+        <div className="w-7 h-7 rounded-full bg-emerald-400/15 flex items-center justify-center">
+          <span className="text-emerald-400 text-xs">↗</span>
         </div>
       </div>
     </motion.div>
@@ -210,34 +210,10 @@ export default function LandingHero() {
 
       {/* ── glow blobs ── */}
       <motion.div style={{ scale: bgScale }} className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-[#C8F04A]/5 blur-[140px]" />
+        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-emerald-400/10 blur-[140px]" />
         <div className="absolute bottom-[-10%] right-[5%] w-[500px] h-[500px] rounded-full bg-[#3b82f6]/6 blur-[120px]" />
       </motion.div>
 
-      {/* ── NAV ── */}
-      <motion.nav
-        initial={{ opacity: 0, y: -16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="relative z-20 flex items-center justify-between px-6 sm:px-10 pt-8"
-      >
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-[#C8F04A] flex items-center justify-center">
-            <Globe className="w-4 h-4 text-black" />
-          </div>
-          <span className="font-bold text-lg tracking-tight">VisaPath</span>
-        </div>
-        <div className="hidden md:flex items-center gap-8 text-sm text-white/50">
-          <a href="#" className="hover:text-white transition-colors">Services</a>
-          <a href="#" className="hover:text-white transition-colors">Countries</a>
-          <a href="#" className="hover:text-white transition-colors">Reviews</a>
-        </div>
-        <Link href="/apply">
-          <span className="text-sm px-5 py-2.5 rounded-full border border-white/15 hover:border-white/40 text-white/70 hover:text-white transition-all cursor-pointer">
-            Apply now ↗
-          </span>
-        </Link>
-      </motion.nav>
 
       {/* ── TICKER ── */}
       <motion.div
@@ -262,8 +238,8 @@ export default function LandingHero() {
             className="flex items-center gap-3 mb-8"
           >
             <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8F04A] opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C8F04A]" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
             </span>
             <span className="text-xs tracking-[0.2em] uppercase text-white/45">98% first-time approval</span>
           </motion.div>
@@ -279,7 +255,7 @@ export default function LandingHero() {
             >
               The world<br />
               <span className="italic text-white/40">is your</span><br />
-              <span className="text-[#C8F04A]">destination.</span>
+              <span className="text-emerald-400">destination.</span>
             </motion.h1>
           </div>
 
@@ -329,7 +305,7 @@ export default function LandingHero() {
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="group flex items-center gap-3 px-8 py-4 bg-[#C8F04A] text-black font-bold rounded-full text-sm tracking-wide hover:bg-white transition-colors"
+                className="group flex items-center gap-3 px-8 py-4 bg-emerald-400 text-black font-bold rounded-full text-sm tracking-wide hover:bg-emerald-300 transition-colors"
               >
                 Start application
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -364,7 +340,7 @@ export default function LandingHero() {
           <div className="w-full max-w-md">
             <div className="rounded-3xl overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-2xl shadow-[0_32px_80px_rgba(0,0,0,0.7)]">
               {/* Top accent bar */}
-              <div className="h-1 w-full bg-gradient-to-r from-[#C8F04A] via-[#a8d43a] to-[#6ee7b7]" />
+              <div className="h-1 w-full bg-gradient-to-r from-emerald-400 via-emerald-300 to-emerald-200" />
 
               <div className="p-8 sm:p-10">
                 <div className="mb-8">
@@ -421,7 +397,7 @@ export default function LandingHero() {
                     {[destination, purpose, nationality].map((v, i) => (
                       <motion.div
                         key={i}
-                        animate={{ backgroundColor: v ? "#C8F04A" : "rgba(255,255,255,0.1)" }}
+                        animate={{ backgroundColor: v ? "#34d399" : "rgba(255,255,255,0.1)" }}
                         className="h-1 flex-1 rounded-full"
                       />
                     ))}
@@ -434,7 +410,7 @@ export default function LandingHero() {
                     whileTap={canSubmit ? { scale: 0.98 } : {}}
                     className={`w-full h-14 mt-2 rounded-2xl text-sm font-bold tracking-wide flex items-center justify-center gap-3 transition-all
                       ${canSubmit
-                        ? "bg-[#C8F04A] text-black hover:bg-white cursor-pointer shadow-[0_0_40px_rgba(200,240,74,0.25)]"
+                        ? "bg-emerald-400 text-black hover:bg-emerald-300 cursor-pointer shadow-[0_0_40px_rgba(16,185,129,0.25)]"
                         : "bg-white/5 text-white/20 cursor-not-allowed"
                       }`}
                   >
@@ -483,7 +459,7 @@ export default function LandingHero() {
         className="lg:hidden relative z-20 px-6 pb-10"
       >
         <Link href="/apply">
-          <button className="w-full py-4 bg-[#C8F04A] text-black font-bold rounded-full text-sm tracking-wide flex items-center justify-center gap-2">
+          <button className="w-full py-4 bg-emerald-400 text-black font-bold rounded-full text-sm tracking-wide flex items-center justify-center gap-2 hover:bg-emerald-300 transition-colors">
             Start Your Application
             <ArrowUpRight className="w-4 h-4" />
           </button>
