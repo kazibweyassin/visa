@@ -1,0 +1,173 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─────────────────────────────────────────
+// User Management
+// ─────────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  phone         String?
+  country       String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  applications  Application[]
+  documents     UploadedDocument[]
+  reviews       DocumentReview[]
+
+  @@index([email])
+  @@map("users")
+}
+
+// ─────────────────────────────────────────
+// Application Management
+// ─────────────────────────────────────────
+
+model Application {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  fromCountry   String    // Passport country
+  toCountry     String    // Destination country
+  visaType      String    @default("Schengen short-stay (Type C)")
+  
+  status        ApplicationStatus @default(DRAFT)
+  progress      Int       @default(0) // Percentage
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  submittedAt   DateTime?
+  
+  documents     UploadedDocument[]
+  checklist     ChecklistProgress[]
+
+  @@index([userId])
+  @@index([status])
+  @@map("applications")
+}
+
+enum ApplicationStatus {
+  DRAFT
+  DOCUMENTS_READY
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+  NEEDS_REVISION
+}
+
+// ─────────────────────────────────────────
+// Document Management
+// ─────────────────────────────────────────
+
+model DocumentRequirement {
+  id            String    @id @default(cuid())
+  visaType      String    @default("schengen") // schengen, uk, us, canada, etc.
+  category      String    // passport, financial, accommodation, travel, employment, insurance, personal
+  name          String
+  description   String
+  isRequired    Boolean   @default(true)
+  acceptedFormats String  // JSON: ["pdf", "jpg", "png"]
+  notes         String?
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  uploads       UploadedDocument[]
+  checklist     ChecklistProgress[]
+
+  @@index([visaType, category])
+  @@map("document_requirements")
+}
+
+model UploadedDocument {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  requirementId String
+  requirement   DocumentRequirement @relation(fields: [requirementId], references: [id])
+  
+  fileName      String
+  fileSize      Int       // in bytes
+  fileType      String    // mime type
+  fileUrl       String?   // S3 or cloud storage URL
+  
+  status        DocumentStatus @default(PENDING)
+  uploadedAt    DateTime  @default(now())
+  reviewedAt    DateTime?
+  
+  review        DocumentReview?
+
+  @@index([userId])
+  @@index([applicationId])
+  @@index([status])
+  @@map("uploaded_documents")
+}
+
+enum DocumentStatus {
+  PENDING       // Waiting for review
+  APPROVED      // Meets requirements
+  NEEDS_REVISION // Issues found
+  REJECTED      // Cannot be used
+}
+
+model DocumentReview {
+  id            String    @id @default(cuid())
+  documentId    String    @unique
+  document      UploadedDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  
+  reviewedBy    String?   // User ID of reviewer (future: admin/team member)
+  reviewer      User?     @relation(fields: [reviewedBy], references: [id])
+  
+  status        DocumentStatus
+  feedback      String?   // Detailed feedback for user
+  issues        String?   // JSON array of specific issues
+  
+  reviewedAt    DateTime  @default(now())
+
+  @@index([documentId])
+  @@index([status])
+  @@map("document_reviews")
+}
+
+// ─────────────────────────────────────────
+// Checklist Progress
+// ─────────────────────────────────────────
+
+model ChecklistProgress {
+  id            String    @id @default(cuid())
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  
+  requirementId String
+  requirement   DocumentRequirement @relation(fields: [requirementId], references: [id])
+  
+  isCompleted   Boolean   @default(false)
+  completedAt   DateTime?
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([applicationId, requirementId])
+  @@index([applicationId])
+  @@map("checklist_progress")
+}

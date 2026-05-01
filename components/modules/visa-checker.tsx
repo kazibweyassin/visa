@@ -14,10 +14,12 @@ import {
   MapPin,
   ChevronDown,
   Plane,
+  FileText,
+  ListChecks,
 } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { africanCountries, schengenCountries } from "@/lib/visa-data";
+import { africanCountries, schengenCountries, ugandaTouristCountries, visaRoutes } from "@/lib/visa-data";
 
 const visaResult = {
   visaType: "Schengen short-stay (Type C)",
@@ -27,6 +29,29 @@ const visaResult = {
   bookingNote:
     "Apply at the embassy of the country you'll stay longest in.",
 };
+
+// Helper function to determine visa type and get info
+function getVisaInfo(fromCountry: string, toCountry: string) {
+  const isUganda = toCountry === "Uganda";
+  const isUgandaSource = ugandaTouristCountries.includes(fromCountry);
+  const isSchengenDest = schengenCountries.includes(toCountry);
+  const isSchengenSource = africanCountries.includes(fromCountry);
+
+  if (isUganda && isUgandaSource) {
+    return {
+      type: "uganda_tourist",
+      info: visaRoutes["uganda_tourist"],
+      icon: "🇺🇬"
+    };
+  } else if (isSchengenDest && isSchengenSource) {
+    return {
+      type: "schengen",
+      info: visaRoutes["schengen"],
+      icon: "🇪🇺"
+    };
+  }
+  return null;
+}
 
 /* ─────────────────────────────────────────
    CUSTOM SELECT
@@ -138,11 +163,33 @@ function ResultPill({
 /* ─────────────────────────────────────────
    MAIN
 ───────────────────────────────────────── */
+
+// Helper function to determine visa type and get info
+function getVisaRoute(fromCountry: string, toCountry: string): string {
+  if (toCountry === "Uganda") {
+    return "uganda_tourist";
+  }
+  return "schengen";
+}
+
+// Helper to get visa info based on route
+function getVisaInfo(fromCountry: string, toCountry: string) {
+  const route = getVisaRoute(fromCountry, toCountry);
+  const info = visaRoutes[route];
+  
+  return {
+    ...info,
+    icon: route === "uganda_tourist" ? "🇺🇬" : "🌍",
+  };
+}
+
 export function VisaChecker() {
   const [fromCountry, setFromCountry] = useState("");
   const [toCountry, setToCountry] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [error, setError] = useState("");
+  const [expandedDocs, setExpandedDocs] = useState(false);
+  const [expandedTimeline, setExpandedTimeline] = useState(false);
 
   const handleCheck = () => {
     if (!fromCountry || !toCountry) {
@@ -234,17 +281,36 @@ export function VisaChecker() {
                 icon={MapPin}
                 value={fromCountry}
                 onChange={(v) => { setFromCountry(v); setShowResult(false); setError(""); }}
-                options={africanCountries}
+                options={[...africanCountries, ...ugandaTouristCountries]}
                 placeholder="Select your country"
               />
-              <NiceSelect
-                label="I want to visit"
-                icon={Plane}
-                value={toCountry}
-                onChange={(v) => { setToCountry(v); setShowResult(false); setError(""); }}
-                options={schengenCountries}
-                placeholder="Select destination"
-              />
+              
+              {/* Smart destination selector based on source */}
+              {fromCountry && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                >
+                  <NiceSelect
+                    label="I want to visit"
+                    icon={Plane}
+                    value={toCountry}
+                    onChange={(v) => { setToCountry(v); setShowResult(false); setError(""); }}
+                    options={
+                      ugandaTouristCountries.includes(fromCountry)
+                        ? ["Uganda", ...schengenCountries]
+                        : schengenCountries
+                    }
+                    placeholder="Select destination"
+                  />
+                </motion.div>
+              )}
+              
+              {!fromCountry && (
+                <div className="rounded-2xl border border-white/8 bg-white/5 p-4 text-center">
+                  <p className="text-xs text-white/40">Select your country first</p>
+                </div>
+              )}
 
               {/* Route preview pill */}
               <AnimatePresence>
@@ -349,6 +415,7 @@ export function VisaChecker() {
                       className="text-2xl font-black text-white leading-tight tracking-tight"
                       style={{ fontFamily: "'Georgia', serif" }}
                     >
+                      {getVisaInfo(fromCountry, toCountry)?.icon}{" "}
                       {fromCountry}
                       <span className="text-white/25 font-normal italic mx-2">to</span>
                       {toCountry}
@@ -369,16 +436,23 @@ export function VisaChecker() {
                       className="text-lg font-black text-white leading-snug"
                       style={{ fontFamily: "'Georgia', serif" }}
                     >
-                      {visaResult.visaType}
+                      {getVisaInfo(fromCountry, toCountry).visaType}
                     </p>
                   </motion.div>
 
                   {/* Stat pills */}
                   <div className="space-y-2 flex-1">
-                    <ResultPill icon={Clock} label="Processing" value={visaResult.processingTime} delay={0.15} />
-                    <ResultPill icon={BadgePercent} label="Approval rate" value={visaResult.approvalRate} accent delay={0.2} />
-                    <ResultPill icon={Stamp} label="Our service fee" value={visaResult.serviceFee} accent delay={0.25} />
-                    <ResultPill icon={MapPin} label="Your passport" value={fromCountry} delay={0.3} />
+                    {(() => {
+                      const visaInfo = getVisaInfo(fromCountry, toCountry);
+                      return (
+                        <>
+                          <ResultPill icon={Clock} label="Processing" value={visaInfo.processingTime} delay={0.15} />
+                          <ResultPill icon={BadgePercent} label="Approval rate" value={visaInfo.approvalRate} accent delay={0.2} />
+                          <ResultPill icon={Stamp} label="Our service fee" value={visaInfo.serviceFee} accent delay={0.25} />
+                          <ResultPill icon={MapPin} label="Your passport" value={fromCountry} delay={0.3} />
+                        </>
+                      );
+                    })()}
                   </div>
 
                   {/* Advisory note */}
@@ -390,28 +464,170 @@ export function VisaChecker() {
                   >
                     <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-400" />
                     <p className="text-[11px] leading-relaxed text-amber-300/80">
-                      {visaResult.bookingNote}
+                      {getVisaInfo(fromCountry, toCountry).notes}
                     </p>
                   </motion.div>
 
-                  {/* CTA */}
+                  {/* Collapsible Sections */}
                   <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="mt-5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.37 }}
+                    className="mt-4 space-y-2"
                   >
-                    <Link href={applyLink}>
+                    {/* Documents Accordion */}
+                    <button
+                      onClick={() => setExpandedDocs(!expandedDocs)}
+                      className="w-full flex items-center justify-between rounded-lg bg-white/5 border border-white/10 px-4 py-3 text-left transition-colors hover:bg-white/8"
+                    >
+                      <span className="flex items-center gap-2.5">
+                        <FileText className="h-4 w-4 text-emerald-400/70" />
+                        <span className="text-xs font-semibold text-white/80">Documents needed</span>
+                      </span>
                       <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="group flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl bg-white py-4 text-sm font-bold text-stone-900 shadow-lg transition-all hover:bg-stone-100"
+                        animate={{ rotate: expandedDocs ? 180 : 0 }}
+                        transition={{ duration: 0.2 }}
                       >
-                        Start my application
-                        <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        <ChevronDown className="h-3.5 w-3.5 text-white/40" />
                       </motion.div>
-                    </Link>
+                    </button>
+
+                    <AnimatePresence>
+                      {expandedDocs && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden rounded-lg bg-white/3 border border-white/8 px-4 py-3"
+                        >
+                          <ul className="space-y-1.5 text-xs text-white/60">
+                            <li className="flex gap-2">
+                              <span className="text-emerald-400/60 font-bold">•</span>
+                              <span>Valid passport (6+ months)</span>
+                            </li>
+                            <li className="flex gap-2">
+                              <span className="text-emerald-400/60 font-bold">•</span>
+                              <span>Bank statements (last 3 months)</span>
+                            </li>
+                            <li className="flex gap-2">
+                              <span className="text-emerald-400/60 font-bold">•</span>
+                              <span>Accommodation proof</span>
+                            </li>
+                            <li className="flex gap-2">
+                              <span className="text-emerald-400/60 font-bold">•</span>
+                              <span>Flight bookings / return ticket</span>
+                            </li>
+                            <li className="flex gap-2">
+                              <span className="text-emerald-400/60 font-bold">•</span>
+                              <span>Travel insurance</span>
+                            </li>
+                            <li className="flex gap-2">
+                              <span className="text-emerald-400/60 font-bold">•</span>
+                              <span>Proof of employment/studies</span>
+                            </li>
+                          </ul>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {/* Timeline Accordion */}
+                    <button
+                      onClick={() => setExpandedTimeline(!expandedTimeline)}
+                      className="w-full flex items-center justify-between rounded-lg bg-white/5 border border-white/10 px-4 py-3 text-left transition-colors hover:bg-white/8"
+                    >
+                      <span className="flex items-center gap-2.5">
+                        <ListChecks className="h-4 w-4 text-emerald-400/70" />
+                        <span className="text-xs font-semibold text-white/80">Your timeline</span>
+                      </span>
+                      <motion.div
+                        animate={{ rotate: expandedTimeline ? 180 : 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <ChevronDown className="h-3.5 w-3.5 text-white/40" />
+                      </motion.div>
+                    </button>
+
+                    <AnimatePresence>
+                      {expandedTimeline && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden rounded-lg bg-white/3 border border-white/8 px-4 py-3"
+                        >
+                          <div className="space-y-2.5 text-xs text-white/60">
+                            <div className="flex gap-2">
+                              <span className="text-emerald-400/70 font-bold w-6">1.</span>
+                              <div>
+                                <p className="font-semibold text-white/80">Prepare documents</p>
+                                <p className="text-white/40 text-[10px]">Recommended: 2 weeks</p>
+                              </div>
+                            </div>
+                            <div className="flex gap-2">
+                              <span className="text-emerald-400/70 font-bold w-6">2.</span>
+                              <div>
+                                <p className="font-semibold text-white/80">Submit to us for review</p>
+                                <p className="text-white/40 text-[10px]">We check everything</p>
+                              </div>
+                            </div>
+                            <div className="flex gap-2">
+                              <span className="text-emerald-400/70 font-bold w-6">3.</span>
+                              <div>
+                                <p className="font-semibold text-white/80">Get feedback & refine</p>
+                                <p className="text-white/40 text-[10px]">Fix any issues</p>
+                              </div>
+                            </div>
+                            <div className="flex gap-2">
+                              <span className="text-emerald-400/70 font-bold w-6">4.</span>
+                              <div>
+                                <p className="font-semibold text-white/80">Submit to embassy</p>
+                                <p className="text-white/40 text-[10px]">10–15 business days</p>
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </motion.div>
+
+                  {/* CTA */}
+                  <div className="mt-5 space-y-3">
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      <Link href={applyLink}>
+                        <motion.div
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="group flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl bg-white py-4 text-sm font-bold text-stone-900 shadow-lg transition-all hover:bg-stone-100"
+                        >
+                          Start my application
+                          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </motion.div>
+                      </Link>
+                    </motion.div>
+
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.45 }}
+                    >
+                      <Link href="/prepare">
+                        <motion.div
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="group flex w-full cursor-pointer items-center justify-center gap-2 rounded-2xl bg-white/10 border border-white/20 py-4 text-sm font-bold text-white hover:bg-white/15 transition-all"
+                        >
+                          Prepare documents first
+                          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </motion.div>
+                      </Link>
+                    </motion.div>
+                  </div>
                 </motion.div>
               ) : (
                 <motion.div
