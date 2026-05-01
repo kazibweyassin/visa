@@ -8,8 +8,8 @@ const signals = [
     title: "Document vault",
     description: "Secure uploads with structured checklists.",
     icon: FileText,
-    color: "text-blue-500",
-    bg: "bg-blue-50",
+    color: "text-emerald-500",
+    bg: "bg-emerald-50",
   },
   {
     title: "Human review",

@@ -66,7 +66,7 @@ const CATEGORIES = ["All", "Policy Update", "Travel Advisory", "Operational"];
 const CATEGORY_STYLES: Record<string, string> = {
   "Policy Update":   "bg-amber-100 text-amber-800 border-amber-200",
   "Travel Advisory": "bg-rose-50 text-rose-700 border-rose-200",
-  "Operational":     "bg-blue-50 text-blue-700 border-blue-200",
+  "Operational":     "bg-cyan-50 text-cyan-700 border-cyan-200",
 };
 
 function formatDate(dateStr: string) {

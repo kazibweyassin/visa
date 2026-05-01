@@ -17,8 +17,8 @@ const popularVisas = [
     fee: "€90",
     href: "/apply?visa=france-schengen",
     image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1200&q=85",
-    accent: "#4A6CF7",
     tag: "Most popular",
+    tagColor: "var(--green)",
   },
   {
     title: "Germany",
@@ -31,8 +31,8 @@ const popularVisas = [
     fee: "€90",
     href: "/apply?visa=germany-schengen",
     image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=1200&q=85",
-    accent: "#10b981",
     tag: "Fast processing",
+    tagColor: "var(--amber)",
   },
   {
     title: "Netherlands",
@@ -45,115 +45,116 @@ const popularVisas = [
     fee: "€90",
     href: "/apply?visa=netherlands-schengen",
     image: "https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=1200&q=85",
-    accent: "#f59e0b",
     tag: "High approval",
+    tagColor: "var(--green)",
   },
 ];
 
-/* ── Parallax image card ── */
-function VisaCard({
-  item,
-  index,
-}: {
-  item: (typeof popularVisas)[0];
-  index: number;
-}) {
+function VisaCard({ item, index }: { item: (typeof popularVisas)[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const imgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const imgY = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
 
   return (
     <motion.article
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.7, delay: index * 0.12, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative flex flex-col overflow-hidden rounded-3xl bg-stone-900"
-      style={{ minHeight: 480 }}
+      transition={{ duration: 0.7, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      className="group relative flex flex-col overflow-hidden rounded-2xl"
+      style={{
+        minHeight: 460,
+        background: "var(--bg-2)",
+        border: "1px solid var(--border-2)",
+      }}
     >
-      {/* Full-bleed parallax image */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Parallax image */}
+      <div className="absolute inset-0 overflow-hidden rounded-2xl">
         <motion.img
           src={item.image}
           alt={item.country}
           style={{ y: imgY }}
-          className="absolute inset-0 h-[115%] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          className="absolute inset-0 h-[115%] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           loading="lazy"
         />
-        {/* Multi-stop gradient overlay — heavy at bottom for text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-950/95 via-stone-950/40 to-stone-950/10" />
-        {/* Side vignette */}
-        <div className="absolute inset-0 bg-gradient-to-r from-stone-950/20 to-transparent" />
+        {/* Progressive overlay — dark at bottom */}
+        <div className="absolute inset-0" style={{
+          background: "linear-gradient(to top, rgba(10,10,8,0.97) 0%, rgba(10,10,8,0.55) 50%, rgba(10,10,8,0.15) 100%)"
+        }} />
       </div>
 
-      {/* Top strip — tag + flag */}
-      <div className="relative flex items-start justify-between p-6">
-        {/* Tag pill */}
-        <span className="rounded-full border border-white/15 bg-white/10 backdrop-blur-md px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white/80">
+      {/* Top: tag + flag */}
+      <div className="relative flex items-start justify-between p-5">
+        <span
+          className="rounded-full px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em]"
+          style={{
+            border: `1px solid ${item.tagColor}33`,
+            background: `${item.tagColor}18`,
+            color: item.tagColor,
+            backdropFilter: "blur(8px)",
+          }}
+        >
           {item.tag}
         </span>
 
-        {/* Flag */}
-        <div className="flex items-center gap-2 rounded-full border border-white/15 bg-black/30 backdrop-blur-md px-3 py-1.5">
-          <img
-            src={item.flagSrc}
-            alt={item.country}
-            className="h-3.5 w-5 rounded-sm object-cover shadow-sm"
-          />
-          <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/70">
+        <div
+          className="flex items-center gap-2 rounded-full px-3 py-1.5"
+          style={{
+            border: "1px solid var(--border-2)",
+            background: "rgba(10,10,8,0.5)",
+            backdropFilter: "blur(8px)",
+          }}
+        >
+          <img src={item.flagSrc} alt={item.country} className="h-3.5 w-5 rounded-sm object-cover" />
+          <span className="text-[10px] font-bold uppercase tracking-[0.14em]" style={{ color: "var(--text-3)" }}>
             {item.country}
           </span>
         </div>
       </div>
 
-      {/* Spacer */}
       <div className="flex-1" />
 
       {/* Bottom content */}
-      <div className="relative p-6 pt-0">
-        {/* Country name — big serif */}
+      <div className="relative p-5 pt-0">
         <div className="mb-4">
           <h3
-            className="text-5xl font-black text-white leading-none tracking-tight"
-            style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
+            className="font-black leading-none tracking-tight"
+            style={{ fontSize: "3.2rem", fontFamily: "var(--font-serif)", color: "var(--text-1)" }}
           >
             {item.title}
           </h3>
-          <p className="mt-1 text-sm font-medium text-white/40 tracking-wide">
+          <p className="mt-1 text-sm font-medium tracking-wide" style={{ color: "var(--text-3)" }}>
             {item.subtitle}
           </p>
         </div>
 
-        {/* Stats row */}
+        {/* Stats */}
         <div className="mb-5 flex items-center gap-4">
-          <div className="flex items-center gap-1.5 text-xs text-white/50">
-            <Clock className="h-3.5 w-3.5 text-white/30" />
+          <div className="flex items-center gap-1.5 text-xs" style={{ color: "var(--text-3)" }}>
+            <Clock className="h-3.5 w-3.5" style={{ color: "var(--text-3)" }} />
             {item.processing}
           </div>
-          <div className="h-3 w-px bg-white/15" />
-          <div className="flex items-center gap-1.5 text-xs text-white/50">
-            <Users className="h-3.5 w-3.5 text-white/30" />
+          <div className="h-3 w-px" style={{ background: "var(--border-2)" }} />
+          <div className="flex items-center gap-1.5 text-xs" style={{ color: "var(--text-3)" }}>
+            <Users className="h-3.5 w-3.5" style={{ color: "var(--text-3)" }} />
             {item.entries} entry
           </div>
-          <div className="h-3 w-px bg-white/15" />
-          <div className="text-xs font-bold text-white/70">
+          <div className="h-3 w-px" style={{ background: "var(--border-2)" }} />
+          <div className="text-xs font-bold" style={{ color: "var(--text-2)" }}>
             {item.stay}
           </div>
         </div>
 
-        {/* Price + CTA row */}
+        {/* Price + CTA */}
         <div className="flex items-center gap-3">
           <div className="flex flex-col">
-            <span className="text-[10px] font-semibold uppercase tracking-widest text-white/30">
+            <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "var(--text-3)" }}>
               Embassy fee
             </span>
             <span
-              className="text-xl font-black text-white leading-none mt-0.5"
-              style={{ fontFamily: "'Georgia', serif" }}
+              className="text-2xl font-black leading-none mt-0.5"
+              style={{ fontFamily: "var(--font-serif)", color: "var(--text-1)" }}
             >
               {item.fee}
             </span>
@@ -161,39 +162,33 @@ function VisaCard({
 
           <Link
             href={item.href}
-            className="group/btn ml-auto flex items-center gap-2 rounded-2xl bg-white px-5 py-3 text-sm font-bold text-stone-900 transition-all duration-300 hover:bg-stone-100 hover:shadow-xl hover:shadow-black/30 hover:-translate-y-0.5"
+            className="ml-auto flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold transition-all duration-200 hover:-translate-y-0.5"
+            style={{ background: "var(--text-1)", color: "#0a0a08" }}
           >
             Apply now
-            <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+            <ArrowUpRight className="h-4 w-4" />
           </Link>
         </div>
       </div>
 
-      {/* Accent line at bottom */}
+      {/* Bottom accent line on hover */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ background: `linear-gradient(to right, transparent, ${item.accent}, transparent)` }}
+        className="absolute bottom-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{ background: "linear-gradient(to right, transparent, var(--green), transparent)" }}
       />
     </motion.article>
   );
 }
 
-/* ── Main section ── */
 export function PopularEvisas() {
   return (
-    <section className="relative overflow-hidden bg-[#faf9f7] py-24 sm:py-32">
+    <section className="relative overflow-hidden py-24 sm:py-32" style={{ background: "var(--bg)" }}>
       {/* Dot grid */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
-        style={{
-          backgroundImage: `radial-gradient(circle, #d6d3ce 1px, transparent 1px)`,
-          backgroundSize: "28px 28px",
-        }}
-      />
+      <div className="pointer-events-none absolute inset-0 dot-grid opacity-100" />
 
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
 
-        {/* ── Section header ── */}
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -202,53 +197,70 @@ export function PopularEvisas() {
           className="mb-14 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
         >
           <div className="max-w-lg">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white border border-stone-200 px-4 py-1.5 text-[10px] font-bold tracking-[0.22em] uppercase text-emerald-600 shadow-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+            <span className="eyebrow">
+              <span className="eyebrow-dot" />
               Popular routes
             </span>
 
             <h2
-              className="mt-5 text-4xl font-black text-stone-900 sm:text-5xl leading-[0.95] tracking-tight"
-              style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
+              className="mt-5 font-black leading-[0.92] tracking-tight"
+              style={{
+                fontSize: "clamp(2.4rem, 5vw, 3.5rem)",
+                fontFamily: "var(--font-serif)",
+                color: "var(--text-1)",
+              }}
             >
               Top Schengen visas
               <br />
-              <span className="italic font-bold text-stone-400">for Ugandan passports.</span>
+              <span style={{ color: "var(--text-3)", fontStyle: "italic", fontWeight: 700 }}>
+                for Ugandan passports.
+              </span>
             </h2>
           </div>
 
           <Link
             href="/apply"
-            className="group hidden sm:inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-5 py-2.5 text-sm font-semibold text-stone-600 shadow-sm hover:border-stone-300 hover:text-stone-900 transition-all"
+            className="group hidden sm:inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all"
+            style={{
+              border: "1px solid var(--border-2)",
+              background: "var(--bg-2)",
+              color: "var(--text-2)",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--border-3)";
+              (e.currentTarget as HTMLAnchorElement).style.color = "var(--text-1)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--border-2)";
+              (e.currentTarget as HTMLAnchorElement).style.color = "var(--text-2)";
+            }}
           >
             All visa routes
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </motion.div>
 
-        {/* ── Cards grid ── */}
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Cards grid */}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {popularVisas.map((item, index) => (
             <VisaCard key={item.title} item={item} index={index} />
           ))}
         </div>
 
-        {/* ── Bottom strip ── */}
+        {/* Bottom strip */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-5 rounded-3xl border border-stone-200 bg-white px-8 py-6 shadow-sm"
+          className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-5 rounded-2xl px-7 py-5"
+          style={{ border: "1px solid var(--border-2)", background: "var(--bg-2)" }}
         >
           <div className="text-center sm:text-left">
-            <p
-              className="text-base font-bold text-stone-900"
-              style={{ fontFamily: "'Georgia', serif" }}
-            >
+            <p className="font-bold" style={{ fontFamily: "var(--font-serif)", color: "var(--text-1)" }}>
               Not seeing your destination?
             </p>
-            <p className="mt-0.5 text-sm text-stone-400">
+            <p className="mt-0.5 text-sm" style={{ color: "var(--text-3)" }}>
               We cover 15+ countries — UK, Canada, Ireland and more.
             </p>
           </div>
@@ -258,13 +270,18 @@ export function PopularEvisas() {
               href="https://wa.me/256704833021"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-stone-200 px-5 py-2.5 text-sm font-medium text-stone-600 hover:border-stone-300 hover:bg-stone-50 transition-all"
+              className="rounded-full px-5 py-2.5 text-sm font-medium transition-all"
+              style={{
+                border: "1px solid var(--border-2)",
+                color: "var(--text-2)",
+              }}
             >
               Ask us
             </Link>
             <Link
               href="/apply"
-              className="group flex items-center gap-2 rounded-full bg-stone-900 px-5 py-2.5 text-sm font-bold text-white hover:bg-stone-800 transition-colors shadow-md shadow-stone-900/15"
+              className="group flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition-all"
+              style={{ background: "var(--text-1)", color: "#0a0a08" }}
             >
               Start application
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -272,11 +289,12 @@ export function PopularEvisas() {
           </div>
         </motion.div>
 
-        {/* Mobile "see all" */}
+        {/* Mobile see all */}
         <div className="mt-6 flex justify-center sm:hidden">
           <Link
             href="/apply"
-            className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-white px-6 py-3 text-sm font-semibold text-stone-700 shadow-sm hover:bg-stone-50 transition-colors"
+            className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors"
+            style={{ border: "1px solid var(--border-2)", background: "var(--bg-2)", color: "var(--text-2)" }}
           >
             All visa routes
             <ArrowRight className="h-4 w-4" />

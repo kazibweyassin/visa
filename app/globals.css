@@ -1,35 +1,58 @@
 @import "tailwindcss";
 
-
+/* ─────────────────────────────────────────
+   AILES GLOBAL — Design Tokens
+   Dark editorial. Warm cream. Emerald signal.
+───────────────────────────────────────── */
 :root {
-  --background: #F8FAFF;
-  --foreground: #0F172A;
-  --navy: #1D4ED8;
-  --gold: #2563EB;
-  --primary: #1D4ED8;
-  --secondary: #38BDF8;
-  --surface: #FFFFFF;
-  --muted: #E0E7FF;
-}
+  /* Base surfaces */
+  --bg:          #0a0a08;   /* near-black, warm */
+  --bg-2:        #111110;   /* card surface */
+  --bg-3:        #1a1a18;   /* elevated surface */
+  --bg-4:        #242420;   /* hover/active surface */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Text */
+  --text-1:      #f5f0e8;   /* primary — warm cream */
+  --text-2:      #a09a8f;   /* secondary */
+  --text-3:      #5a5650;   /* tertiary / placeholder */
+
+  /* Borders */
+  --border-1:    rgba(245, 240, 232, 0.06);
+  --border-2:    rgba(245, 240, 232, 0.10);
+  --border-3:    rgba(245, 240, 232, 0.18);
+
+  /* Brand — emerald used as a signal, not wallpaper */
+  --green:       #22c55e;
+  --green-dim:   #16a34a;
+  --green-glow:  rgba(34, 197, 94, 0.12);
+  --green-muted: rgba(34, 197, 94, 0.08);
+
+  /* Accent — warm amber for contrast moments */
+  --amber:       #f59e0b;
+  --amber-muted: rgba(245, 158, 11, 0.10);
+
+  /* Typography */
+  --font-serif:  'Georgia', 'Times New Roman', serif;
+  --font-sans:   var(--font-geist-sans), system-ui, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
   min-height: 100vh;
   margin: 0;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-2);
+  font-family: var(--font-sans);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-1);
 }
 
 * {
@@ -39,27 +62,60 @@ body {
 a, button {
   transition: all 0.2s ease;
 }
+
 a {
-  color: var(--primary);
-}
-a:hover,
-button:hover {
-  color: var(--foreground);
+  color: var(--green);
+  text-decoration: none;
 }
 
-.card, .section {
-  background: var(--surface);
-  border-radius: 1.5rem;
-  box-shadow: 0 18px 50px rgba(59, 130, 246, 0.12);
-  padding: 1.5rem;
+/* ─────────────────────────────────────────
+   Shared section spacing
+───────────────────────────────────────── */
+.section-pad {
+  padding: 7rem 0;
 }
 
-/* Muted backgrounds for subtle UI elements */
-.muted {
-  background: var(--muted);
+@media (min-width: 640px) {
+  .section-pad { padding: 9rem 0; }
 }
 
+/* ─────────────────────────────────────────
+   Shared eyebrow pill
+───────────────────────────────────────── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--border-2);
+  background: var(--bg-3);
+  padding: 0.375rem 0.875rem;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+.eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+/* ─────────────────────────────────────────
+   Dot-grid background utility
+───────────────────────────────────────── */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(245,240,232,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ─────────────────────────────────────────
+   Selection
+───────────────────────────────────────── */
 ::selection {
-  background: rgba(59, 130, 246, 0.24);
-  color: var(--foreground);
+  background: rgba(34, 197, 94, 0.2);
+  color: var(--text-1);
 }

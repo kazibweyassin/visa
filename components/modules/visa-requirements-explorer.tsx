@@ -52,7 +52,7 @@ const TYPE_LABEL: Record<VisaType, string> = {
 
 const TYPE_STYLES: Record<VisaType, string> = {
   free: "bg-emerald-50 text-emerald-700 border-emerald-200",
-  evisa: "bg-blue-50 text-blue-700 border-blue-200",
+  evisa: "bg-emerald-50 text-emerald-700 border-emerald-200",
   required: "bg-rose-50 text-rose-700 border-rose-200",
   arrival: "bg-amber-50 text-amber-700 border-amber-200",
 };
@@ -64,7 +64,7 @@ const DIFFICULTY_CONFIG: Record<Difficulty, { label: string; color: string; bg: 
 };
 
 const REGION_STYLES: Record<string, string> = {
-  "Europe":       "bg-blue-50 text-blue-600",
+  "Europe":       "bg-cyan-50 text-cyan-600",
   "Middle East":  "bg-orange-50 text-orange-600",
   "Asia":         "bg-purple-50 text-purple-600",
   "Americas":     "bg-teal-50 text-teal-600",
@@ -304,9 +304,9 @@ function VisaCard({ entry, passport }: { entry: VisaEntry; passport: string }) {
               </div>
 
               {/* Tip */}
-              <div className="flex gap-2.5 rounded-xl bg-blue-50 p-3">
-                <Info className="mt-0.5 h-4 w-4 shrink-0 text-blue-500" />
-                <p className="text-xs leading-relaxed text-blue-800">{entry.tip}</p>
+              <div className="flex gap-2.5 rounded-xl bg-emerald-50 p-3">
+                <Info className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
+                <p className="text-xs leading-relaxed text-emerald-800">{entry.tip}</p>
               </div>
 
               {/* Notes */}

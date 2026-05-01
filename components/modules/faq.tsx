@@ -45,7 +45,7 @@ const faqItems = [
 
 const categoryColors: Record<string, string> = {
   Approvals: "bg-rose-50 text-rose-600",
-  Service: "bg-blue-50 text-blue-600",
+  Service: "bg-emerald-50 text-emerald-600",
   Payments: "bg-amber-50 text-amber-600",
   Timelines: "bg-purple-50 text-purple-600",
   Rejections: "bg-orange-50 text-orange-600",

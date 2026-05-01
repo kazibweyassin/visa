@@ -6,155 +6,152 @@ import { motion, Variants } from "framer-motion";
 const steps = [
   {
     title: "Share your trip profile",
-    description:
-      "Complete a 5-minute form that captures your route, purpose, and timeline.",
+    description: "Complete a 5-minute form that captures your route, purpose, and timeline.",
     icon: FileText,
-    accent: "bg-blue-50 text-blue-600",
-    border: "border-blue-100",
+    number: "01",
   },
   {
     title: "Pay securely",
-    description:
-      "Settle the service fee with card, bank transfer, or mobile money (MTN, Airtel, M-Pesa).",
+    description: "Settle the service fee with card, bank transfer, or mobile money (MTN, Airtel, M-Pesa).",
     icon: Wallet,
-    accent: "bg-amber-50 text-amber-600",
-    border: "border-amber-100",
+    number: "02",
   },
   {
     title: "Document prep & audit",
-    description:
-      "We review your documents, align them with consulate rules, and flag any gaps before submission.",
+    description: "We review your documents, align them with consulate rules, and flag any gaps before submission.",
     icon: ShieldCheck,
-    accent: "bg-emerald-50 text-emerald-600",
-    border: "border-emerald-100",
+    number: "03",
   },
   {
     title: "Consulate appointment",
-    description:
-      "Attend your appointment with a complete packet and clear interview preparation.",
+    description: "Attend your appointment with a complete packet and clear interview preparation.",
     icon: Plane,
-    accent: "bg-purple-50 text-purple-600",
-    border: "border-purple-100",
+    number: "04",
   },
 ];
 
-// ✅ Properly typed variants
 const connectorVariant: Variants = {
   hidden: { scaleX: 0 },
   visible: {
     scaleX: 1,
-    transition: {
-      duration: 0.6,
-      ease: "easeInOut",
-      delay: 0.2,
-    },
+    transition: { duration: 0.8, ease: "easeInOut", delay: 0.3 },
   },
 };
 
 export function HowItWorks() {
   return (
-    <section
-      id="how-it-works"
-      className="relative overflow-hidden bg-white py-20 sm:py-28"
-    >
-      {/* Background overlay */}
-      <div className="pointer-events-none absolute inset-0 bg-[rgba(59,130,246,0.06)]" />
+    <section id="how-it-works" className="relative overflow-hidden py-24 sm:py-32" style={{ background: "var(--bg)" }}>
+      {/* Top separator */}
+      <div className="absolute top-0 left-0 right-0 h-px" style={{ background: "var(--border-1)" }} />
+      <div className="dot-grid pointer-events-none absolute inset-0" />
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
+
         {/* Header */}
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-[11px] font-medium uppercase tracking-[0.35em] text-[var(--gold)]">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mx-auto max-w-xl text-center mb-16"
+        >
+          <span className="eyebrow">
+            <span className="eyebrow-dot" />
             How it works
-          </p>
-          <h2 className="mt-4 text-3xl font-semibold text-slate-900 sm:text-4xl">
-            A guided, verified route to your Schengen visa.
+          </span>
+          <h2
+            className="mt-5 font-black leading-[0.92] tracking-tight"
+            style={{ fontSize: "clamp(2.2rem, 4.5vw, 3rem)", fontFamily: "var(--font-serif)", color: "var(--text-1)" }}
+          >
+            A guided, verified route
+            <br />
+            <span style={{ color: "var(--text-3)", fontStyle: "italic", fontWeight: 700 }}>
+              to your visa.
+            </span>
           </h2>
-          <p className="mt-3 text-base text-slate-500">
-            Every step is designed to reduce mistakes and improve your submission
-            quality.
+          <p className="mt-4 text-sm leading-relaxed" style={{ color: "var(--text-3)" }}>
+            Every step is designed to reduce mistakes and improve your submission quality.
           </p>
-        </div>
+        </motion.div>
 
         {/* Desktop timeline */}
-        <div className="relative mt-16 hidden lg:block">
+        <div className="relative hidden lg:block">
           {/* Connector line */}
           <motion.div
-            className="absolute left-[calc(12.5%+1.5rem)] right-[calc(12.5%+1.5rem)] top-[2.75rem] h-px bg-slate-200"
-            style={{ originX: 0 }} // ✅ critical for correct animation
+            className="absolute top-[2.6rem] h-px"
+            style={{
+              left: "calc(12.5% + 1.5rem)",
+              right: "calc(12.5% + 1.5rem)",
+              background: "var(--border-2)",
+              originX: 0,
+            }}
             variants={connectorVariant}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           />
 
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-4 gap-4">
             {steps.map((step, index) => (
               <motion.div
                 key={step.title}
-                initial={{ opacity: 0, x: -16, scale: 0.98 }}
-                whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.12,
-                  ease: "easeOut",
-                }}
-                className={`flex gap-4 rounded-2xl border ${step.border} bg-white p-5 shadow-sm`}
+                transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+                className="flex flex-col rounded-2xl p-5 transition-all duration-300"
+                style={{ border: "1px solid var(--border-2)", background: "var(--bg-2)" }}
               >
-                {/* Icon */}
-                <div
-                  className={`relative flex h-14 w-14 items-center justify-center rounded-2xl ${step.accent} border ${step.border} shadow-sm`}
-                >
-                  <step.icon className="h-6 w-6" />
-                  <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-[var(--gold)] text-[10px] font-bold text-slate-900 shadow">
+                {/* Icon container with step number */}
+                <div className="relative mb-5 w-fit">
+                  <div
+                    className="flex h-12 w-12 items-center justify-center rounded-xl"
+                    style={{ background: "var(--bg-3)", border: "1px solid var(--border-2)" }}
+                  >
+                    <step.icon className="h-5 w-5" style={{ color: "var(--text-2)" }} />
+                  </div>
+                  <span
+                    className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-black"
+                    style={{ background: "var(--green)", color: "#000" }}
+                  >
                     {index + 1}
                   </span>
                 </div>
 
-                {/* Content */}
-                <div>
-                  <h3 className="text-sm font-semibold text-slate-900">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-xs leading-5 text-slate-500">
-                    {step.description}
-                  </p>
-                </div>
+                {/* Step number label */}
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase mb-2" style={{ color: "var(--text-3)" }}>
+                  {step.number}
+                </span>
+
+                <h3 className="text-sm font-bold" style={{ color: "var(--text-1)" }}>{step.title}</h3>
+                <p className="mt-2 text-xs leading-5" style={{ color: "var(--text-3)" }}>{step.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
 
         {/* Mobile */}
-        <div className="mt-12 space-y-4 lg:hidden">
+        <div className="space-y-3 lg:hidden">
           {steps.map((step, index) => (
             <motion.div
               key={step.title}
-              initial={{ opacity: 0, x: -16 }}
+              initial={{ opacity: 0, x: -12 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{
-                duration: 0.45,
-                delay: index * 0.1,
-              }}
-              className={`flex gap-4 rounded-2xl border ${step.border} bg-white p-5 shadow-sm`}
+              transition={{ duration: 0.45, delay: index * 0.08 }}
+              className="flex gap-4 rounded-2xl p-5"
+              style={{ border: "1px solid var(--border-2)", background: "var(--bg-2)" }}
             >
-              <div
-                className={`relative flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${step.accent} border ${step.border}`}
-              >
-                <step.icon className="h-5 w-5" />
-                <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-[var(--gold)] text-[10px] font-bold text-slate-900">
+              <div className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style={{ background: "var(--bg-3)", border: "1px solid var(--border-2)" }}>
+                <step.icon className="h-5 w-5" style={{ color: "var(--text-2)" }} />
+                <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-black" style={{ background: "var(--green)", color: "#000" }}>
                   {index + 1}
                 </span>
               </div>
-
               <div>
-                <h3 className="text-sm font-semibold text-slate-900">
-                  {step.title}
-                </h3>
-                <p className="mt-1 text-sm leading-5 text-slate-500">
-                  {step.description}
-                </p>
+                <p className="text-[10px] font-bold tracking-[0.18em] uppercase mb-1" style={{ color: "var(--text-3)" }}>{step.number}</p>
+                <h3 className="text-sm font-bold" style={{ color: "var(--text-1)" }}>{step.title}</h3>
+                <p className="mt-1 text-sm leading-5" style={{ color: "var(--text-3)" }}>{step.description}</p>
               </div>
             </motion.div>
           ))}
@@ -162,7 +159,7 @@ export function HowItWorks() {
 
         {/* CTA */}
         <motion.div
-          className="mt-14 text-center"
+          className="mt-12 text-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -170,13 +167,13 @@ export function HowItWorks() {
         >
           <a
             href="/apply"
-            className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[var(--primary)] px-6 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-[var(--secondary)]"
+            className="group inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-bold transition-all hover:-translate-y-0.5"
+            style={{ background: "var(--green)", color: "#000" }}
           >
             Start your application
             <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
           </a>
-
-          <p className="mt-3 text-xs text-slate-400">
+          <p className="mt-3 text-xs" style={{ color: "var(--text-3)" }}>
             Takes 5 minutes. No obligation until payment.
           </p>
         </motion.div>
