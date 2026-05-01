@@ -163,26 +163,6 @@ function ResultPill({
 /* ─────────────────────────────────────────
    MAIN
 ───────────────────────────────────────── */
-
-// Helper function to determine visa type and get info
-function getVisaRoute(fromCountry: string, toCountry: string): string {
-  if (toCountry === "Uganda") {
-    return "uganda_tourist";
-  }
-  return "schengen";
-}
-
-// Helper to get visa info based on route
-function getVisaInfo(fromCountry: string, toCountry: string) {
-  const route = getVisaRoute(fromCountry, toCountry);
-  const info = visaRoutes[route];
-  
-  return {
-    ...info,
-    icon: route === "uganda_tourist" ? "🇺🇬" : "🌍",
-  };
-}
-
 export function VisaChecker() {
   const [fromCountry, setFromCountry] = useState("");
   const [toCountry, setToCountry] = useState("");
@@ -436,23 +416,33 @@ export function VisaChecker() {
                       className="text-lg font-black text-white leading-snug"
                       style={{ fontFamily: "'Georgia', serif" }}
                     >
-                      {getVisaInfo(fromCountry, toCountry).visaType}
+                      {getVisaInfo(fromCountry, toCountry)?.info.visaType || visaResult.visaType}
                     </p>
                   </motion.div>
 
                   {/* Stat pills */}
                   <div className="space-y-2 flex-1">
-                    {(() => {
-                      const visaInfo = getVisaInfo(fromCountry, toCountry);
-                      return (
-                        <>
-                          <ResultPill icon={Clock} label="Processing" value={visaInfo.processingTime} delay={0.15} />
-                          <ResultPill icon={BadgePercent} label="Approval rate" value={visaInfo.approvalRate} accent delay={0.2} />
-                          <ResultPill icon={Stamp} label="Our service fee" value={visaInfo.serviceFee} accent delay={0.25} />
-                          <ResultPill icon={MapPin} label="Your passport" value={fromCountry} delay={0.3} />
-                        </>
-                      );
-                    })()}
+                    <ResultPill 
+                      icon={Clock} 
+                      label="Processing" 
+                      value={getVisaInfo(fromCountry, toCountry)?.info.processingTime || visaResult.processingTime} 
+                      delay={0.15} 
+                    />
+                    <ResultPill 
+                      icon={BadgePercent} 
+                      label="Approval rate" 
+                      value={getVisaInfo(fromCountry, toCountry)?.info.approvalRate || visaResult.approvalRate} 
+                      accent 
+                      delay={0.2} 
+                    />
+                    <ResultPill 
+                      icon={Stamp} 
+                      label="Our service fee" 
+                      value={getVisaInfo(fromCountry, toCountry)?.info.serviceFee || visaResult.serviceFee} 
+                      accent 
+                      delay={0.25} 
+                    />
+                    <ResultPill icon={MapPin} label="Your passport" value={fromCountry} delay={0.3} />
                   </div>
 
                   {/* Advisory note */}
@@ -464,7 +454,7 @@ export function VisaChecker() {
                   >
                     <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-400" />
                     <p className="text-[11px] leading-relaxed text-amber-300/80">
-                      {getVisaInfo(fromCountry, toCountry).notes}
+                      {getVisaInfo(fromCountry, toCountry)?.info.notes || visaResult.bookingNote}
                     </p>
                   </motion.div>
 
