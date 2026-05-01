@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/lib/generated/prisma";
 import { schengenDocumentRequirements, ugandaTouristDocumentRequirements } from "../lib/document-requirements";
 
 const prisma = new PrismaClient();

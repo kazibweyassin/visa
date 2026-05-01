@@ -23,6 +23,8 @@ import {
   pricingPlans,
   schengenCountries,
   travelPurposes,
+  ugandaTouristCountries,
+  visaRoutes,
 } from "@/lib/visa-data";
 
 /* ── Types ── */
@@ -427,10 +429,18 @@ export function ApplyForm() {
                         >
                           <div className="grid gap-5 sm:grid-cols-2">
                             <Field label="Citizenship">
-                              <StyledSelect value={formState.citizenship} onChange={set("citizenship")} options={africanCountries} placeholder="Your country" />
+                              <StyledSelect value={formState.citizenship} onChange={set("citizenship")} options={[...africanCountries, ...ugandaTouristCountries]} placeholder="Your country" />
                             </Field>
                             <Field label="Destination">
-                              <StyledSelect value={formState.destination} onChange={set("destination")} options={schengenCountries} placeholder="Schengen country" />
+                              {(() => {
+                                // Show Uganda as destination for Uganda-source countries, otherwise show Schengen
+                                const destinationOptions = ugandaTouristCountries.includes(formState.citizenship)
+                                  ? ["Uganda", ...schengenCountries]
+                                  : schengenCountries;
+                                return (
+                                  <StyledSelect value={formState.destination} onChange={set("destination")} options={destinationOptions} placeholder="Select destination" />
+                                );
+                              })()}
                             </Field>
                             <Field label="Purpose of travel">
                               <StyledSelect value={formState.purpose} onChange={set("purpose")} options={travelPurposes} placeholder="Select purpose" />

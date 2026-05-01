@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -10,7 +10,7 @@ import { schengenDocumentRequirements } from "@/lib/document-requirements";
 import { DocumentChecklist } from "@/components/modules/document-checklist";
 import { DocumentUpload } from "@/components/modules/document-upload";
 
-export default function PreparePage() {
+function PrepareContent() {
   const searchParams = useSearchParams();
   const [selectedRequirement, setSelectedRequirement] =
     useState<DocumentRequirement | null>(null);
@@ -25,7 +25,7 @@ export default function PreparePage() {
     const saved = localStorage.getItem("uploadedDocs");
     if (saved) {
       try {
-        const docs = new Map(JSON.parse(saved));
+        const docs = new Map<string, any>(JSON.parse(saved));
         setUploadedDocs(docs);
       } catch (e) {
         console.error("Failed to load saved docs", e);
@@ -193,5 +193,13 @@ export default function PreparePage() {
         onUploadSuccess={handleUploadSuccess}
       />
     </main>
+  );
+}
+
+export default function PreparePage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PrepareContent />
+    </Suspense>
   );
 }
