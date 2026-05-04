@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
   },
-  metadataBase: new URL("https://ailesglobal.com"),
+  metadataBase: new URL(siteUrl),
   alternates: { canonical: "/" },
   keywords: [
     "Schengen visa",
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     description:
       "End-to-end visa support built for East African passport holders.",
     type: "website",
-    url: "https://ailesglobal.com",
+    url: siteUrl,
     images: [{ url: "/og-image.svg", width: 1200, height: 630, alt: "Ailes Global" }],
   },
   twitter: {
@@ -63,7 +64,7 @@ export default function RootLayout({
         <meta property="og:description" content="End-to-end visa support built for East African passport holders." />
         <meta property="og:image" content="/og-image.svg" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ailesglobal.com" />
+        <meta property="og:url" content={siteUrl} />
       </head>
       <body
         className="min-h-full flex flex-col"

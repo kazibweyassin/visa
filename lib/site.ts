@@ -6,3 +6,5 @@ export const siteConfig = {
   ctaLabel: "Start preparation",
   secondaryCtaLabel: "Check requirements",
 };
+
+export const siteUrl = "https://ailesglobal.com";
