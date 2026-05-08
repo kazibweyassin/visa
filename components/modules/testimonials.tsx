@@ -50,7 +50,7 @@ export function Testimonials() {
         className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-full"
         style={{
           width: 600, height: 400,
-          background: "radial-gradient(circle, rgba(34,197,94,0.05) 0%, transparent 70%)",
+          background: "rgba(30,95,184,0.03)",
         }}
       />
 
@@ -169,7 +169,7 @@ export function Testimonials() {
                   className="flex items-center gap-1.5 rounded-full px-3 py-1.5 shrink-0"
                   style={{
                     background: "var(--green-muted)",
-                    border: "1px solid rgba(34,197,94,0.15)",
+                    border: "1px solid rgba(30,95,184,0.15)",
                   }}
                 >
                   <CheckCircle2 className="h-3 w-3 shrink-0" style={{ color: "var(--green)" }} />
@@ -182,7 +182,7 @@ export function Testimonials() {
               {/* Hover accent */}
               <div
                 className="absolute bottom-0 left-5 right-5 h-px rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ background: "linear-gradient(to right, transparent, var(--green), transparent)" }}
+                style={{ background: "var(--green-muted)" }}
               />
             </motion.article>
           ))}

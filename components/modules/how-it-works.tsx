@@ -112,7 +112,7 @@ export function HowItWorks() {
                   </div>
                   <span
                     className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-black"
-                    style={{ background: "var(--green)", color: "#000" }}
+                    style={{ background: "var(--green)", color: "#fff" }}
                   >
                     {index + 1}
                   </span>
@@ -144,7 +144,7 @@ export function HowItWorks() {
             >
               <div className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-xl" style={{ background: "var(--bg-3)", border: "1px solid var(--border-2)" }}>
                 <step.icon className="h-5 w-5" style={{ color: "var(--text-2)" }} />
-                <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-black" style={{ background: "var(--green)", color: "#000" }}>
+                <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-black" style={{ background: "var(--green)", color: "#fff" }}>
                   {index + 1}
                 </span>
               </div>
@@ -157,25 +157,43 @@ export function HowItWorks() {
           ))}
         </div>
 
-        {/* CTA */}
+        {/* Visual & CTA */}
         <motion.div
-          className="mt-12 text-center"
+          className="mt-16 grid lg:grid-cols-2 gap-8 items-center"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
         >
-          <a
-            href="/apply"
-            className="group inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-bold transition-all hover:-translate-y-0.5"
-            style={{ background: "var(--green)", color: "#000" }}
-          >
-            Start your application
-            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-          </a>
-          <p className="mt-3 text-xs" style={{ color: "var(--text-3)" }}>
-            Takes 5 minutes. No obligation until payment.
-          </p>
+          {/* Image */}
+          <div className="relative rounded-2xl overflow-hidden h-64 lg:h-80 hidden lg:block order-last">
+            <img
+              src="/flags.jpg"
+              alt="Rows of international visa flags"
+              className="h-full w-full object-cover object-[72%_center]"
+            />
+            <div style={{ background: "rgba(30,95,184,0.14)" }} className="absolute inset-0" />
+            <div className="absolute left-4 top-4 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em]" style={{ background: "rgba(250,249,247,0.82)", color: "var(--text-1)" }}>
+              Visa destinations
+            </div>
+          </div>
+          {/* CTA */}
+          <div
+           className="text-center lg:text-left">
+            <h3 className="text-lg font-bold" style={{ color: "var(--text-1)" }}>Get started in 5 minutes</h3>
+            <p className="mt-3 text-sm" style={{ color: "var(--text-3)" }}>No hidden fees. No surprises. Just straightforward visa guidance backed by our professional team.</p>
+            <a
+              href="/apply"
+              className="group inline-flex h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-bold transition-all hover:-translate-y-0.5 mt-6"
+              style={{ background: "var(--green)", color: "#000" }}
+            >
+              Start your application
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+            </a>
+            <p className="mt-3 text-xs" style={{ color: "var(--text-3)" }}>
+              Takes 5 minutes. No obligation until payment.
+            </p>
+          </div>
         </motion.div>
       </div>
     </section>

@@ -43,7 +43,7 @@ const signals = [
 
 export function TrustBar() {
   return (
-    <section className="bg-[var(--surface)] py-6">
+    <section className="bg-[var(--bg)] py-6">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-2 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm sm:grid-cols-2 lg:grid-cols-5">
           {signals.map((signal, index) => (

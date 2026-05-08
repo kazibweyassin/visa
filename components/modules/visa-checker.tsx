@@ -65,10 +65,10 @@ function NiceSelect({
         <select
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full appearance-none rounded-xl py-3 pl-9 pr-8 text-sm outline-none transition-all duration-200"
+          className="w-full appearance-none rounded-xl py-3 pl-9 pr-8 text-sm font-medium outline-none transition-all duration-200"
           style={{
             background: "var(--bg-3)",
-            border: `1px solid ${hasValue ? "rgba(34,197,94,0.25)" : "var(--border-2)"}`,
+            border: `1px solid ${hasValue ? "rgba(30,95,184,0.25)" : "var(--border-2)"}`,
             color: hasValue ? "var(--text-1)" : "var(--text-3)",
           }}
         >
@@ -106,22 +106,22 @@ function ResultPill({ icon: Icon, label, value, accent, delay }: {
       className="flex items-center gap-3 rounded-xl px-4 py-3"
       style={{
         background: accent ? "var(--green-muted)" : "var(--bg-3)",
-        border: `1px solid ${accent ? "rgba(34,197,94,0.15)" : "var(--border-2)"}`,
+        border: `1px solid ${accent ? "rgba(30,95,184,0.15)" : "var(--border-2)"}`,
       }}
     >
       <div
         className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg"
         style={{
-          background: accent ? "rgba(34,197,94,0.15)" : "var(--bg-4)",
+          background: accent ? "rgba(30,95,184,0.15)" : "var(--bg-4)",
         }}
       >
         <Icon className="h-3.5 w-3.5" style={{ color: accent ? "var(--green)" : "var(--text-3)" }} />
       </div>
       <div className="flex min-w-0 flex-1 items-center justify-between gap-3">
-        <span className="text-[10px] font-bold uppercase tracking-[0.14em] shrink-0" style={{ color: "var(--text-3)" }}>
+        <span className="text-[10px] font-bold uppercase tracking-[0.15em] shrink-0" style={{ color: "var(--text-2)" }}>
           {label}
         </span>
-        <span className="text-sm font-bold truncate text-right" style={{ color: accent ? "var(--green)" : "var(--text-1)" }}>
+        <span className="text-sm font-bold truncate text-right tracking-wide" style={{ color: accent ? "var(--green)" : "var(--text-1)" }}>
           {value}
         </span>
       </div>
@@ -155,7 +155,7 @@ export function VisaChecker() {
       <div className="dot-grid pointer-events-none absolute inset-0" />
 
       {/* Glow */}
-      <div className="pointer-events-none absolute -top-32 -left-32 rounded-full" style={{ width: 500, height: 500, background: "radial-gradient(circle, rgba(34,197,94,0.06) 0%, transparent 70%)" }} />
+      <div className="pointer-events-none absolute -top-32 -left-32 rounded-full" style={{ width: 500, height: 500, background: "rgba(30,95,184,0.03)" }} />
 
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
 
@@ -174,7 +174,7 @@ export function VisaChecker() {
             </span>
             <h2
               className="mt-5 font-black leading-[0.92] tracking-tight"
-              style={{ fontSize: "clamp(2.4rem, 5vw, 3.5rem)", fontFamily: "var(--font-serif)", color: "var(--text-1)" }}
+              style={{ fontSize: "clamp(2.4rem, 5vw, 3.5rem)", fontFamily: "var(--font-serif)", color: "var(--text-1)", fontWeight: 900 }}
             >
               Know before
               <br />
@@ -199,7 +199,7 @@ export function VisaChecker() {
             style={{ border: "1px solid var(--border-2)", background: "var(--bg-2)" }}
           >
             <div className="mb-7">
-              <p className="text-base font-semibold" style={{ color: "var(--text-1)" }}>Where are you travelling?</p>
+              <p className="text-base font-bold tracking-wide" style={{ color: "var(--text-1)" }}>Where are you travelling?</p>
               <p className="mt-1 text-sm" style={{ color: "var(--text-3)" }}>Select your passport and destination.</p>
             </div>
 
@@ -275,9 +275,9 @@ export function VisaChecker() {
                 className="group relative w-full overflow-hidden rounded-xl py-3.5 text-sm font-bold transition-all duration-300"
                 style={{
                   background: bothSelected ? "var(--green)" : "var(--bg-3)",
-                  color: bothSelected ? "#000" : "var(--text-3)",
+                  color: bothSelected ? "#fff" : "var(--text-3)",
                   cursor: bothSelected ? "pointer" : "not-allowed",
-                  boxShadow: bothSelected ? "0 0 30px rgba(34,197,94,0.15)" : "none",
+                  boxShadow: bothSelected ? "0 0 30px rgba(30,95,184,0.15)" : "none",
                 }}
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
@@ -285,7 +285,7 @@ export function VisaChecker() {
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                 </span>
                 {bothSelected && (
-                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12" />
+                  null
                 )}
               </motion.button>
 
@@ -314,7 +314,7 @@ export function VisaChecker() {
                 <motion.div key="result" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="flex flex-col h-full">
                   <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} className="mb-5">
                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-2" style={{ color: "var(--text-3)" }}>Visa Summary</p>
-                    <h3 className="text-xl font-black leading-tight tracking-tight" style={{ fontFamily: "var(--font-serif)", color: "var(--text-1)" }}>
+                    <h3 className="text-xl font-black leading-tight tracking-tight" style={{ fontFamily: "var(--font-serif)", color: "var(--text-1)", fontSize: "1.35rem" }}>
                       {getVisaInfo(fromCountry, toCountry)?.icon} {fromCountry}
                       <span className="font-normal italic mx-2" style={{ color: "var(--text-3)" }}>to</span>
                       {toCountry}
@@ -327,10 +327,10 @@ export function VisaChecker() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.1 }}
                     className="mb-4 rounded-xl p-4"
-                    style={{ background: "var(--green-muted)", border: "1px solid rgba(34,197,94,0.15)" }}
+                    style={{ background: "var(--green-muted)", border: "1px solid rgba(30,95,184,0.2)" }}
                   >
                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5" style={{ color: "var(--green)", opacity: 0.7 }}>Visa Required</p>
-                    <p className="text-base font-black leading-snug" style={{ fontFamily: "var(--font-serif)", color: "var(--text-1)" }}>
+                    <p className="text-base font-black leading-snug" style={{ fontFamily: "var(--font-serif)", color: "var(--text-1)", fontSize: "1.1rem" }}>
                       {getVisaInfo(fromCountry, toCountry)?.info.visaType || visaResult.visaType}
                     </p>
                   </motion.div>
@@ -432,7 +432,7 @@ export function VisaChecker() {
                         <motion.div
                           whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                           className="group flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold transition-all"
-                          style={{ background: "var(--text-1)", color: "#0a0a08" }}
+                          style={{ background: "var(--text-1)", color: "#fff" }}
                         >
                           Start my application
                           <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -465,7 +465,7 @@ export function VisaChecker() {
                         <div className="h-1 w-3/4 rounded-full" style={{ background: "var(--border-1)" }} />
                       </div>
                     </div>
-                    <div className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-lg" style={{ background: "var(--green-muted)", border: "1px solid rgba(34,197,94,0.2)" }}>
+                    <div className="absolute -right-2 -top-2 flex h-7 w-7 items-center justify-center rounded-lg" style={{ background: "var(--green-muted)", border: "1px solid rgba(30,95,184,0.2)" }}>
                       <Stamp className="h-3.5 w-3.5" style={{ color: "var(--green)" }} />
                     </div>
                   </div>

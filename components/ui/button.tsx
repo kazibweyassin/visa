@@ -12,8 +12,8 @@ type ButtonProps = ComponentPropsWithoutRef<typeof Link> & {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    "inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[var(--primary)] text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[var(--secondary)]",
-  secondary: "border border-[var(--muted)] bg-[var(--muted)] text-[var(--primary)] hover:opacity-95",
+    "inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[var(--green)] text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[var(--green-dim)]",
+  secondary: "border border-[var(--border-2)] bg-[var(--bg-3)] text-[var(--green)] hover:opacity-95",
 };
 
 export function Button({ variant = "primary", className, ...props }: ButtonProps) {

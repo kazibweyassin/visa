@@ -6,10 +6,10 @@ export default function FAQPage() {
   return (
     <>
       <SiteHeader />
-      <main className="relative overflow-hidden bg-[var(--background)] text-[var(--foreground)]">
+      <main className="relative overflow-hidden bg-[var(--bg)] text-[var(--text-2)]">
         <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="mb-10">
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--gold)]">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--amber)]">
               FAQ
             </p>
             <h1 className="mt-4 text-3xl font-semibold text-slate-950 sm:text-4xl">

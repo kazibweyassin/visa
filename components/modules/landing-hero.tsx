@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { Globe, Plane, Flag, ArrowUpRight } from "lucide-react";
+import { Globe, Plane, Flag, ArrowUpRight, Lock, ClipboardCheck, ShieldCheck } from "lucide-react";
 
 /* ─────────────────────────────────────────
    DATA
@@ -40,6 +40,8 @@ const TICKER_ITEMS = [
   "Schengen Visa", "Ireland Study", "Netherlands Visa",
   "France Tourist", "Family Reunification",
 ];
+
+const HERO_PHOTO = "/banner.jpg";
 
 /* ─────────────────────────────────────────
    TICKER
@@ -140,7 +142,7 @@ function CustomSelect({
                   className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-left transition-colors"
                   style={{
                     color: value === opt.label ? "var(--text-1)" : "var(--text-2)",
-                    background: value === opt.label ? "rgba(34,197,94,0.08)" : "transparent",
+                    background: value === opt.label ? "rgba(30,95,184,0.08)" : "transparent",
                   }}
                   onMouseEnter={(e) => {
                     if (value !== opt.label) (e.currentTarget as HTMLButtonElement).style.background = "var(--bg-3)";
@@ -193,6 +195,27 @@ export default function LandingHero() {
       className="relative min-h-screen overflow-hidden flex flex-col"
       style={{ background: "var(--bg)" }}
     >
+      {/* Hero photo backdrop */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[40%] overflow-hidden lg:hidden">
+        <img
+          src={HERO_PHOTO}
+          alt="Traveler checking flight board in airport terminal"
+          className="h-full w-full object-cover object-[70%_center]"
+          loading="eager"
+        />
+        <div className="absolute inset-0" style={{ background: "rgba(250,249,247,0.7)" }} />
+      </div>
+
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[58%] overflow-hidden lg:block">
+        <img
+          src={HERO_PHOTO}
+          alt="Traveler checking flight board in airport terminal"
+          className="h-full w-full object-cover object-[72%_center]"
+          loading="eager"
+        />
+        <div className="absolute inset-0" style={{ background: "rgba(250,249,247,0.42)" }} />
+      </div>
+
       {/* Grain texture */}
       <div
         className="pointer-events-none absolute inset-0 z-10 opacity-[0.028]"
@@ -206,18 +229,18 @@ export default function LandingHero() {
       <div className="pointer-events-none absolute inset-0 z-0">
         <div
           className="absolute rounded-full"
-          style={{
-            top: "-15%", left: "-8%",
-            width: 560, height: 560,
-            background: "radial-gradient(circle, rgba(34,197,94,0.07) 0%, transparent 70%)",
-          }}
+            style={{
+              top: "-15%", left: "-8%",
+              width: 560, height: 560,
+              background: "rgba(30,95,184,0.04)",
+            }}
         />
         <div
           className="absolute rounded-full"
           style={{
             bottom: "-10%", right: "0%",
             width: 480, height: 480,
-            background: "radial-gradient(circle, rgba(245,158,11,0.04) 0%, transparent 70%)",
+            background: "rgba(245,158,11,0.03)",
           }}
         />
       </div>
@@ -268,8 +291,8 @@ export default function LandingHero() {
               }}
             >
               The world<br />
-              <span style={{ color: "var(--text-3)", fontStyle: "italic" }}>is open</span><br />
-              <span style={{ color: "var(--green)" }}>for you.</span>
+              <span style={{ color: "#2563eb", fontStyle: "italic" }}>is open</span><br />
+              <span style={{ color: "var(--amber)" }}>for you.</span>
             </motion.h1>
           </div>
 
@@ -322,7 +345,7 @@ export default function LandingHero() {
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 className="flex items-center gap-2.5 px-7 py-3.5 rounded-full text-sm font-bold tracking-wide transition-colors"
-                style={{ background: "var(--green)", color: "#000" }}
+                style={{ background: "var(--green)", color: "#fff" }}
               >
                 Start application
                 <ArrowUpRight className="w-4 h-4" />
@@ -353,11 +376,11 @@ export default function LandingHero() {
               style={{
                 background: "var(--bg-2)",
                 border: "1px solid var(--border-2)",
-                boxShadow: "0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(34,197,94,0.04)",
+                boxShadow: "0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(30,95,184,0.04)",
               }}
             >
-              {/* Top accent */}
-              <div className="h-px w-full" style={{ background: "linear-gradient(90deg, transparent, var(--green), transparent)" }} />
+              {/* Top accent (flat) */}
+              <div className="h-px w-full" style={{ background: "var(--green-muted)" }} />
 
               <div className="p-7 sm:p-9">
                 <div className="mb-7">
@@ -429,9 +452,9 @@ export default function LandingHero() {
                     className="w-full h-12 mt-1 rounded-xl text-sm font-bold tracking-wide flex items-center justify-center gap-2.5 transition-all"
                     style={{
                       background: canSubmit ? "var(--green)" : "var(--bg-3)",
-                      color: canSubmit ? "#000" : "var(--text-3)",
+                      color: canSubmit ? "#fff" : "var(--text-3)",
                       cursor: canSubmit ? "pointer" : "not-allowed",
-                      boxShadow: canSubmit ? "0 0 40px rgba(34,197,94,0.2)" : "none",
+                      boxShadow: canSubmit ? "0 0 40px rgba(30,95,184,0.2)" : "none",
                     }}
                   >
                     {isSubmitting ? (
@@ -467,11 +490,20 @@ export default function LandingHero() {
               className="mt-4 flex items-center justify-center gap-5 text-[10px] tracking-wide"
               style={{ color: "var(--text-3)" }}
             >
-              <span>🔒 Encrypted</span>
+              <span className="inline-flex items-center gap-1.5">
+                <Lock className="h-3.5 w-3.5" style={{ color: "var(--green)" }} />
+                Encrypted
+              </span>
               <span className="w-px h-3" style={{ background: "var(--border-1)" }} />
-              <span>📋 Human-reviewed</span>
+              <span className="inline-flex items-center gap-1.5">
+                <ClipboardCheck className="h-3.5 w-3.5" style={{ color: "var(--green)" }} />
+                Human-reviewed
+              </span>
               <span className="w-px h-3" style={{ background: "var(--border-1)" }} />
-              <span>✅ Consulate-ready</span>
+              <span className="inline-flex items-center gap-1.5">
+                <ShieldCheck className="h-3.5 w-3.5" style={{ color: "var(--green)" }} />
+                Consulate-ready
+              </span>
             </motion.div>
           </div>
         </motion.div>

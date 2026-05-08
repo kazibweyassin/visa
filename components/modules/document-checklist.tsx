@@ -73,7 +73,8 @@ export function DocumentChecklist({
             initial={{ width: 0 }}
             animate={{ width: `${progressPercent}%` }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="h-full bg-gradient-to-r from-emerald-500 to-teal-400"
+            className="h-full"
+            style={{ background: "var(--green)" }}
           />
         </div>
         <p className="text-xs text-white/40">{progressPercent}% complete</p>

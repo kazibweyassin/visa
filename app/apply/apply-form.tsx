@@ -237,20 +237,53 @@ export function ApplyForm() {
     e.preventDefault();
     if (!validateStep(3)) return;
     setIsSubmitting(true);
-    await new Promise((r) => setTimeout(r, 900));
-    setSuccessReference(`${Math.floor(100000 + Math.random() * 900000)}`);
-    setFormState(initialForm);
-    setSelectedPlan("");
-    setAcceptedTerms(false);
-    setCurrentStep(1);
-    setIsSubmitting(false);
+    try {
+      const payload = {
+        citizenship: formState.citizenship,
+        destination: formState.destination,
+        purpose: formState.purpose,
+        travelStart: formState.travelStart,
+        travelEnd: formState.travelEnd,
+        fullName: formState.fullName,
+        email: formState.email,
+        phone: formState.phone,
+        passportNumber: formState.passportNumber,
+        dateOfBirth: formState.dateOfBirth,
+        selectedPlan,
+      };
+
+      const res = await fetch('/api/applications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setFormError(data?.error || 'Failed to submit application');
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Show a lightweight reference to the user
+      const ref = data?.application?.id || `${Math.floor(100000 + Math.random() * 900000)}`;
+      setSuccessReference(ref);
+      setFormState(initialForm);
+      setSelectedPlan("");
+      setAcceptedTerms(false);
+      setCurrentStep(1);
+    } catch (err) {
+      console.error('Submit application error:', err);
+      setFormError('Submission failed. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <main className="min-h-screen bg-[#faf9f7] px-4 py-12 sm:px-6 lg:px-8">
       {/* Dot grid */}
-      <div className="pointer-events-none fixed inset-0 opacity-[0.35]"
-        style={{ backgroundImage: `radial-gradient(circle, #d6d3ce 1px, transparent 1px)`, backgroundSize: "28px 28px" }} />
+      <div className="pointer-events-none fixed inset-0 opacity-[0.35]" style={{ backgroundImage: "none" }} />
 
       <div className="relative mx-auto max-w-5xl">
         {/* Top nav */}
@@ -260,7 +293,7 @@ export function ApplyForm() {
             Back to home
           </Link>
           <div className="flex items-center gap-2">
-            <div className="h-7 w-7 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center shadow-sm">
+            <div className="h-7 w-7 rounded-lg flex items-center justify-center shadow-sm" style={{ background: "var(--green)", color: "white" }}>
               <Globe2 className="h-3.5 w-3.5 text-white" />
             </div>
             <span className="text-sm font-bold text-stone-900 tracking-tight">AILES Global</span>
@@ -297,7 +330,7 @@ export function ApplyForm() {
                     >
                       <div className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-xs font-bold transition-all ${
                         done
-                          ? "bg-emerald-500 text-white"
+                          ? "bg-emerald-500"
                           : active
                           ? "bg-stone-900 text-white"
                           : "bg-stone-200 text-stone-400"
@@ -568,7 +601,6 @@ export function ApplyForm() {
                         >
                           Continue
                           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                          <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-500 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12" />
                         </motion.button>
                       ) : (
                         <motion.button
@@ -576,7 +608,7 @@ export function ApplyForm() {
                           disabled={isSubmitting}
                           whileHover={!isSubmitting ? { scale: 1.02 } : {}}
                           whileTap={!isSubmitting ? { scale: 0.98 } : {}}
-                          className="group flex items-center gap-2 rounded-full bg-emerald-500 px-7 py-2.5 text-sm font-bold text-white shadow-md shadow-emerald-500/25 hover:bg-emerald-600 disabled:opacity-60 disabled:cursor-not-allowed transition-all"
+                          className="group flex items-center gap-2 rounded-full bg-emerald-500 px-7 py-2.5 text-sm font-bold shadow-md shadow-emerald-500/25 hover:bg-emerald-600 disabled:opacity-60 disabled:cursor-not-allowed transition-all" style={{ color: "#fff" }}
                         >
                           {isSubmitting ? (
                             <>

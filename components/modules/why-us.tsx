@@ -87,16 +87,16 @@ function Cell({ value }: { value: CellValue }) {
 
 export function WhyUs() {
   return (
-    <section id="why-us" className="relative overflow-hidden bg-[var(--surface)] py-20 sm:py-28">
-      <div className="pointer-events-none absolute inset-0 bg-[rgba(120,119,198,0.08)]" />
+    <section id="why-us" className="relative overflow-hidden bg-[var(--bg)] py-20 sm:py-28">
+      <div className="pointer-events-none absolute inset-0" style={{ background: "var(--green-muted)" }} />
 
       <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-[var(--primary)]">
+          <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-[var(--green)]">
             Why {siteConfig.name}
           </p>
-          <h2 className="mt-4 text-3xl font-semibold text-[var(--foreground)] sm:text-4xl">
+          <h2 className="mt-4 text-3xl font-semibold text-[var(--text-1)] sm:text-4xl">
             A modern alternative to going it alone or using platforms built for Western applicants.
           </h2>
         </div>
@@ -117,11 +117,11 @@ export function WhyUs() {
             {["On your own", siteConfig.name, "Western platforms"].map((col, i) => (
               <div
                 key={col}
-                className={`px-3 py-4 text-center text-xs font-semibold uppercase tracking-wider ${i === 1 ? "text-[var(--primary)]" : "text-slate-400"}`}
+                className={`px-3 py-4 text-center text-xs font-semibold uppercase tracking-wider ${i === 1 ? "text-[var(--green)]" : "text-slate-400"}`}
               >
                 {col}
                 {i === 1 && (
-                  <span className="ml-1.5 rounded-full bg-[var(--primary)] px-1.5 py-0.5 text-[9px] font-bold text-white">US</span>
+                  <span className="ml-1.5 rounded-full bg-[var(--green)] px-1.5 py-0.5 text-[9px] font-bold text-white">US</span>
                 )}
               </div>
             ))}

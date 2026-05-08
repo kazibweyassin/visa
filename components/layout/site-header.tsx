@@ -55,7 +55,7 @@ export function SiteHeader() {
                 className="text-[1.35rem] font-black tracking-[-0.03em] text-stone-900 leading-none transition-colors duration-200 group-hover:text-stone-700"
                 style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
               >
-                Ailes<span className="text-emerald-500">.</span>
+                Ailes<span style={{ color: "var(--green)" }}>.</span>
               </span>
               <span
                 className="text-[0.62rem] font-semibold tracking-[0.3em] uppercase text-stone-400 transition-colors duration-200 group-hover:text-stone-500"
@@ -99,19 +99,19 @@ export function SiteHeader() {
                 href="https://wa.me/256704833021"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 text-[13px] font-medium text-gray-600 hover:border-gray-300 hover:text-gray-900 hover:bg-gray-50 transition-all duration-200"
+                className="flex items-center gap-2 px-4 py-2 rounded-full border border-[rgba(30,95,184,0.12)] text-[13px] font-medium text-[var(--green-dim)] hover:border-[rgba(30,95,184,0.16)] hover:text-[var(--text-1)] hover:bg-[var(--bg-4)] transition-all duration-200"
               >
-                <MessageCircle className="w-3.5 h-3.5 text-emerald-500" />
+                <MessageCircle className="w-3.5 h-3.5 text-[var(--green)]" />
                 Talk to advisor
               </Link>
 
               <Link
                 href="/apply"
-                className="group relative flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-[13px] font-semibold rounded-full overflow-hidden transition-all duration-200 hover:bg-gray-800 hover:shadow-lg hover:shadow-gray-900/20"
+                className="group relative flex items-center gap-2 px-5 py-2.5 bg-[var(--green)] text-[13px] font-semibold rounded-full overflow-hidden transition-all duration-200 hover:bg-[var(--green-dim)] hover:shadow-lg hover:shadow-[rgba(30,95,184,0.12)]" style={{ color: "#fff" }}
               >
                 <span className="relative z-10">Start Application</span>
                 <ArrowUpRight className="w-3.5 h-3.5 relative z-10 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                <span className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12" />
+                {/* sheen removed to avoid gradients */}
               </Link>
             </div>
 
@@ -175,6 +175,33 @@ export function SiteHeader() {
                   </motion.div>
                 ))}
 
+                <div className="px-4 pt-4 pb-2">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+                    Policies
+                  </p>
+                </div>
+
+                {[
+                  { label: "Privacy Policy", href: "/privacy" },
+                  { label: "Cookie Policy", href: "/cookie-policy" },
+                ].map((link, i) => (
+                  <motion.div
+                    key={link.label}
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: (navLinks.length + i) * 0.04 + 0.06 }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setMenuOpen(false)}
+                      className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-[14px] font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                    >
+                      {link.label}
+                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300" />
+                    </Link>
+                  </motion.div>
+                ))}
+
                 {/* Mobile CTAs */}
                 <motion.div
                   initial={{ opacity: 0, y: 8 }}
@@ -187,15 +214,15 @@ export function SiteHeader() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors"
+                    className="flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl border border-[rgba(30,95,184,0.12)] text-sm font-medium text-[var(--green-dim)] hover:bg-[var(--bg-4)] transition-colors"
                   >
-                    <MessageCircle className="w-4 h-4 text-emerald-500" />
+                    <MessageCircle className="w-4 h-4 text-[var(--green)]" />
                     Advisor
                   </Link>
                   <Link
                     href="/apply"
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-colors"
+                    className="flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl bg-[var(--green)] text-sm font-semibold hover:bg-[var(--green-dim)] transition-colors" style={{ color: "#000" }}
                   >
                     Apply now
                     <ArrowUpRight className="w-3.5 h-3.5" />

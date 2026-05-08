@@ -167,7 +167,7 @@ export function DocumentUpload({
                 />
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="mt-4 inline-block rounded-lg bg-emerald-500/20 border border-emerald-500/30 px-4 py-2 text-xs font-semibold text-emerald-400 hover:bg-emerald-500/30 transition-colors"
+                  className="mt-4 inline-block rounded-lg bg-emerald-500/20 border border-emerald-500/30 px-4 py-2 text-xs font-semibold text-emerald-400 hover:bg-emerald-500/30 transition-colors" style={{ color: "#fff" }}
                 >
                   Choose File
                 </button>
@@ -236,7 +236,7 @@ export function DocumentUpload({
             <button
               onClick={handleUpload}
               disabled={!selectedFile || isUploading}
-              className="flex-1 rounded-lg bg-emerald-500 px-4 py-3 text-sm font-semibold text-white hover:bg-emerald-400 disabled:bg-emerald-500/50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+              className="flex-1 rounded-lg bg-emerald-500 px-4 py-3 text-sm font-semibold hover:bg-emerald-400 disabled:bg-emerald-500/50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2" style={{ color: "#fff" }}
             >
               {isUploading ? (
                 <>

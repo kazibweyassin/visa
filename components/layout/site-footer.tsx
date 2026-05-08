@@ -35,6 +35,8 @@ const quickLinks = [
   { label: "How it Works", href: "#how-it-works" },
   { label: "Pricing", href: "/pricing" },
   { label: "FAQ", href: "/faq" },
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Cookie Policy", href: "/cookie-policy" },
 ];
 
 const services = [
@@ -60,8 +62,7 @@ export function SiteFooter() {
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.3]"
         style={{
-          backgroundImage: `radial-gradient(circle, #d6d3ce 1px, transparent 1px)`,
-          backgroundSize: "28px 28px",
+          backgroundImage: "none",
         }}
       />
 
@@ -90,20 +91,20 @@ export function SiteFooter() {
               href="https://wa.me/256704833021"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-5 py-3 rounded-full border border-stone-200 bg-white text-sm font-medium text-stone-600 hover:border-stone-300 hover:text-stone-900 hover:bg-stone-50 transition-all shadow-sm"
+              className="group flex items-center gap-2 px-5 py-3 rounded-full border border-[rgba(30,95,184,0.08)] bg-white text-sm font-medium text-[var(--green-dim)] hover:border-[rgba(30,95,184,0.12)] hover:text-[var(--text-1)] hover:bg-[var(--bg-4)] transition-all shadow-sm"
             >
-              <MessageCircle className="h-4 w-4 text-emerald-500" />
+              <MessageCircle className="h-4 w-4 text-[var(--green)]" />
               Talk to an advisor
             </Link>
             <Link
               href="/apply"
-              className="group relative flex items-center gap-2 overflow-hidden px-6 py-3 rounded-full bg-stone-900 text-sm font-bold text-white shadow-md shadow-stone-900/20 hover:bg-stone-800 transition-colors"
+              className="group relative flex items-center gap-2 overflow-hidden px-6 py-3 rounded-full bg-[var(--green)] text-sm font-bold shadow-md shadow-[rgba(30,95,184,0.12)] hover:bg-[var(--green-dim)] transition-colors" style={{ color: "#fff" }}
             >
               <span className="relative z-10 flex items-center gap-2">
                 Start application
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </span>
-              <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-500 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12" />
+              {/* sheen removed to avoid gradients */}
             </Link>
           </div>
         </div>
@@ -122,7 +123,7 @@ export function SiteFooter() {
                   style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
                 >
                   Ailes
-                  <span className="text-emerald-500">.</span>
+                  <span style={{ color: "var(--green)" }}>.</span>
                 </span>
                 <span
                   className="text-[0.7rem] font-semibold tracking-[0.32em] uppercase text-stone-400 transition-colors duration-200 group-hover:text-stone-500"
@@ -262,10 +263,10 @@ export function SiteFooter() {
 
           <div className="flex items-center gap-5 order-1 sm:order-2">
             <Link href="/privacy" className="text-[11px] text-stone-400 hover:text-stone-700 transition-colors">
-              Privacy
+              Privacy Policy
             </Link>
-            <Link href="/terms" className="text-[11px] text-stone-400 hover:text-stone-700 transition-colors">
-              Terms
+            <Link href="/cookie-policy" className="text-[11px] text-stone-400 hover:text-stone-700 transition-colors">
+              Cookie Policy
             </Link>
 
             <motion.button

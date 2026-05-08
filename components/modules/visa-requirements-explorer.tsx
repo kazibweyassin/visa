@@ -321,7 +321,7 @@ function VisaCard({ entry, passport }: { entry: VisaEntry; passport: string }) {
               <div className="flex gap-2">
                 <a
                   href="/apply"
-                  className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-[var(--primary)] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[var(--secondary)]"
+                  className="flex flex-1 items-center justify-center gap-1.5 rounded-xl bg-[var(--green)] px-4 py-2.5 text-xs font-semibold text-white transition hover:bg-[var(--green-dim)]"
                 >
                   Apply now <ArrowRight className="h-3.5 w-3.5" />
                 </a>
@@ -360,7 +360,7 @@ export default function VisaRequirementsExplorer() {
         <div className="relative flex-1">
           <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
           <input
-            className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-4 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)]/50 focus:ring-2 focus:ring-[var(--primary)]/10"
+            className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-4 text-sm text-slate-900 outline-none transition focus:border-[var(--green)]/50 focus:ring-2 focus:ring-[var(--green)]/10"
             placeholder="Search destination or region…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -369,7 +369,7 @@ export default function VisaRequirementsExplorer() {
         <select
           value={passport}
           onChange={(e) => setPassport(e.target.value)}
-          className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 outline-none transition focus:border-[var(--primary)]/50 sm:w-48"
+          className="rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-900 outline-none transition focus:border-[var(--green)]/50 sm:w-48"
         >
           <option value="">All passports</option>
           {(Object.entries(PASSPORT_LABELS) as [PassportCode, string][]).map(([code, label]) => (

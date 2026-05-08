@@ -78,10 +78,8 @@ function VisaCard({ item, index }: { item: (typeof popularVisas)[0]; index: numb
           className="absolute inset-0 h-[115%] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           loading="lazy"
         />
-        {/* Progressive overlay — dark at bottom */}
-        <div className="absolute inset-0" style={{
-          background: "linear-gradient(to top, rgba(10,10,8,0.97) 0%, rgba(10,10,8,0.55) 50%, rgba(10,10,8,0.15) 100%)"
-        }} />
+        {/* Progressive overlay — replaced gradient with flat overlay */}
+        <div className="absolute inset-0" style={{ background: "rgba(10,10,8,0.55)" }} />
       </div>
 
       {/* Top: tag + flag */}
@@ -120,28 +118,28 @@ function VisaCard({ item, index }: { item: (typeof popularVisas)[0]; index: numb
         <div className="mb-4">
           <h3
             className="font-black leading-none tracking-tight"
-            style={{ fontSize: "3.2rem", fontFamily: "var(--font-serif)", color: "var(--text-1)" }}
+            style={{ fontSize: "3.2rem", fontFamily: "var(--font-serif)", color: "#fff" }}
           >
             {item.title}
           </h3>
-          <p className="mt-1 text-sm font-medium tracking-wide" style={{ color: "var(--text-3)" }}>
+          <p className="mt-1 text-sm font-medium tracking-wide" style={{ color: "#fff" }}>
             {item.subtitle}
           </p>
         </div>
 
         {/* Stats */}
         <div className="mb-5 flex items-center gap-4">
-          <div className="flex items-center gap-1.5 text-xs" style={{ color: "var(--text-3)" }}>
-            <Clock className="h-3.5 w-3.5" style={{ color: "var(--text-3)" }} />
+          <div className="flex items-center gap-1.5 text-xs" style={{ color: "#fff" }}>
+            <Clock className="h-3.5 w-3.5" style={{ color: "#fff" }} />
             {item.processing}
           </div>
           <div className="h-3 w-px" style={{ background: "var(--border-2)" }} />
-          <div className="flex items-center gap-1.5 text-xs" style={{ color: "var(--text-3)" }}>
-            <Users className="h-3.5 w-3.5" style={{ color: "var(--text-3)" }} />
+          <div className="flex items-center gap-1.5 text-xs" style={{ color: "#fff" }}>
+            <Users className="h-3.5 w-3.5" style={{ color: "#fff" }} />
             {item.entries} entry
           </div>
           <div className="h-3 w-px" style={{ background: "var(--border-2)" }} />
-          <div className="text-xs font-bold" style={{ color: "var(--text-2)" }}>
+          <div className="text-xs font-bold" style={{ color: "#fff" }}>
             {item.stay}
           </div>
         </div>
@@ -149,12 +147,12 @@ function VisaCard({ item, index }: { item: (typeof popularVisas)[0]; index: numb
         {/* Price + CTA */}
         <div className="flex items-center gap-3">
           <div className="flex flex-col">
-            <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "var(--text-3)" }}>
+            <span className="text-[10px] font-semibold uppercase tracking-widest" style={{ color: "#fff" }}>
               Embassy fee
             </span>
             <span
               className="text-2xl font-black leading-none mt-0.5"
-              style={{ fontFamily: "var(--font-serif)", color: "var(--text-1)" }}
+              style={{ fontFamily: "var(--font-serif)", color: "#fff" }}
             >
               {item.fee}
             </span>
@@ -163,7 +161,7 @@ function VisaCard({ item, index }: { item: (typeof popularVisas)[0]; index: numb
           <Link
             href={item.href}
             className="ml-auto flex items-center gap-2 rounded-xl px-5 py-3 text-sm font-bold transition-all duration-200 hover:-translate-y-0.5"
-            style={{ background: "var(--text-1)", color: "#0a0a08" }}
+            style={{ background: "var(--text-1)", color: "#fff" }}
           >
             Apply now
             <ArrowUpRight className="h-4 w-4" />
@@ -174,7 +172,7 @@ function VisaCard({ item, index }: { item: (typeof popularVisas)[0]; index: numb
       {/* Bottom accent line on hover */}
       <div
         className="absolute bottom-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ background: "linear-gradient(to right, transparent, var(--green), transparent)" }}
+        style={{ background: "var(--green-muted)" }}
       />
     </motion.article>
   );
@@ -185,7 +183,20 @@ export function PopularEvisas() {
     <section className="relative overflow-hidden py-24 sm:py-32" style={{ background: "var(--bg)" }}>
       {/* Dot grid */}
       <div className="pointer-events-none absolute inset-0 dot-grid opacity-100" />
-
+      {/* Floating traveler image */}
+      <motion.div
+        className="pointer-events-none absolute -right-12 top-20 hidden lg:block"
+        initial={{ y: 0, opacity: 0 }}
+        whileInView={{ opacity: 0.35, y: [-20, -40, -20] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+        viewport={{ once: true }}
+      >
+        <img
+          src="/traveler-backpack.png"
+          alt="Young traveler with backpack"
+          className="h-[480px] w-auto object-contain drop-shadow-2xl"
+        />
+      </motion.div>
       <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
 
         {/* Section header */}
@@ -277,14 +288,6 @@ export function PopularEvisas() {
               }}
             >
               Ask us
-            </Link>
-            <Link
-              href="/apply"
-              className="group flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold transition-all"
-              style={{ background: "var(--text-1)", color: "#0a0a08" }}
-            >
-              Start application
-              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </div>
         </motion.div>

@@ -56,17 +56,17 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative overflow-hidden bg-[var(--surface)] py-20 sm:py-28">
-      <div className="pointer-events-none absolute inset-0 bg-[rgba(255,209,102,0.08)]" />
+    <section id="faq" className="relative overflow-hidden bg-[var(--bg)] py-20 sm:py-28">
+      <div className="pointer-events-none absolute inset-0" style={{ background: "var(--green-muted)" }} />
 
       <div className="relative mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs text-slate-500 shadow-sm">
-            <HelpCircle className="h-3.5 w-3.5 text-[var(--gold)]" />
+            <HelpCircle className="h-3.5 w-3.5 text-[var(--amber)]" />
             Frequently asked questions
           </div>
-          <h2 className="mt-5 text-3xl font-semibold text-[var(--foreground)] sm:text-4xl">
+          <h2 className="mt-5 text-3xl font-semibold text-[var(--text-1)] sm:text-4xl">
             Answers to common questions.
           </h2>
           <p className="mt-3 text-base text-slate-500">
@@ -118,7 +118,7 @@ export function FAQ() {
           Still have questions?{" "}
           <a
             href="https://wa.me/256XXXXXXXXX"
-            className="font-semibold text-[var(--primary)] hover:underline"
+            className="font-semibold text-[var(--green)] hover:underline"
             target="_blank"
             rel="noreferrer"
           >

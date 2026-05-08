@@ -58,8 +58,8 @@ const planMeta = {
     highlight: true,
     cardStyle: "bg-stone-900 border-stone-800",
     priceColor: "text-white",
-    ctaStyle: "bg-emerald-500 text-white hover:bg-emerald-400 shadow-md shadow-emerald-500/30",
-    tagStyle: "bg-emerald-500 text-white",
+    ctaStyle: "bg-emerald-500 hover:bg-emerald-400 shadow-md shadow-emerald-500/30" + (typeof window !== 'undefined' ? ' style={{color:"#fff"}}' : ''),
+    tagStyle: "bg-emerald-500",
   },
   express: {
     icon: Zap,
@@ -78,12 +78,11 @@ export function Pricing() {
       id="pricing"
       className="relative overflow-hidden bg-[#faf9f7] py-24 sm:py-32"
     >
-      {/* Dot grid */}
+      {/* Dot grid (disabled gradients) */}
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.35]"
         style={{
-          backgroundImage: `radial-gradient(circle, #d6d3ce 1px, transparent 1px)`,
-          backgroundSize: "28px 28px",
+          backgroundImage: "none",
         }}
       />
       {/* Glow */}
@@ -221,7 +220,7 @@ export function Pricing() {
                     Start with {plan.name}
                     <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </span>
-                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-500 bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-12" />
+                  {/* sheen removed to avoid gradients */}
                 </Link>
               </motion.div>
             );
