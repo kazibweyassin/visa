@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "@/lib/generated/prisma";
+import { PrismaClient } from "../lib/generated/prisma/client";
 import { schengenDocumentRequirements, ugandaTouristDocumentRequirements } from "../lib/document-requirements";
 
 const connectionString = process.env.DATABASE_URL;
