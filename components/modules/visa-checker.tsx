@@ -165,7 +165,7 @@ export function VisaChecker() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-14 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6"
+          className="mb-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 lg:gap-6"
         >
           <div>
             <span className="eyebrow">
@@ -198,12 +198,12 @@ export function VisaChecker() {
             className="rounded-2xl p-7 sm:p-9 flex flex-col"
             style={{ border: "1px solid var(--border-2)", background: "var(--bg-2)" }}
           >
-            <div className="mb-7">
+            <div className="mb-6">
               <p className="text-base font-bold tracking-wide" style={{ color: "var(--text-1)" }}>Where are you travelling?</p>
               <p className="mt-1 text-sm" style={{ color: "var(--text-3)" }}>Select your passport and destination.</p>
             </div>
 
-            <div className="flex-1 space-y-4">
+            <div className="flex-1 space-y-3">
               <NiceSelect
                 label="I'm from"
                 icon={MapPin}
@@ -266,7 +266,7 @@ export function VisaChecker() {
               </AnimatePresence>
             </div>
 
-            <div className="mt-7 space-y-3">
+            <div className="mt-6 space-y-3">
               <motion.button
                 type="button"
                 onClick={handleCheck}
@@ -312,8 +312,8 @@ export function VisaChecker() {
             <AnimatePresence mode="wait">
               {showResult ? (
                 <motion.div key="result" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="flex flex-col h-full">
-                  <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} className="mb-5">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-2" style={{ color: "var(--text-3)" }}>Visa Summary</p>
+                  <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} className="mb-4">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5" style={{ color: "var(--text-3)" }}>Visa Summary</p>
                     <h3 className="text-xl font-black leading-tight tracking-tight" style={{ fontFamily: "var(--font-serif)", color: "var(--text-1)", fontSize: "1.35rem" }}>
                       {getVisaInfo(fromCountry, toCountry)?.icon} {fromCountry}
                       <span className="font-normal italic mx-2" style={{ color: "var(--text-3)" }}>to</span>
@@ -326,7 +326,7 @@ export function VisaChecker() {
                     initial={{ opacity: 0, scale: 0.97 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.1 }}
-                    className="mb-4 rounded-xl p-4"
+                    className="mb-3 rounded-xl p-4"
                     style={{ background: "var(--green-muted)", border: "1px solid rgba(30,95,184,0.2)" }}
                   >
                     <p className="text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5" style={{ color: "var(--green)", opacity: 0.7 }}>Visa Required</p>
@@ -347,7 +347,7 @@ export function VisaChecker() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.35 }}
-                    className="mt-4 flex items-start gap-2.5 rounded-xl px-4 py-3"
+                    className="mt-3 flex items-start gap-2.5 rounded-xl px-4 py-3"
                     style={{ background: "var(--amber-muted)", border: "1px solid rgba(245,158,11,0.15)" }}
                   >
                     <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" style={{ color: "var(--amber)" }} />
@@ -357,7 +357,7 @@ export function VisaChecker() {
                   </motion.div>
 
                   {/* Collapsibles */}
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.37 }} className="mt-4 space-y-2">
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }} className="mt-3 space-y-2">
                     {/* Documents */}
                     <button
                       onClick={() => setExpandedDocs(!expandedDocs)}
@@ -426,7 +426,7 @@ export function VisaChecker() {
                   </motion.div>
 
                   {/* CTA */}
-                  <div className="mt-5 space-y-2">
+                  <div className="mt-4 space-y-2">
                     <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
                       <Link href={applyLink}>
                         <motion.div
@@ -496,7 +496,7 @@ export function VisaChecker() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-px overflow-hidden rounded-2xl"
+          className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-px overflow-hidden rounded-2xl"
           style={{ background: "var(--border-1)", border: "1px solid var(--border-2)" }}
         >
           {[

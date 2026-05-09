@@ -205,7 +205,7 @@ export function PopularEvisas() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-14 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
+          className="mb-10 flex flex-col gap-4 sm:gap-6 sm:flex-row sm:items-end sm:justify-between"
         >
           <div className="max-w-lg">
             <span className="eyebrow">

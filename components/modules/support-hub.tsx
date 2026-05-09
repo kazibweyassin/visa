@@ -49,7 +49,7 @@ export function SupportHub() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {supportItems.map((item) => {
             const Icon = item.icon;
             const classes = "group rounded-2xl border border-[var(--border-2)] bg-[var(--bg-2)] p-5 transition-all hover:-translate-y-0.5 hover:border-[var(--border-3)] hover:shadow-[0_16px_36px_rgba(0,0,0,0.05)]";

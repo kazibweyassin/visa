@@ -107,7 +107,7 @@ export function WhyUs() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-12 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm"
+          className="mt-10 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm"
         >
           <div className="min-w-min">
           {/* Header row */}

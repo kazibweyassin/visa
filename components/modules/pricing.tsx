@@ -177,7 +177,7 @@ export function Pricing() {
                 <div className={`mb-6 h-px ${dark ? "bg-white/10" : "bg-stone-100"}`} />
 
                 {/* Features */}
-                <ul className="mb-8 flex-1 space-y-3">
+                <ul className="mb-6 flex-1 space-y-3">
                   {features.included.map((f, i) => (
                     <motion.li
                       key={f}

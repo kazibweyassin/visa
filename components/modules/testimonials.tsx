@@ -62,7 +62,7 @@ export function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-14 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between"
+          className="mb-10 flex flex-col gap-4 lg:gap-6 lg:flex-row lg:items-end lg:justify-between"
         >
           <div>
             <span className="eyebrow">
