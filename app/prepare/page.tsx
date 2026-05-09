@@ -236,12 +236,21 @@ function PrepareContent() {
   const [uploadedDocs, setUploadedDocs] = useState<Map<string, unknown>>(
     new Map()
   );
+  const [currentApplication, setCurrentApplication] = useState<{
+    applicationId: string;
+    userId: string;
+  } | null>(null);
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
     try {
       const saved = localStorage.getItem("uploadedDocs");
       if (saved) setUploadedDocs(new Map<string, unknown>(JSON.parse(saved)));
+
+      const storedApplication = localStorage.getItem("visaCurrentApplication");
+      if (storedApplication) {
+        setCurrentApplication(JSON.parse(storedApplication));
+      }
     } catch {
       localStorage.removeItem("uploadedDocs");
     } finally {
@@ -539,6 +548,8 @@ function PrepareContent() {
       {/* ── Upload modal ── */}
       <DocumentUpload
         requirement={selectedRequirement}
+        applicationId={currentApplication?.applicationId ?? ""}
+        userId={currentApplication?.userId ?? ""}
         onClose={() => setSelectedRequirement(null)}
         onUploadSuccess={handleUploadSuccess}
       />

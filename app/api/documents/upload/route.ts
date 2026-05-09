@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getSupabaseAdminClient } from "@/lib/supabase-admin";
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 const ALLOWED_FORMATS = ["pdf", "jpg", "jpeg", "png"];
+const STORAGE_BUCKET = process.env.SUPABASE_STORAGE_BUCKET || "document-uploads";
+
+function sanitizeFileName(fileName: string) {
+  return fileName.replace(/[^a-zA-Z0-9._-]/g, "_");
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -61,9 +67,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Upload file to cloud storage (AWS S3, Google Cloud Storage, etc.)
-    // For now, generate a mock URL
-    const fileUrl = `https://storage.example.com/${userId}/${applicationId}/${requirementId}/${file.name}`;
+    const supabase = getSupabaseAdminClient();
+    const storagePath = `${userId}/${applicationId}/${requirementId}/${crypto.randomUUID()}-${sanitizeFileName(file.name)}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from(STORAGE_BUCKET)
+      .upload(storagePath, file, {
+        contentType: file.type || "application/octet-stream",
+        upsert: false,
+      });
+
+    if (uploadError) {
+      console.error("Storage upload error:", uploadError);
+      return NextResponse.json(
+        { error: uploadError.message || "Failed to upload file" },
+        { status: 500 }
+      );
+    }
+
+    const { data: publicUrlData } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(storagePath);
+    const fileUrl = publicUrlData.publicUrl;
 
     // Save to database
     const uploadedDocument = await prisma.uploadedDocument.create({

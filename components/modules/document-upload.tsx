@@ -7,12 +7,16 @@ import { DocumentRequirement } from "@/lib/types/document";
 
 interface DocumentUploadProps {
   requirement: DocumentRequirement | null;
+  applicationId: string;
+  userId: string;
   onClose: () => void;
   onUploadSuccess: (docId: string) => void;
 }
 
 export function DocumentUpload({
   requirement,
+  applicationId,
+  userId,
   onClose,
   onUploadSuccess,
 }: DocumentUploadProps) {
@@ -69,12 +73,18 @@ export function DocumentUpload({
 
   const handleUpload = async () => {
     if (!selectedFile) return;
+    if (!applicationId || !userId) {
+      setError("Missing application context. Please submit an application first.");
+      return;
+    }
 
     setIsUploading(true);
     try {
       const formData = new FormData();
       formData.append("file", selectedFile);
       formData.append("requirementId", requirement.id);
+      formData.append("applicationId", applicationId);
+      formData.append("userId", userId);
 
       const response = await fetch("/api/documents/upload", {
         method: "POST",

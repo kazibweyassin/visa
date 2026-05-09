@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    return NextResponse.json({ success: true, application }, { status: 201 });
+    return NextResponse.json({ success: true, application, userId: user.id }, { status: 201 });
   } catch (error) {
     console.error("Create application error:", error);
     return NextResponse.json({ error: "Failed to create application" }, { status: 500 });

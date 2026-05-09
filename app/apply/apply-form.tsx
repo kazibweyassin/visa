@@ -267,6 +267,12 @@ export function ApplyForm() {
 
       // Show a lightweight reference to the user
       const ref = data?.application?.id || `${Math.floor(100000 + Math.random() * 900000)}`;
+      if (data?.application?.id && data?.userId) {
+        localStorage.setItem(
+          "visaCurrentApplication",
+          JSON.stringify({ applicationId: data.application.id, userId: data.userId })
+        );
+      }
       setSuccessReference(ref);
       setFormState(initialForm);
       setSelectedPlan("");
