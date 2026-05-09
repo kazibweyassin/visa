@@ -1,7 +1,17 @@
+import "dotenv/config";
+import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@/lib/generated/prisma";
 import { schengenDocumentRequirements, ugandaTouristDocumentRequirements } from "../lib/document-requirements";
 
-const prisma = new PrismaClient();
+const connectionString = process.env.DATABASE_URL;
+
+if (!connectionString) {
+  throw new Error("Missing DATABASE_URL in environment");
+}
+
+const prisma = new PrismaClient({
+  adapter: new PrismaPg({ connectionString }),
+});
 
 async function main() {
   console.log("🌱 Seeding database...");

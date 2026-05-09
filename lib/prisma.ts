@@ -1,5 +1,14 @@
 // lib/prisma.ts
-import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "@/lib/generated/prisma";
+
+const connectionString = process.env.DATABASE_URL;
+
+if (!connectionString) {
+  throw new Error("Missing DATABASE_URL in environment");
+}
+
+const adapter = new PrismaPg({ connectionString });
 
 declare global {
   // eslint-disable-next-line no-var
@@ -7,6 +16,7 @@ declare global {
 }
 
 export const prisma = global.prisma ?? new PrismaClient({
+  adapter,
   log: process.env.NODE_ENV === "development" ? ["query"] : [],
 });
 
