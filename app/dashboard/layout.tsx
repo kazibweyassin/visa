@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text-2)]">
       <header className="sticky top-0 z-40 border-b border-[var(--border-2)] bg-white/85 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 sm:gap-4 px-4 sm:px-6 lg:px-8 py-4">
           <Link href="/" className="flex items-baseline gap-2 select-none">
             <span className="text-2xl font-black tracking-[-0.04em] text-[var(--text-1)]">
               Ailes<span className="text-[var(--green)]">.</span>

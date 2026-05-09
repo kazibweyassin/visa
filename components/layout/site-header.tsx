@@ -46,19 +46,19 @@ export function SiteHeader() {
             : "bg-white/80 backdrop-blur-sm"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-8">
-          <div className="flex items-center h-16 gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
+          <div className="flex items-center h-16 gap-4 sm:gap-6 lg:gap-8">
 
             {/* Logo */}
-            <Link href="/" aria-label="Ailes Global" className="group shrink-0 flex items-baseline gap-2 select-none">
+            <Link href="/" aria-label="Ailes Global" className="group shrink-0 flex items-baseline gap-1 sm:gap-2 select-none">
               <span
-                className="text-[1.35rem] font-black tracking-[-0.03em] text-stone-900 leading-none transition-colors duration-200 group-hover:text-stone-700"
+                className="text-[1rem] sm:text-[1.35rem] font-black tracking-[-0.03em] text-stone-900 leading-none transition-colors duration-200 group-hover:text-stone-700"
                 style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
               >
                 Ailes<span style={{ color: "var(--green)" }}>.</span>
               </span>
               <span
-                className="text-[0.62rem] font-semibold tracking-[0.3em] uppercase text-stone-400 transition-colors duration-200 group-hover:text-stone-500"
+                className="hidden sm:inline text-[0.62rem] font-semibold tracking-[0.3em] uppercase text-stone-400 transition-colors duration-200 group-hover:text-stone-500"
                 style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
               >
                 Global
@@ -120,7 +120,7 @@ export function SiteHeader() {
               onClick={() => setMenuOpen((o) => !o)}
               aria-label="Toggle menu"
               aria-expanded={menuOpen}
-              className="lg:hidden ml-auto flex items-center justify-center w-9 h-9 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+              className="lg:hidden ml-auto flex items-center justify-center w-10 h-10 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span
@@ -147,7 +147,7 @@ export function SiteHeader() {
               transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
               className="lg:hidden overflow-hidden border-t border-gray-100 bg-white"
             >
-              <div className="px-5 pt-3 pb-6 space-y-0.5">
+              <div className="px-4 sm:px-5 pt-3 pb-6 space-y-1">
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={link.label}
@@ -160,7 +160,7 @@ export function SiteHeader() {
                       target={link.target}
                       rel={link.target ? "noopener noreferrer" : undefined}
                       onClick={() => setMenuOpen(false)}
-                      className={`flex items-center justify-between w-full px-4 py-3 rounded-xl text-[14px] font-medium transition-colors ${
+                      className={`flex items-center justify-between w-full px-4 py-3.5 rounded-lg text-[13px] sm:text-[14px] font-medium transition-colors min-h-[44px] ${
                         isActive(link.href)
                           ? "bg-gray-100 text-gray-900"
                           : "text-gray-500 hover:bg-gray-50 hover:text-gray-900"
@@ -175,8 +175,8 @@ export function SiteHeader() {
                   </motion.div>
                 ))}
 
-                <div className="px-4 pt-4 pb-2">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+                <div className="px-4 pt-5 pb-2">
+                  <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
                     Policies
                   </p>
                 </div>
@@ -194,7 +194,7 @@ export function SiteHeader() {
                     <Link
                       href={link.href}
                       onClick={() => setMenuOpen(false)}
-                      className="flex items-center justify-between w-full px-4 py-3 rounded-xl text-[14px] font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 transition-colors"
+                      className="flex items-center justify-between w-full px-4 py-3.5 rounded-lg text-[13px] sm:text-[14px] font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900 transition-colors min-h-[44px]"
                     >
                       {link.label}
                       <span className="w-1.5 h-1.5 rounded-full bg-gray-300" />
@@ -207,24 +207,25 @@ export function SiteHeader() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="pt-4 mt-3 border-t border-gray-100 grid grid-cols-2 gap-2.5"
+                  className="pt-4 mt-4 border-t border-gray-100 grid grid-cols-2 gap-2 sm:gap-3"
                 >
                   <Link
                     href="https://wa.me/256704833021"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl border border-[rgba(30,95,184,0.12)] text-sm font-medium text-[var(--green-dim)] hover:bg-[var(--bg-4)] transition-colors"
+                    className="flex items-center justify-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-3 rounded-lg border border-[rgba(30,95,184,0.12)] text-[11px] sm:text-sm font-medium text-[var(--green-dim)] hover:bg-[var(--bg-4)] transition-colors min-h-[44px]"
                   >
                     <MessageCircle className="w-4 h-4 text-[var(--green)]" />
-                    Advisor
+                    <span className="hidden sm:inline">Advisor</span>
                   </Link>
                   <Link
                     href="/apply"
                     onClick={() => setMenuOpen(false)}
-                    className="flex items-center justify-center gap-1.5 px-4 py-3 rounded-xl bg-[var(--green)] text-sm font-semibold hover:bg-[var(--green-dim)] transition-colors" style={{ color: "#000" }}
+                    className="flex items-center justify-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-3 rounded-lg bg-[var(--green)] text-[11px] sm:text-sm font-semibold hover:bg-[var(--green-dim)] transition-colors min-h-[44px]" style={{ color: "#000" }}
                   >
-                    Apply now
+                    <span className="hidden sm:inline">Apply now</span>
+                    <span className="sm:hidden">Apply</span>
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </Link>
                 </motion.div>

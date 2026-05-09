@@ -88,7 +88,7 @@ export function Pricing() {
       {/* Glow */}
       <div className="pointer-events-none absolute top-0 left-1/2 h-[400px] w-[700px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-100/50 blur-[100px]" />
 
-      <div className="relative mx-auto max-w-6xl px-5 sm:px-8">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
 
         {/* ── Header ── */}
         <motion.div
@@ -115,8 +115,8 @@ export function Pricing() {
           </p>
         </motion.div>
 
-        {/* ── Cards ── */}
-        <div className="grid gap-5 lg:grid-cols-3 items-stretch">
+        {/* Cards */}
+        <div className="grid gap-4 sm:gap-5 lg:grid-cols-3 items-stretch">
           {pricingPlans.map((plan, index) => {
             const meta = planMeta[plan.key as keyof typeof planMeta];
             const features = planMatrix[plan.key as keyof typeof planMatrix];
@@ -130,7 +130,7 @@ export function Pricing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className={`relative flex flex-col rounded-3xl border p-8 ${meta.cardStyle} ${
+                className={`relative flex flex-col rounded-3xl border p-6 sm:p-8 ${meta.cardStyle} ${
                   dark ? "shadow-2xl shadow-stone-900/30" : "shadow-sm"
                 }`}
               >

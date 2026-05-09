@@ -107,21 +107,22 @@ export function WhyUs() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-12 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm"
+          className="mt-12 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm"
         >
+          <div className="min-w-min">
           {/* Header row */}
           <div className="grid grid-cols-[1.4fr_repeat(3,0.87fr)] border-b border-slate-200 bg-slate-50 px-1">
-            <div className="px-4 py-4 text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <div className="px-3 sm:px-4 py-3 sm:py-4 text-xs font-semibold uppercase tracking-wider text-slate-400">
               Capability
             </div>
             {["On your own", siteConfig.name, "Western platforms"].map((col, i) => (
               <div
                 key={col}
-                className={`px-3 py-4 text-center text-xs font-semibold uppercase tracking-wider ${i === 1 ? "text-[var(--green)]" : "text-slate-400"}`}
+                className={`px-2 sm:px-3 py-3 sm:py-4 text-center text-[10px] sm:text-xs font-semibold uppercase tracking-wider ${i === 1 ? "text-[var(--green)]" : "text-slate-400"}`}
               >
-                {col}
+                <span className="block">{col}</span>
                 {i === 1 && (
-                  <span className="ml-1.5 rounded-full bg-[var(--green)] px-1.5 py-0.5 text-[9px] font-bold text-white">US</span>
+                  <span className="mt-1 inline-block rounded-full bg-[var(--green)] px-1.5 py-0.5 text-[8px] sm:text-[9px] font-bold text-white">US</span>
                 )}
               </div>
             ))}
@@ -137,16 +138,17 @@ export function WhyUs() {
               transition={{ duration: 0.3, delay: index * 0.04 }}
               className="grid grid-cols-[1.4fr_repeat(3,0.87fr)] border-b border-slate-100 px-1 last:border-b-0 hover:bg-slate-50/60"
             >
-              <div className="px-4 py-3.5 text-sm text-slate-700">{row.label}</div>
+              <div className="px-3 sm:px-4 py-2.5 sm:py-3.5 text-[12px] sm:text-sm text-slate-700">{row.label}</div>
               <Cell value={row.selfApply} />
               <Cell value={row.brand} />
               <Cell value={row.western} />
             </motion.div>
           ))}
+          </div>
         </motion.div>
 
         {/* Legend */}
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-5 text-xs text-slate-400">
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-3 sm:gap-5 text-xs sm:text-xs text-slate-400">
           {[
             { icon: <Check className="h-3 w-3 text-emerald-600" />, label: "Included", bg: "bg-emerald-50" },
             { icon: <Minus className="h-3 w-3 text-amber-500" />, label: "Partial / limited", bg: "bg-amber-50" },

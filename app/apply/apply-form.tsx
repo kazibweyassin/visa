@@ -287,7 +287,7 @@ export function ApplyForm() {
   };
 
   return (
-    <main className="min-h-screen bg-[#faf9f7] px-4 py-12 sm:px-6 lg:px-8">
+    <main className="min-h-screen bg-[#faf9f7] px-3 sm:px-4 lg:px-8 py-12 sm:py-14 lg:py-16">
       {/* Dot grid */}
       <div className="pointer-events-none fixed inset-0 opacity-[0.35]" style={{ backgroundImage: "none" }} />
 
@@ -311,7 +311,7 @@ export function ApplyForm() {
           <div className="grid lg:grid-cols-[280px_1fr]">
 
             {/* ── LEFT SIDEBAR ── */}
-            <div className="border-b border-stone-100 bg-stone-50 p-8 lg:border-b-0 lg:border-r">
+            <div className="border-b border-stone-100 bg-stone-50 p-6 sm:p-8 lg:border-b-0 lg:border-r">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-600">Application</p>
               <h1 className="mt-2 text-xl font-bold text-stone-900 leading-snug"
                 style={{ fontFamily: "'Georgia', serif" }}>
@@ -391,7 +391,7 @@ export function ApplyForm() {
             </div>
 
             {/* ── RIGHT PANEL ── */}
-            <div className="p-8 sm:p-10">
+            <div className="p-6 sm:p-8 lg:p-10">
               <AnimatePresence mode="wait">
                 {successReference ? (
                   <motion.div

@@ -41,8 +41,8 @@ const stats = [
 
 export default function DashboardPage() {
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
-      <section className="rounded-3xl border border-[var(--border-2)] p-6 sm:p-8" style={{ background: "var(--bg-2)" }}>
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12">
+      <section className="rounded-3xl border border-[var(--border-2)] p-5 sm:p-6 lg:p-8" style={{ background: "var(--bg-2)" }}>
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <span className="eyebrow">Dashboard</span>
@@ -65,7 +65,7 @@ export default function DashboardPage() {
         </div>
       </section>
 
-      <section className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <section className="mt-8 grid gap-3 sm:gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (
@@ -80,7 +80,7 @@ export default function DashboardPage() {
         })}
       </section>
 
-      <section className="mt-10 grid gap-6 xl:grid-cols-[1.5fr_0.9fr]">
+      <section className="mt-10 grid gap-4 sm:gap-6 xl:grid-cols-[1.5fr_0.9fr]">
         <div>
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-xl font-bold text-[var(--text-1)]">Your applications</h2>

@@ -205,15 +205,15 @@ function BenefitCard({
 function PrepareSkeleton() {
   return (
     <div className="min-h-screen" style={{ background: "#F7F6F3" }}>
-      <div className="border-b bg-white px-8 py-5">
+      <div className="border-b bg-white px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
         <div className="mx-auto max-w-5xl space-y-3">
           <div className="h-3 w-20 animate-pulse rounded-full bg-[#E5E9F2]" />
           <div className="h-7 w-64 animate-pulse rounded-lg bg-[#E5E9F2]" />
           <div className="h-3 w-80 animate-pulse rounded-lg bg-[#E5E9F2]" />
         </div>
       </div>
-      <div className="mx-auto max-w-5xl px-8 py-10">
-        <div className="grid gap-6 lg:grid-cols-3">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <div className="grid gap-4 sm:gap-5 lg:gap-6 lg:grid-cols-3">
           <div className="space-y-3 lg:col-span-2">
             {[...Array(6)].map((_, i) => (
               <div key={i} className="h-16 animate-pulse rounded-xl bg-white" />
@@ -370,8 +370,8 @@ function PrepareContent() {
       </header>
 
       {/* ── Body ── */}
-      <div className="mx-auto max-w-5xl px-6 py-8 sm:px-8">
-        <div className="grid gap-6 lg:grid-cols-[1fr_300px]">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div className="grid gap-4 sm:gap-5 lg:gap-6 lg:grid-cols-[1fr_300px]">
 
           {/* ── Left: doc list ── */}
           <div className="min-w-0">
