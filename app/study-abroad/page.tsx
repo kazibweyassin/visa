@@ -76,7 +76,7 @@ const styles = `
   }
   .sa-hero-title em { font-style: italic; color: #C9A84C; }
   .sa-hero-sub {
-    font-size: 15px; color: rgba(255,255,255,.5); line-height: 1.75;
+    font-size: 15px; color: rgba(255,255,255,.72); line-height: 1.75;
     font-weight: 300; max-width: 520px; margin-bottom: 36px;
   }
   .sa-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
@@ -109,7 +109,7 @@ const styles = `
     font-size: clamp(28px, 4vw, 44px); font-weight: 400;
     color: #0B1C2D; line-height: 1.15; margin-bottom: 10px;
   }
-  .sa-sub { font-size: 14px; color: #8A8A7A; line-height: 1.7; font-weight: 300; max-width: 520px; margin-bottom: 40px; }
+  .sa-sub { font-size: 14px; color: #6B7280; line-height: 1.7; font-weight: 400; max-width: 520px; margin-bottom: 40px; }
 
   /* Destinations */
   .sa-dest-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -125,7 +125,7 @@ const styles = `
   .sa-dest-country { font-size: 16px; font-weight: 500; color: #0B1C2D; margin-bottom: 14px; }
   .sa-dest-rows { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
   .sa-dest-row { display: flex; justify-content: space-between; font-size: 12px; }
-  .sa-dest-row-label { color: #9CA3AF; }
+  .sa-dest-row-label { color: #6B7280; }
   .sa-dest-row-value { color: #1A1A14; font-weight: 500; text-align: right; max-width: 55%; }
   .sa-dest-link { font-size: 12px; color: #C9A84C; font-weight: 500; }
 
@@ -135,7 +135,7 @@ const styles = `
   .sa-service-card { padding: 24px; border: 1px solid #EDE8DF; border-radius: 6px; background: #F7F3EC; }
   .sa-service-icon { font-size: 20px; color: #C9A84C; margin-bottom: 12px; }
   .sa-service-title { font-size: 14px; font-weight: 500; color: #0B1C2D; margin-bottom: 6px; }
-  .sa-service-desc { font-size: 13px; color: #8A8A7A; line-height: 1.6; font-weight: 300; }
+  .sa-service-desc { font-size: 13px; color: #6B7280; line-height: 1.6; font-weight: 400; }
 
   /* CTA band */
   .sa-cta-band {
@@ -147,7 +147,7 @@ const styles = `
     font-size: clamp(28px, 4vw, 44px); font-weight: 400;
     color: #0B1C2D; margin-bottom: 12px;
   }
-  .sa-cta-sub { font-size: 14px; color: rgba(11,28,45,.6); margin-bottom: 28px; font-weight: 300; }
+  .sa-cta-sub { font-size: 14px; color: rgba(11,28,45,.78); margin-bottom: 28px; font-weight: 400; }
   .sa-btn-navy {
     display: inline-flex; align-items: center; gap: 8px;
     background: #0B1C2D; color: #fff;

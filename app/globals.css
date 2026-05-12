@@ -172,6 +172,12 @@ a {
 .bg-emerald-100\/50 { background-color: rgba(30,95,184,0.05) !important; }
 .bg-emerald-50\/40 { background-color: rgba(30,95,184,0.04) !important; }
 
+/* Improve readability of muted text on light surfaces */
+.text-stone-400 { color: #6b7280 !important; }
+.text-stone-500 { color: #4b5563 !important; }
+.text-slate-500 { color: #556070 !important; }
+.text-slate-600 { color: #475569 !important; }
+
 /* Ensure readable button/text contrast when using brand backgrounds */
 .bg-emerald-500, .bg-emerald-400, .bg-emerald-600, .bg-emerald-500\/20, .bg-emerald-500\/30 {
   color: #fff !important;

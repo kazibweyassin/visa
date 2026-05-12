@@ -53,6 +53,12 @@ export default function PrivacyPolicyPage() {
             <p className="mt-2 text-sm leading-7 text-[var(--text-3)]">
               If you have questions about this policy, email hello@ailesglobal.com.
             </p>
+            <p className="mt-3 text-xs text-[var(--text-3)]">
+              <Link href="/legal-notice" className="font-semibold text-[var(--green)] hover:underline">
+                Read our legal notice
+              </Link>
+              {" "}to understand what Ailes Global is and what we do.
+            </p>
           </div>
         </div>
       </section>

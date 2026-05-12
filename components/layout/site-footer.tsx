@@ -262,6 +262,9 @@ export function SiteFooter() {
           </p>
 
           <div className="flex items-center gap-5 order-1 sm:order-2">
+            <Link href="/legal-notice" className="text-[11px] text-stone-400 hover:text-stone-700 transition-colors">
+              Legal Notice
+            </Link>
             <Link href="/privacy" className="text-[11px] text-stone-400 hover:text-stone-700 transition-colors">
               Privacy Policy
             </Link>

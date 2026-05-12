@@ -53,6 +53,12 @@ export default function CookiePolicyPage() {
             <p className="mt-2 text-sm leading-7 text-[var(--text-3)]">
               If you want to know more about cookie usage, contact us at hello@ailesglobal.com.
             </p>
+            <p className="mt-3 text-xs text-[var(--text-3)]">
+              <Link href="/legal-notice" className="font-semibold text-[var(--amber)] hover:underline">
+                Read our legal notice
+              </Link>
+              {" "}to understand what Ailes Global is and what we do.
+            </p>
           </div>
         </div>
       </section>

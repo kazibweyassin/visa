@@ -182,6 +182,7 @@ export function SiteHeader() {
                 </div>
 
                 {[
+                  { label: "Legal Notice", href: "/legal-notice" },
                   { label: "Privacy Policy", href: "/privacy" },
                   { label: "Cookie Policy", href: "/cookie-policy" },
                 ].map((link, i) => (

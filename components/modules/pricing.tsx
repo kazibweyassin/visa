@@ -108,9 +108,9 @@ export function Pricing() {
           >
             Simple, honest
             <br />
-            <span className="italic font-bold text-stone-400">pricing.</span>
+            <span className="italic font-bold text-stone-500">pricing.</span>
           </h2>
-          <p className="mx-auto mt-5 max-w-md text-sm text-stone-400 leading-relaxed">
+          <p className="mx-auto mt-5 max-w-md text-sm text-stone-500 leading-relaxed">
             Government and consulate fees are paid separately. Our fee covers preparation and guidance only.
           </p>
         </motion.div>
@@ -147,10 +147,10 @@ export function Pricing() {
                     <div className={`mb-3 flex h-9 w-9 items-center justify-center rounded-xl ${
                       dark ? "bg-white/10" : "bg-stone-100"
                     }`}>
-                      <Icon className={`h-4 w-4 ${dark ? "text-white/70" : "text-stone-500"}`} />
+                      <Icon className={`h-4 w-4 ${dark ? "text-white/85" : "text-stone-500"}`} />
                     </div>
                     <p className={`text-[10px] font-bold uppercase tracking-[0.22em] ${
-                      dark ? "text-white/40" : "text-stone-400"
+                      dark ? "text-white/65" : "text-stone-400"
                     }`}>
                       {plan.name}
                     </p>
@@ -165,11 +165,11 @@ export function Pricing() {
                   >
                     {plan.price}
                   </span>
-                  <span className={`ml-2 text-sm ${dark ? "text-white/30" : "text-stone-400"}`}>
+                  <span className={`ml-2 text-sm ${dark ? "text-white/65" : "text-stone-400"}`}>
                     one-time
                   </span>
                 </div>
-                <p className={`mb-7 text-sm leading-relaxed ${dark ? "text-white/45" : "text-stone-400"}`}>
+                <p className={`mb-7 text-sm leading-relaxed ${dark ? "text-white/75" : "text-stone-500"}`}>
                   {plan.description}
                 </p>
 
@@ -202,9 +202,9 @@ export function Pricing() {
                       <div className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
                         dark ? "bg-white/8" : "bg-stone-100"
                       }`}>
-                        <X className={`h-3 w-3 ${dark ? "text-white" : "text-stone-400"}`} />
+                        <X className={`h-3 w-3 ${dark ? "text-white/90" : "text-stone-400"}`} />
                       </div>
-                      <span className={`text-sm leading-snug line-through ${dark ? "text-white/50" : "text-stone-400"}`}>
+                      <span className={`text-sm leading-snug line-through ${dark ? "text-white/70" : "text-stone-400"}`}>
                         {f}
                       </span>
                     </li>
@@ -235,7 +235,7 @@ export function Pricing() {
           transition={{ delay: 0.4 }}
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6 text-center sm:text-left"
         >
-          <div className="flex flex-wrap justify-center sm:justify-start gap-x-8 gap-y-3 text-xs text-stone-400">
+          <div className="flex flex-wrap justify-center sm:justify-start gap-x-8 gap-y-3 text-xs text-stone-500">
             {[
               "No hidden charges",
               "Embassy fees paid separately",
