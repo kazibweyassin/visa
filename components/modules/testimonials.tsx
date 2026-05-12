@@ -168,12 +168,12 @@ export function Testimonials() {
                 <div
                   className="flex items-center gap-1.5 rounded-full px-3 py-1.5 shrink-0"
                   style={{
-                    background: "var(--green-muted)",
-                    border: "1px solid rgba(30,95,184,0.15)",
+                    background: "rgba(30,95,184,0.15)",
+                    border: "1px solid rgba(30,95,184,0.25)",
                   }}
                 >
-                  <CheckCircle2 className="h-3 w-3 shrink-0" style={{ color: "var(--green)" }} />
-                  <span className="text-[10px] font-bold whitespace-nowrap" style={{ color: "var(--green)" }}>
+                  <CheckCircle2 className="h-3 w-3 shrink-0" style={{ color: "var(--green-dim)" }} />
+                  <span className="text-[10px] font-bold whitespace-nowrap" style={{ color: "var(--green-dim)" }}>
                     {item.outcome}
                   </span>
                 </div>
